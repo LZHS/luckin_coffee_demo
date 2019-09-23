@@ -43,7 +43,7 @@ esac
 
 echo "$emoji 脚本自动提交，提交时间$YESTERDAY"
  
-git pull
+git pull origin master
 
 git status
 
