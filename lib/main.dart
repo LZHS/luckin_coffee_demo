@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/test_demo/190923/LayoutWidget.dart';  
+import 'package:flutter_demo/test_demo/190923/LayoutWidget.dart';
 
 //void main() => runApp(MyApp());
 
