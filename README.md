@@ -25,3 +25,6 @@ samples, guidance on mobile development, and a full API reference.
 
 
 * [练习布局源码 地址](https://github.com/flutter/website/blob/master/examples/layout/lakes/interactive/lib/main.dart)
+
+
+* [闲鱼 flutter 技术](https://www.yuque.com/xytech/flutter/)
