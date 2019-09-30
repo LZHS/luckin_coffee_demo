@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Hello extends Center {
-  @override
-  // TODO: implement child
+  @override 
   Widget get child =>
       new Text("Hello World !", textDirection: TextDirection.ltr);
 }
