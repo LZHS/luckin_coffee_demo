@@ -5,7 +5,7 @@ import 'package:flutter_demo/test_demo/1909/190930/ExpandedDemo.dart';
 import 'package:flutter_demo/test_demo/1909/190930/SimpleDemo.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  //debugPaintSizeEnabled = true;
   runApp(MaterailStyleApp());
 }
 
