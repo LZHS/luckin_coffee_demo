@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/test_demo/1910/191014/pages/AirlpayScreen.dart';
+import 'package:flutter_demo/test_demo/1910/191014/pages/EmailScreen.dart';
+import 'package:flutter_demo/test_demo/1910/191014/pages/HomeScreen.dart';
+import 'package:flutter_demo/test_demo/1910/191014/pages/PortraitScreen.dart';
 
 class BottomNavigationWidget extends StatefulWidget {
   @override
@@ -8,6 +12,18 @@ class BottomNavigationWidget extends StatefulWidget {
 class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   final _bottomNavigationColor = Colors.blue;
   int _currentIndex = 0;
+  List<Widget> pages = List<Widget>();
+
+  @override
+  void initState() { 
+    pages
+      ..add(HomeScreen())
+      ..add(EmailScreen())
+      ..add(AirlpayScreen())
+      ..add(PortraitScreen());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +55,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.pages,
+              Icons.airplay,
               color: _bottomNavigationColor,
             ),
             title: Text(
-              "Pages",
+              "Airlpay",
               style: TextStyle(
                 color: _bottomNavigationColor,
               ),
@@ -51,11 +67,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.airplay,
+              Icons.portrait,
               color: _bottomNavigationColor,
             ),
             title: Text(
-              "Airlpay",
+              "Portrait",
               style: TextStyle(
                 color: _bottomNavigationColor,
               ),
@@ -68,14 +84,11 @@ class _BottomNavigationWidgetState extends State<BottomNavigationWidget> {
             this._currentIndex = index;
           });
         },
+        type: BottomNavigationBarType.shifting,
       ),
-      appBar: AppBar(
-        title: const Text("BottomNavigationWidget"),
-      ),
-      body: Container(),
+      body: pages[this._currentIndex],
     );
   }
 }
-
 
 // TODO  https://juejin.im/post/5b5d8d1c6fb9a04fd6596188
