@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/test_demo/1910/191017/MyAppPage.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -10,12 +11,27 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Flutter 路由 Demo"),
         ),
-        body: RaisedButton(
-          child: Text("跳转到下一个页面"),
-        ),
+        body: HomeBody(),
       ),
     );
   }
 }
 
-//TODO 
+class HomeBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      child: Text("跳转到下一个页面"),
+      color: Colors.teal,
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (BuildContext context) => MyAppPage(),
+            ));
+      },
+    );
+  }
+}
+
+//TODO
