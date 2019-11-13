@@ -1,5 +1,5 @@
 class Log {
-  static const String _TAG_DEF = "### fluitter - log ###";
+  static const String _TAG_DEF = "### flutter - log ###";
 
   static bool debuggable = true; //是否是debug模式,true: log v 不输出.
   static String TAG = _TAG_DEF;

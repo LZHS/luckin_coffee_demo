@@ -32,14 +32,12 @@ class I18n implements WidgetsLocalizations {
   @override
   TextDirection get textDirection => TextDirection.ltr;
 
-  /// "Flutter Demo"
-  String get appName => "Flutter Demo";
-  /// "flutter 路由 DEMO"
-  String get appBarTitle => "flutter 路由 DEMO";
-  /// "跳转至下一个页面"
-  String get goToNextPage => "跳转至下一个页面";
-  /// "返回上一个页面"
-  String get backLastPage => "返回上一个页面";
+  /// "你好 ${name}"
+  String greetTo(String name) => "你好 ${name}";
+  /// "测试语言"
+  String get appName => "测试语言";
+  /// "切换语言"
+  String get btnText => "切换语言";
 }
 
 class _I18n_zh_CN extends I18n {
@@ -49,11 +47,29 @@ class _I18n_zh_CN extends I18n {
   TextDirection get textDirection => TextDirection.ltr;
 }
 
+class _I18n_en_US extends I18n {
+  const _I18n_en_US();
+
+  /// "Hello ${name}"
+  @override
+  String greetTo(String name) => "Hello ${name}";
+  /// "Test Language"
+  @override
+  String get appName => "Test Language";
+  /// "switch the language"
+  @override
+  String get btnText => "switch the language";
+
+  @override
+  TextDirection get textDirection => TextDirection.ltr;
+}
+
 class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocalizations> {
   const GeneratedLocalizationsDelegate();
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale("zh", "CN")
+      Locale("zh", "CN"),
+      Locale("en", "US")
     ];
   }
 
@@ -76,8 +92,14 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     if ("zh_CN" == lang) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_zh_CN());
     }
+    else if ("en_US" == lang) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
+    }
     else if ("zh" == languageCode) {
       return SynchronousFuture<WidgetsLocalizations>(const _I18n_zh_CN());
+    }
+    else if ("en" == languageCode) {
+      return SynchronousFuture<WidgetsLocalizations>(const _I18n_en_US());
     }
 
     return SynchronousFuture<WidgetsLocalizations>(const I18n());

@@ -1,6 +1,5 @@
 {
-    "appName":"Flutter Demo",
-    "appBarTitle": "flutter 路由 DEMO",
-    "goToNextPage": "跳转至下一个页面",
-    "backLastPage": "返回上一个页面"
+    "greetTo": "你好 {name}",
+    "appName": "测试语言",
+    "btnText":"切换语言"
 }

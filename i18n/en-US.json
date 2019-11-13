@@ -1,0 +1,6 @@
+{
+    
+    "greetTo": "Hello {name}",
+    "appName": "Test Language",
+    "btnText":"switch the language"
+}
