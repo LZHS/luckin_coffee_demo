@@ -1,7 +1,11 @@
+const bool kReleaseMode =
+    bool.fromEnvironment('dart.vm.product', defaultValue: false);
+
+/// Log Util.
 class Log {
   static const String _TAG_DEF = "### flutter - log ###";
 
-  static bool debuggable = true; //是否是debug模式,true: log v 不输出.
+  static bool debuggable = !kReleaseMode; //是否是debug模式,true: log v 不输出.
   static String TAG = _TAG_DEF;
 
   static void init({bool isDebug = false, String tag = _TAG_DEF}) {
@@ -13,23 +17,31 @@ class Log {
     _printLog(tag, '  e  ', object);
   }
 
-  static void d(Object object, {String tag}) {
-    
-      _printLog(tag, '  DEBUG  ', object); 
+  static void v(Object object, {String tag}) {
+    if (debuggable) _printLog(tag, '  v  ', object);
   }
 
-  static void v(Object object, {String tag}) {
-    if (debuggable) {
-      _printLog(tag, '  v  ', object);
-    }
+  static void d(Object object, {String tag}) {
+    if (debuggable) _printLog(tag, '  d  ', object);
   }
 
   static void _printLog(String tag, String stag, Object object) {
-    StringBuffer sb = new StringBuffer();
-    sb.write("  "+ ((tag == null || tag.isEmpty) ? TAG : tag)+"  ");
-    sb.write(DateTime.now().toString() + "  ");
-    sb.write(stag);
-    sb.write(object);
-    print(sb.toString());
+    String da = object.toString();
+    while (da.isNotEmpty) {
+      da = "  " +
+          ((tag == null || tag.isEmpty) ? TAG : tag) +
+          "  " +
+          DateTime.now().toString() +
+          "  " +
+          stag +
+          da;
+      if (da.length > 512) {
+        print(da.substring(0, 512) + "\n");
+        da = da.substring(512, da.length);
+      } else {
+        print(da + "\n");
+        da = "";
+      }
+    }
   }
 }

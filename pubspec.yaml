@@ -1,5 +1,5 @@
 name: flutter_demo
-description: A new Flutter project.
+description: 这个项目作为我平时练习所用项目
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -26,6 +26,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   english_words: ^3.1.5
+  fluro: "^1.5.1"
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +57,15 @@ flutter:
     - images/publish_work_sign.png
     - images/share_qq.png
     - images/share_wechat.png
-
+    - assets/images/logo_fluro.png
+    - assets/images/acc_boom.png
+    - assets/images/ic_result_hz.png
+    - assets/images/ic_function_hz.png
+    - assets/images/ic_transform_custom_hz.png
+    - assets/images/ic_transform_fade_in_hz.png
+    - assets/images/ic_transform_fade_out_hz.png
+    - assets/images/ic_transform_global_hz.png
+    - assets/images/ic_transform_native_hz.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -82,3 +91,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Lazer84
+      fonts:
+        - asset: assets/fonts/Lazer84.ttf
