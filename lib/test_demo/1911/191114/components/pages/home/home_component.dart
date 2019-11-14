@@ -7,7 +7,7 @@ class HomeComponent extends StatefulWidget {
 }
 
 class _HomeComponentState extends State<HomeComponent> {
-  var _deepLinkOpacity = 1.0;
+  var _deepLinkOpacity = 0.0;
   final _deepLinkURL =
       "fluro://deeplink?path=/message&mesage=fluro%20rocks%21%21";
   final _daysOfWeek = const ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"];
@@ -121,7 +121,7 @@ class _HomeComponentState extends State<HomeComponent> {
       children: <Widget>[
         AnimatedOpacity(
           duration: Duration(milliseconds: 1000),
-          opacity: _deepLinkOpacity,
+          opacity: (_deepLinkOpacity - 1.0).abs(),
           child: Center(
             child: Text(
               "Copied to clipboard!",
@@ -130,10 +130,29 @@ class _HomeComponentState extends State<HomeComponent> {
                 fontWeight: FontWeight.w500,
                 color: Color(0xffffffff),
               ),
-              
             ),
           ),
         ),
+        AnimatedOpacity(
+          opacity: _deepLinkOpacity,
+          duration: Duration(milliseconds: 250),
+          child: FlatButton(
+            highlightColor: const Color(0x11ffffff),
+            splashColor: const Color(0x22ffffffff),
+            onPressed: (){
+
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Click here to copy a deep link url to the clipboard",
+               textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    color: const Color(0xCCFFFFFF),
+                  ),),
+            ),
+          ),
+        )
       ],
     );
   }
