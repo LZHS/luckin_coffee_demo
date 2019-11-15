@@ -1,5 +1,9 @@
+import 'dart:async';
+ 
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common_utils.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_demo/common_utils.dart'; 
+import 'package:flutter_demo/test_demo/1911/191114/config/routers.dart';
 
 class HomeComponent extends StatefulWidget {
   @override
@@ -7,7 +11,7 @@ class HomeComponent extends StatefulWidget {
 }
 
 class _HomeComponentState extends State<HomeComponent> {
-  var _deepLinkOpacity = 0.0;
+  var _deepLinkOpacity = 1.0;
   final _deepLinkURL =
       "fluro://deeplink?path=/message&mesage=fluro%20rocks%21%21";
   final _daysOfWeek = const ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"];
@@ -114,7 +118,12 @@ class _HomeComponentState extends State<HomeComponent> {
     );
   }
 
-  _tappedMenuButton(BuildContext context, String key) {}
+  _tappedMenuButton(BuildContext context, String key) {
+    Log.d("_tappedMenuButton --> key : $key");
+    RouterManager.goDemoMessageComponent(context, "德玛西亚").then((result) {
+      Log.d("result = $result");
+    });
+  }
 
   Widget deepLinkWidget(BuildContext context) {
     return Stack(
@@ -139,17 +148,30 @@ class _HomeComponentState extends State<HomeComponent> {
           child: FlatButton(
             highlightColor: const Color(0x11ffffff),
             splashColor: const Color(0x22ffffffff),
-            onPressed: (){
-
+            onPressed: () {
+              if (_deepLinkOpacity == 1.0) {
+                Timer(Duration(milliseconds: 2000), () {
+                  setState(() {
+                    _deepLinkOpacity = 1.0;
+                  });
+                });
+                setState(() {
+                  _deepLinkOpacity = 0.0;
+                });
+                final clipboardData = ClipboardData(text: _deepLinkURL);
+                Clipboard.setData(clipboardData);
+              }
             },
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("Click here to copy a deep link url to the clipboard",
-               textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12.0,
-                    color: const Color(0xCCFFFFFF),
-                  ),),
+              child: Text(
+                "Click here to copy a deep link url to the clipboard",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: const Color(0xCCFFFFFF),
+                ),
+              ),
             ),
           ),
         )

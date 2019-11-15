@@ -1,6 +1,7 @@
-import 'package:fluro/fluro.dart';
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common_utils.dart';
+import 'package:flutter_demo/fluro/src/router.dart';
 import 'package:flutter_demo/test_demo/1911/191114/config/application.dart';
 import 'package:flutter_demo/test_demo/1911/191114/config/routers.dart';
  
