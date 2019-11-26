@@ -120,7 +120,8 @@ class _HomeComponentState extends State<HomeComponent> {
 
   _tappedMenuButton(BuildContext context, String key) {
     Log.d("_tappedMenuButton --> key : $key");
-    RouterManager.goDemoMessageComponent(context, "德玛西亚").then((result) {
+    var para="德玛西亚";
+    RouterManager.goDemoMessageComponent(context, para).then((result) {
       Log.d("result = $result");
     });
   }

@@ -6,7 +6,7 @@
  * Copyright (c) 2019 Yakka, LLC. All rights reserved.
  * See LICENSE for distribution and usage details.
  */
- 
+
 import 'package:flutter/widgets.dart';
 
 import 'common.dart';
@@ -217,17 +217,20 @@ class RouteTree {
   /// Is the path component a parameter
   bool _isParameterComponent(String component) {
     return component.startsWith(":");
-  } 
+  }
+
   Map<String, List<String>> parseQueryString(String query) {
     var search = RegExp('([^&=]+)=?([^&]*)');
     var params = Map<String, List<String>>();
     if (query.startsWith('?')) query = query.substring(1);
     decode(String s) => Uri.decodeComponent(s.replaceAll('+', ' '));
     for (Match match in search.allMatches(query)) {
-      // String key = decode(match.group(1));
-      // String value = decode(match.group(2)); 
-      String key =  match.group(1);
-      String value = match.group(2);
+      String key = RegExp('(%[a-fA-F0-9]{2})+').hasMatch(match.group(1))
+          ? decode(match.group(1))
+          : match.group(1);
+      String value = RegExp('(%[a-fA-F0-9]{2})+').hasMatch(match.group(2))
+          ? decode(match.group(2))
+          : match.group(2);
       if (params.containsKey(key)) {
         params[key].add(value);
       } else {
