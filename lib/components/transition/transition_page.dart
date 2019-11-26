@@ -26,6 +26,7 @@ class _TransitionPageState extends State<TransitionPage> {
 
   startTime()async{
 
-    
+// TODO 【Flutter】应用广告页面-3秒后跳转 https://www.cnblogs.com/sangwl/p/11435191.html
+
   }
 }
