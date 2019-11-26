@@ -1,5 +1,5 @@
 name: flutter_demo
-description: 这个项目作为我平时练习所用项目
+description: A new Flutter project.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -18,19 +18,15 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter 
-  flutter_localizations:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  english_words: ^3.1.5
- # fluro: "^1.5.1"
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter  
+    sdk: flutter
 
 
 # For information on the generic Dart part of this file, see the
@@ -42,30 +38,16 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: true 
+  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
-    - images/lake.jpg 
-    - images/avatar2.png
-    - images/nav_close.png
-    - images/publish_chat_box.png
-    - images/publish_work_line.png
-    - images/publish_work_sign.png
-    - images/share_qq.png
-    - images/share_wechat.png
-    - assets/images/logo_fluro.png
-    - assets/images/acc_boom.png
-    - assets/images/ic_result_hz.png
-    - assets/images/ic_function_hz.png
-    - assets/images/ic_transform_custom_hz.png
-    - assets/images/ic_transform_fade_in_hz.png
-    - assets/images/ic_transform_fade_out_hz.png
-    - assets/images/ic_transform_global_hz.png
-    - assets/images/ic_transform_native_hz.png
+     - lib/assets/images/
+     - lib/assets/images/home/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
@@ -91,7 +73,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  fonts:
-    - family: Lazer84
-      fonts:
-        - asset: assets/fonts/Lazer84.ttf
