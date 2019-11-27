@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/fluro/common.dart';
 import 'package:flutter_demo/common/fluro/router.dart';
+import 'package:flutter_demo/components/home/home_page.dart';
 import 'package:flutter_demo/components/transition/transition_page.dart';
 
+/// 根页面 --- 用于 过度 页面
 var root = "/";
 var _rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
   return TransitionPage();
+});
+
+/// 主页面
+var home = "/home/home_page";
+var _homeHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return HomePage(msg: params["message"]?.first);
 });
 
 class Routes {
@@ -16,6 +25,8 @@ class Routes {
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       Log.d("未找到 该页面 ", tag: "Routes");
     });
-    router.define(root, handler: _rootHandler);
+    router
+      ..define(root, handler: _rootHandler)
+      ..define(home, handler: _homeHandler);
   }
 }
