@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/fluro/common.dart';
-import 'package:flutter_demo/common/fluro/router.dart';
-import 'package:flutter_demo/components/home/home_page.dart';
-import 'package:flutter_demo/components/transition/transition_page.dart';
+import 'package:flutter_demo/common/fluro/router.dart'; 
+import 'package:flutter_demo/components/pages/main/main_page.dart';
+import 'package:flutter_demo/components/pages/transition/transition_page.dart'; 
 
 /// 根页面 --- 用于 过度 页面
 var root = "/";
@@ -13,10 +13,10 @@ var _rootHandler = Handler(
 });
 
 /// 主页面
-var home = "/home/home_page";
+var home = "/main/main_page";
 var _homeHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return HomePage(msg: params["message"]?.first);
+  return MainPage(msg: params["message"]?.first);
 });
 
 class Routes {
