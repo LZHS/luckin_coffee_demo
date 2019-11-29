@@ -1,0 +1,172 @@
+[
+    {
+        "categoryName": "人气Top",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "榛果拿铁",
+                "describe": "Hazlnut Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 27,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "大师咖啡",
+        "info": "WBC（世界咖啡师大赛）冠军团队拼配",
+        "productInfo": [
+            {
+                "name": "拿铁",
+                "describe": "Latte",
+                "specifications": "默认：大/无糖/热",
+                "unitPrice": 24,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "香草拿铁",
+                "describe": "Vanilla Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 27,
+                "discountInfo": "",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "焦糖拿铁",
+                "describe": "Caramel Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 25,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "榛果拿铁",
+                "describe": "Hazlnut Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 27,
+                "discountInfo": "买1赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "零度拿铁",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "榛果拿铁",
+                "describe": "Hazlnut Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 15,
+                "discountInfo": "第2杯半价",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "榛果拿铁",
+                "describe": "Hazlnut Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 15,
+                "discountInfo": "",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "瑞纳冰",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "拿铁",
+                "describe": "Latte",
+                "specifications": "默认：大/无糖/热",
+                "unitPrice": 24,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "焦糖拿铁",
+                "describe": "Caramel Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 25,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "香草拿铁",
+                "describe": "Vanilla Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 27,
+                "discountInfo": "",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "经典饮品",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "拿铁",
+                "describe": "Latte",
+                "specifications": "默认：大/无糖/热",
+                "unitPrice": 24,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "焦糖拿铁",
+                "describe": "Caramel Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 25,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "健康轻食",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "拿铁",
+                "describe": "Latte",
+                "specifications": "默认：大/无糖/热",
+                "unitPrice": 24,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "焦糖拿铁",
+                "describe": "Caramel Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 25,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    },
+    {
+        "categoryName": "鲜榨果蔬汁",
+        "info": "",
+        "productInfo": [
+            {
+                "name": "拿铁",
+                "describe": "Latte",
+                "specifications": "默认：大/无糖/热",
+                "unitPrice": 24,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            },
+            {
+                "name": "焦糖拿铁",
+                "describe": "Caramel Latte",
+                "specifications": "默认：大/单糖/热",
+                "unitPrice": 25,
+                "discountInfo": "充2赠1",
+                "img": "lib/assets/images/menu/icon_product.png"
+            }
+        ]
+    }
+]

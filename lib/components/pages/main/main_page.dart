@@ -6,6 +6,7 @@ import 'package:flutter_demo/components/pages/main/menu/menu_page.dart';
 import 'package:flutter_demo/components/pages/main/order/order_page.dart';
 import 'package:flutter_demo/components/pages/main/persion_center/persion_center_page.dart';
 import 'package:flutter_demo/components/pages/main/shopping/shopping_page.dart';
+
 /// ```
 /// 主页面
 /// ```
@@ -16,10 +17,12 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with AutomaticKeepAliveClientMixin {
   int currentIndex = 0;
   final List<TabInfo> _tabInfos = List();
   final List _pages = List();
+  var _pageController = PageController(initialPage: 0);
   _MainPageState() {
     _tabInfos
       ..add(
@@ -66,9 +69,22 @@ class _MainPageState extends State<MainPage> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[currentIndex],
+      body: PageView.builder(
+        itemCount: _pages.length,
+        itemBuilder: (BuildContext context, int indext) =>
+            _pages.elementAt(indext),
+        controller: _pageController,
+        onPageChanged: (int indxt) {
+          setState(() {
+            this.currentIndex = indxt;
+          });
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: backgroundColor,
         type: BottomNavigationBarType.fixed,
@@ -77,7 +93,11 @@ class _MainPageState extends State<MainPage> {
         iconSize: 20.0,
         onTap: (index) {
           setState(() {
-            currentIndex = index;
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
           });
         },
       ),

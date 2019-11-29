@@ -43,9 +43,11 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
      - lib/assets/images/
-     - lib/assets/images/home/
      - lib/assets/images/banners/
      - lib/assets/images/navigatioinBar/
+     - lib/assets/images/home/
+     - lib/assets/images/menu/
+     - lib/assets/datas/
      
 
   # An image asset can refer to one or more resolution-specific "variants", see
