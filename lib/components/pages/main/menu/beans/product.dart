@@ -28,6 +28,9 @@ class ProductList {
 }
 
 class ProductInfo {
+  bool isCategory = false;
+  String category;
+  String categoryInfo;
   String name;
   String describe;
   String specifications;
@@ -35,13 +38,17 @@ class ProductInfo {
   String discountInfo;
   String img;
 
-  ProductInfo(
-      {this.name,
-      this.describe,
-      this.specifications,
-      this.unitPrice,
-      this.discountInfo,
-      this.img});
+  ProductInfo({
+    this.name,
+    this.describe,
+    this.specifications,
+    this.unitPrice,
+    this.discountInfo,
+    this.img,
+    this.isCategory,
+    this.category,
+    this.categoryInfo,
+  });
 
   ProductInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];
