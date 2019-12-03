@@ -24,6 +24,7 @@ class Routes {
     router.notFoundHandler = Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       Log.d("未找到 该页面 ", tag: "Routes");
+      return;
     });
     router
       ..define(root, handler: _rootHandler)

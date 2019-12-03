@@ -82,7 +82,7 @@
                 "describe": "Latte",
                 "specifications": "默认：大/无糖/热",
                 "unitPrice": 24,
-                "discountInfo": "充2赠1",
+                "discountInfo": "充1赠1",
                 "img": "lib/assets/images/menu/icon_product.png"
             },
             {
@@ -112,7 +112,7 @@
                 "describe": "Latte",
                 "specifications": "默认：大/无糖/热",
                 "unitPrice": 24,
-                "discountInfo": "充2赠1",
+                "discountInfo": "买2赠1",
                 "img": "lib/assets/images/menu/icon_product.png"
             },
             {
@@ -120,7 +120,7 @@
                 "describe": "Caramel Latte",
                 "specifications": "默认：大/单糖/热",
                 "unitPrice": 25,
-                "discountInfo": "充2赠1",
+                "discountInfo": "买1赠1",
                 "img": "lib/assets/images/menu/icon_product.png"
             }
         ]
@@ -156,7 +156,7 @@
                 "describe": "Latte",
                 "specifications": "默认：大/无糖/热",
                 "unitPrice": 24,
-                "discountInfo": "充2赠1",
+                "discountInfo": "充1赠1",
                 "img": "lib/assets/images/menu/icon_product.png"
             },
             {

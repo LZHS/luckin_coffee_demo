@@ -73,6 +73,7 @@ class _MainPageState extends State<MainPage>
   
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: PageView.builder(
         itemCount: _pages.length,

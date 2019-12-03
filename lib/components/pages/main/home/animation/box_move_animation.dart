@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 
-// 位移控件
+/// 位移控件
 class BoxMoveAnimation extends StatefulWidget {
   @override
   _BoxMoveAnimationState createState() => _BoxMoveAnimationState();
