@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/custom_swiper/custom_swiper.dart';
+import 'package:flutter_demo/components/pages/main/menu/animation/slide_animation.dart';
+import 'package:flutter_demo/components/pages/main/menu/beans/location.dart';
 import 'package:flutter_demo/components/pages/main/menu/beans/product.dart';
 import 'package:flutter_demo/config/colors.dart';
 
@@ -14,21 +16,27 @@ class MenuPage extends StatefulWidget {
   _MenuPageState createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
+class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   /// 页面原始数据
   List originalData = List();
 
   List<ProductList> products = List();
   List<ProductInfo> productInfos = List();
+  List<Location> locations = List();
 
   ScrollController _categoryController = new ScrollController(
     keepScrollOffset: false,
   );
   ScrollController _productsController = new ScrollController();
+
+  double willOffset = 0.0;
   bool isCheckOrScroll = false;
 
   AnimationController _animationController;
- Animation _animation;
+  Animation<Offset> _animation;
+  double startY = 0.0, endY = 0.0;
+  int currIndex = 0;
+
   _MenuPageState() {
     _initData();
     _initEvent();
@@ -115,9 +123,19 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
       List<ProductInfo> tempProductInfos = List();
       originalData.clear();
       originalData = json.decode(val);
-      originalData
-          .forEach((item) => tempProducts.add(ProductList.fromJson(item)));
+      originalData.forEach(
+        (item) => tempProducts.add(
+          ProductList.fromJson(item),
+        ),
+      );
+      var tempStartY = 0.0, tempEndY = 0.0;
       tempProducts.forEach((item) {
+        tempStartY = tempEndY;
+        tempEndY += 44.0 + item.productInfo.length * 90.0;
+        locations.add(Location(
+          startY: tempStartY,
+          endY: tempEndY,
+        ));
         tempProductInfos.add(ProductInfo(
           isCategory: true,
           category: item.categoryName,
@@ -145,10 +163,33 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
     _productsController.addListener(
       () {
         Log.d("offset = ${_productsController.offset}");
+        Log.d("this.isCheckOrScroll = ${this.isCheckOrScroll}");
+        if (this.isCheckOrScroll) {
+          if (_productsController.offset - this.willOffset == 0)
+            this.isCheckOrScroll = false;
+        } else {
+          for (var i = 0; i < locations.length; i++) {
+            Location location = locations.elementAt(i);
+            if (location.startY <= _productsController.offset &&
+                _productsController.offset <= location.endY) {
+              goIndexItem(i);
+              break;
+            }
+          }
+        }
       },
     );
-    _animationController=AnimationController(duration: const  Duration(seconds: 1),vsync: this);
-    _animation= CurveTween(curve:  Curves.linear).animate(_animationController);
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _animation = Tween(begin: Offset(0.0, 0.0), end: Offset(0.0, 0.0)).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.linear,
+      ),
+    );
   }
 
   /// 创建产品 列表
@@ -384,7 +425,10 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
   ///  创建 类别Item 控件
   Widget createCategoryItem(BuildContext context, int index) {
     return GestureDetector(
-      onTap: () => checkCategoryItem(products.elementAt(index).categoryName),
+      onTap: () => checkCategoryItem(
+        index,
+        products.elementAt(index).categoryName,
+      ),
       child: Container(
         width: double.infinity,
         height: 44.0,
@@ -402,28 +446,12 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
 
   /// 创建 类别 位移动画
   Widget createCategoryAnimat() {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      alignment: Alignment.topLeft,
-      child: SlideTransition(
-        //// TODO 将要完成 类别 背景 滑动动画
-        position: _animation,
-        child: Container(
-          width: double.infinity,
-          height: 44.0,
-          decoration: BoxDecoration(
-            color: Colors.red,
-          ),
-        ),
-      ),
-    );
+    return SlideAnimation(animation: _animation);
   }
 
   /// l类别Item 单击事件
-  checkCategoryItem(String category) {
+  checkCategoryItem(int index, String category) { 
     this.isCheckOrScroll = true;
-    double willOffset = 0.0;
     for (var i = 0; i < productInfos.length; i++) {
       ProductInfo item = productInfos.elementAt(i);
       if (item.isCategory)
@@ -435,14 +463,40 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin{
     // if (willOffset >= this._productsController.position.)
     //   willOffset = this._productsController.offset;
     willOffset -= 44.0;
+
     setState(() {
       this._productsController.animateTo(
             willOffset,
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 800),
             curve: Curves.linear,
           );
-      this.isCheckOrScroll = false;
     });
-    Log.d("將要跳轉的位置 $willOffset");
+    goIndexItem(index);
+  }
+
+  goIndexItem(int index) {
+    if (this.currIndex != index)
+      setState(() {
+        this.currIndex = index;
+        this.startY = this.endY;
+        this.endY = index.toDouble();
+        _animation = Tween(
+          begin: Offset(
+            0.0,
+            startY,
+          ),
+          end: Offset(
+            0.0,
+            endY,
+          ),
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.linear,
+          ),
+        );
+
+        _animationController.forward();
+      });
   }
 }
