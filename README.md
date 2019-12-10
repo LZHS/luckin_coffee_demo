@@ -18,3 +18,9 @@ samples, guidance on mobile development, and a full API reference.
 
 
 - [原型设计图地址](https://www.xiaopiu.com/square?libPop=project&libId=5c306b252d5cd56e70a1e640)
+
+
+[Flutter 官方原生接口封装集合](https://blog.csdn.net/u011623470/article/details/100089378)
+
+
+TODO 想实现 数据分层， 将 网络、数据库、本地封装为一层；
