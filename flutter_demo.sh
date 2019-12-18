@@ -43,7 +43,7 @@ esac
 
 echo "$emoji 脚本自动提交，提交时间$YESTERDAY"
  
-git pull origin master
+git pull origin luckin-coffee
 
 git status
 
@@ -51,7 +51,7 @@ git add .
 
 git commit -m "$emoji 脚本自动提交，提交时间$YESTERDAY"
 
-git push -u origin master 
+git push -u origin  luckin-coffee
 
 
      
