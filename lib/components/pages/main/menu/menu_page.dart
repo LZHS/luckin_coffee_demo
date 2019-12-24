@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/custom_swiper/custom_swiper.dart';
+import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/components/pages/main/menu/animation/slide_animation.dart';
 import 'package:flutter_demo/components/pages/main/menu/beans/location.dart';
 import 'package:flutter_demo/components/pages/main/menu/beans/product.dart';
@@ -249,17 +250,9 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
 
   /// 创建 分割线
   Widget createDivider() {
-    return Container(
-      width: double.infinity,
-      height: 1.0,
-      margin: EdgeInsets.only(
-        left: 15.0,
-        right: 15.0,
-      ),
-      decoration: BoxDecoration(
-        color: Color(0xfff2f2f2),
-      ),
-      alignment: Alignment.center,
+    return DividerWidget(
+      left: 15.0,
+      right: 15.0,
     );
   }
 
@@ -450,7 +443,7 @@ class _MenuPageState extends State<MenuPage> with TickerProviderStateMixin {
   }
 
   /// l类别Item 单击事件
-  checkCategoryItem(int index, String category) { 
+  checkCategoryItem(int index, String category) {
     this.isCheckOrScroll = true;
     for (var i = 0; i < productInfos.length; i++) {
       ProductInfo item = productInfos.elementAt(i);

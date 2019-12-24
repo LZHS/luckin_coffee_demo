@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
+import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/config/colors.dart';
 
 /// 订单页面
@@ -10,16 +12,15 @@ class OrderPage extends StatefulWidget {
 
 class _OrderPageState extends State<OrderPage>
     with SingleTickerProviderStateMixin {
-  List<String> barTitles = ["全部", "未完成", "已完成"];
-  List<Widget> barWidgets = List();
+  List<String> _barTitles = ["全部", "未完成", "已完成"];
+  List<Widget> _barWidgets = List();
   TabController _tabController;
   _OrderPageState() {
-    barWidgets
+    _barWidgets
       ..clear()
       ..add(createAllOrder())
       ..add(createUnfinishedOrder())
       ..add(createFinishedOrder());
-      
   }
 
   @override
@@ -27,12 +28,18 @@ class _OrderPageState extends State<OrderPage>
     super.initState();
     this._tabController = TabController(
       initialIndex: 0,
-      length: barTitles.length,
+      length: _barTitles.length,
       vsync: this,
     );
     this._tabController.addListener(() {
       Log.d("this._tabController = ${this._tabController}");
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    this._tabController.dispose();
   }
 
   @override
@@ -61,13 +68,52 @@ class _OrderPageState extends State<OrderPage>
               ),
             ),
           ),
+          DividerWidget(),
+          Container(
+            width: double.infinity,
+            height: 44.0,
+            child: TabBar(
+              controller: _tabController,
+              labelStyle: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+              labelColor: Color(0xff88afd5),
+              unselectedLabelStyle: TextStyle(
+                fontSize: 15,
+              ),
+              unselectedLabelColor: Color(0xff505050),
+              indicatorWeight: 4.0,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorColor: Color(0xff88afd5),
+              indicatorPadding: EdgeInsets.zero,
+              tabs: _barTitles.map(
+                (item) {
+                  return Tab(
+                    text: item,
+                  );
+                },
+              ).toList(),
+            ),
+          ),
 
-
-          // tab Bar
+          DividerWidget(
+            color: 0xffa6a6a6,
+          ),
+          Expanded(
+            flex: 1,
+            child: TabBarView(
+              controller: _tabController, 
+              physics: NeverScrollableScrollPhysics(),
+              children: _barWidgets,
+            ),
+          ),
         ],
       ),
     );
   }
+/// TODO 创建订单详情
+
 
   /// 创建 所有订单列表
   Widget createAllOrder() {
