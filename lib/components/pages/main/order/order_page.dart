@@ -1,7 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
+import 'package:flutter_demo/components/pages/main/order/order_all_page.dart';
 import 'package:flutter_demo/config/colors.dart';
 
 /// 订单页面
@@ -15,13 +15,6 @@ class _OrderPageState extends State<OrderPage>
   List<String> _barTitles = ["全部", "未完成", "已完成"];
   List<Widget> _barWidgets = List();
   TabController _tabController;
-  _OrderPageState() {
-    _barWidgets
-      ..clear()
-      ..add(createAllOrder())
-      ..add(createUnfinishedOrder())
-      ..add(createFinishedOrder());
-  }
 
   @override
   void initState() {
@@ -34,6 +27,12 @@ class _OrderPageState extends State<OrderPage>
     this._tabController.addListener(() {
       Log.d("this._tabController = ${this._tabController}");
     });
+
+    _barWidgets
+      ..clear()
+      ..add(createAllOrder())
+      ..add(createUnfinishedOrder())
+      ..add(createFinishedOrder());
   }
 
   @override
@@ -43,8 +42,8 @@ class _OrderPageState extends State<OrderPage>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Material(
+  Widget build(BuildContext context) { 
+    return Container(
       color: backgroundColor,
       child: Column(
         children: <Widget>[
@@ -103,7 +102,7 @@ class _OrderPageState extends State<OrderPage>
           Expanded(
             flex: 1,
             child: TabBarView(
-              controller: _tabController, 
+              controller: _tabController,
               physics: NeverScrollableScrollPhysics(),
               children: _barWidgets,
             ),
@@ -112,23 +111,10 @@ class _OrderPageState extends State<OrderPage>
       ),
     );
   }
-/// TODO 创建订单详情
-
 
   /// 创建 所有订单列表
   Widget createAllOrder() {
-    return Container(
-      child: Center(
-        child: Text(
-          "所有订单列表",
-          style: TextStyle(
-            fontSize: 17.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ),
-    );
+    return OrderAllPage();
   }
 
   /// 创建 未完成订单列表

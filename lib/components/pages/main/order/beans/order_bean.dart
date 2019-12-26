@@ -36,5 +36,5 @@ class OrderBean {
     data['customerAddress'] = this.customerAddress;
     data['products'] = this.products;
     return data;
-  }
+  } 
 }
