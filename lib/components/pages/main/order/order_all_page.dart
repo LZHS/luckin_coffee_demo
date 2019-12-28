@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
 import 'package:flutter_demo/components/pages/main/order/beans/order_bean.dart';
+import 'package:flutter_demo/components/pages/main/order/enums/order_state_enum.dart';
 import 'package:flutter_demo/components/pages/main/order/widgets/order_widge.dart';
 
 ///```
@@ -35,7 +36,7 @@ class _OrderAllPageState extends State<OrderAllPage> {
   }
 
   /// 初始化 測試數據
-  _initData() {
+  _initData() { 
     rootBundle.loadString("lib/assets/datas/orderAllList.json").then((val) {
       List<OrderBean> tempData = List();
       json.decode(val).forEach((json) => tempData.add(
@@ -49,3 +50,5 @@ class _OrderAllPageState extends State<OrderAllPage> {
     });
   }
 }
+
+typedef SDFGDCallback = void Function(int indxt, OrderStateEnum stateEnum);
