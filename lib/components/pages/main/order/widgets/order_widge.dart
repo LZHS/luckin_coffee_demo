@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/components/pages/main/order/beans/order_bean.dart';
+import 'package:flutter_demo/components/pages/main/order/enums/order_state_enum.dart';
 
 ///```
 /// 订单模块 item 布局
@@ -9,7 +10,8 @@ import 'package:flutter_demo/components/pages/main/order/beans/order_bean.dart';
 ///```
 class OrderWidge extends StatefulWidget {
   final OrderBean _order;
-  OrderWidge(this._order);
+  final onClickEnent _clickEnent;
+  OrderWidge(this._order, this._clickEnent);
 
   @override
   _OrderWidgeState createState() => _OrderWidgeState();
@@ -193,6 +195,7 @@ class _OrderWidgeState extends State<OrderWidge> {
                 ),
               ),
               onTap: () {
+                widget._clickEnent(widget._order.orderId, OrderStateEnum.align);
                 Log.d(" 你 点击了 再来一单 按钮 当前 订单id ${widget._order.orderId}");
               },
             ),
@@ -240,6 +243,8 @@ class _OrderWidgeState extends State<OrderWidge> {
                 ),
               ),
               onTap: () {
+                widget._clickEnent(
+                    widget._order.orderId, OrderStateEnum.evaluation);
                 Log.d(" 你 点击了 去评价 按钮 当前 订单id ${widget._order.orderId}");
               },
             ),
@@ -290,6 +295,7 @@ class _OrderWidgeState extends State<OrderWidge> {
               ),
             ),
             onTap: () {
+              widget._clickEnent(widget._order.orderId, OrderStateEnum.play);
               Log.d(" 你 点击了 支付按钮 当前 订单id ${widget._order.orderId}");
             },
           ),
@@ -298,3 +304,5 @@ class _OrderWidgeState extends State<OrderWidge> {
     );
   }
 }
+
+typedef void onClickEnent(String orderId, OrderStateEnum stateEnum);
