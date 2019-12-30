@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/components/pages/main/order/order_all_page.dart';
+import 'package:flutter_demo/components/pages/main/order/subs/order_all_page.dart';
 import 'package:flutter_demo/config/colors.dart';
 
 /// 订单页面
