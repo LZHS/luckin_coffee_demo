@@ -305,4 +305,4 @@ class _OrderWidgeState extends State<OrderWidge> {
   }
 }
 
-typedef void onClickEnent(String orderId, OrderStateEnum stateEnum);
+typedef onClickEnent = void Function(String orderId, OrderStateEnum stateEnum);

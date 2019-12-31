@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/config/colors.dart';
+import 'package:flutter_demo/config/resources.dart'; 
 
 /// ```
 /// 个人中心页面

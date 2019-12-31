@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/components/pages/main/order/subs/order_all_page.dart';
-import 'package:flutter_demo/config/colors.dart';
+import 'package:flutter_demo/components/pages/main/order/list/order_list.dart';
+import 'package:flutter_demo/config/resources.dart'; 
 
 /// 订单页面
 class OrderPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _OrderPageState extends State<OrderPage>
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Container(
       color: backgroundColor,
       child: Column(
@@ -114,38 +114,22 @@ class _OrderPageState extends State<OrderPage>
 
   /// 创建 所有订单列表
   Widget createAllOrder() {
-    return OrderAllPage();
+    return OrderList(
+      requestPath: "lib/assets/datas/orderAllList.json",
+    );
   }
 
   /// 创建 未完成订单列表
   Widget createUnfinishedOrder() {
-    return Container(
-      child: Center(
-        child: Text(
-          "未完成订单列表",
-          style: TextStyle(
-            fontSize: 17.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ),
+    return OrderList(
+      requestPath: "lib/assets/datas/orderUnFinishList.json",
     );
   }
 
   /// 创建 已完成订单列表
   Widget createFinishedOrder() {
-    return Container(
-      child: Center(
-        child: Text(
-          "已完成订单列表",
-          style: TextStyle(
-            fontSize: 17.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ),
+    return OrderList(
+      requestPath: "lib/assets/datas/orderFinishList.json",
     );
   }
 }

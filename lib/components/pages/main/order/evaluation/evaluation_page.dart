@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/common/common_utils.dart';
+import 'package:flutter_demo/common/widgets/head_title_bar.dart';
 
 ///```
 /// 订单评价页面
@@ -14,11 +16,16 @@ class EvaluationPage extends StatefulWidget {
 }
 
 class _EvaluationPageState extends State<EvaluationPage> {
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: HeadTitleBar(
+        title: "评价",
+      ),
       body: Container(
-        child: Text("订单评价页面"),
+        child: Text("订单评价页面 \n orderId ${this.widget.orderId}"),
       ),
     );
   }

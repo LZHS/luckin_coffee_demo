@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/custom_swiper/custom_swiper.dart';
 import 'package:flutter_demo/components/pages/main/home/animation/box_move_animation.dart';
-import 'package:flutter_demo/config/colors.dart';
+import 'package:flutter_demo/config/resources.dart'; 
 
 ///```
 /// 首页页面

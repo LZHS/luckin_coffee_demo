@@ -9,7 +9,7 @@ import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/components/pages/main/menu/animation/slide_animation.dart';
 import 'package:flutter_demo/components/pages/main/menu/beans/location.dart';
 import 'package:flutter_demo/components/pages/main/menu/beans/product.dart';
-import 'package:flutter_demo/config/colors.dart';
+import 'package:flutter_demo/config/resources.dart'; 
 
 /// 菜单页面
 class MenuPage extends StatefulWidget {
