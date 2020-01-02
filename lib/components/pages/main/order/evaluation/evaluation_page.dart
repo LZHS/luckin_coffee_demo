@@ -16,8 +16,7 @@ class EvaluationPage extends StatefulWidget {
 }
 
 class _EvaluationPageState extends State<EvaluationPage> {
-  
-
+  bool isSatisfied = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,108 @@ class _EvaluationPageState extends State<EvaluationPage> {
         title: "评价",
       ),
       body: Container(
-        child: Text("订单评价页面 \n orderId ${this.widget.orderId}"),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(top: 25.0, bottom: 18.0),
+                    child: Text(
+                      "“${isSatisfied ? '满意' : '失望'}”",
+                      style: TextStyle(
+                        color: Color(0xff383838),
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      InkWell(
+                        child: Image(
+                          image: AssetImage(isSatisfied
+                              ? 'lib/assets/images/order/icon_satisfied.png'
+                              : 'lib/assets/images/order/icon_satisfied_un.png'),
+                          width: 40.0,
+                          height: 40.0,
+                          fit: BoxFit.contain,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            this.isSatisfied = !this.isSatisfied;
+                          });
+                        },
+                      ),
+                      Container(
+                        width: 30.0,
+                      ),
+                      InkWell(
+                        child: Image(
+                          image: AssetImage(isSatisfied
+                              ? 'lib/assets/images/order/icon_satisfied_no_un.png'
+                              : 'lib/assets/images/order/icon_satisfied_no.png'),
+                          width: 40.0,
+                          height: 40.0,
+                          fit: BoxFit.contain,
+                        ),
+                        onTap: () {
+                          setState(() {
+                            this.isSatisfied = !this.isSatisfied;
+                          });
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+
+            /// 提交按钮
+            Container(
+              color: Colors.white,
+              width: double.infinity,
+              height: 60.0,
+              child: Center(
+                child: Material(
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      color: Color(0xff90c0ef),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(2.0),
+                      ),
+                    ),
+                    child: InkResponse(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(2.0),
+                      ),
+                      highlightColor: Color(0x955000000),
+                      highlightShape: BoxShape.rectangle,
+                      radius: 0.0,
+                      onTap: () {
+                        Log.d(" 你点击了提交按钮");
+                      },
+                      child: Container(
+                        width: 345.0,
+                        height: 40.0,
+                        alignment: Alignment.center,
+                        child: Text(
+                          "提交",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
