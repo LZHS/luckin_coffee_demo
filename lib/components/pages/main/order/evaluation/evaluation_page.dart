@@ -24,11 +24,11 @@ class _EvaluationPageState extends State<EvaluationPage> {
         title: "评价",
       ),
       body: Container(
+        color: Colors.white,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Expanded(
-              flex: 1,
+            Container(
               child: Column(
                 children: <Widget>[
                   Container(
@@ -55,7 +55,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            this.isSatisfied = !this.isSatisfied;
+                            if (!this.isSatisfied) this.isSatisfied = true;
                           });
                         },
                       ),
@@ -73,19 +73,33 @@ class _EvaluationPageState extends State<EvaluationPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            this.isSatisfied = !this.isSatisfied;
+                            if (this.isSatisfied) this.isSatisfied = false;
                           });
                         },
                       ),
                     ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(16.0, 29.0, 16.0, 19.0),
+                    child: Container(
+                      height: 125.0,
+                      width: double.infinity,
+                      color: Color(0xfff8f8f8),
+                    ),
                   )
                 ],
               ),
             ),
 
+            Expanded(
+                flex: 1,
+                child: Container(
+                  width: double.infinity,
+                  color: Color(0xfff8f8f8),
+                )),
+
             /// 提交按钮
             Container(
-              color: Colors.white,
               width: double.infinity,
               height: 60.0,
               child: Center(
