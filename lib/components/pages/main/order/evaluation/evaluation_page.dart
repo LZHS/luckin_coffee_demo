@@ -17,6 +17,7 @@ class EvaluationPage extends StatefulWidget {
 
 class _EvaluationPageState extends State<EvaluationPage> {
   bool isSatisfied = true;
+  int inputNum=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,14 +80,39 @@ class _EvaluationPageState extends State<EvaluationPage> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(16.0, 29.0, 16.0, 19.0),
-                    child: Container(
-                      height: 125.0,
-                      width: double.infinity,
-                      color: Color(0xfff8f8f8),
+                  Container(
+                    height: 125.0,
+                    margin: EdgeInsets.fromLTRB(16.0, 29.0, 16.0, 19.0),
+                    padding: EdgeInsets.all(10.0),
+                    width: double.infinity,
+                    color: Color(0xfff8f8f8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.orange,
+                            child:TextField(
+
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 20.0,
+                          width: double.infinity,
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "$inputNum/200",
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              color: Color(0xff505050),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

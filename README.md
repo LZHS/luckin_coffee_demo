@@ -23,4 +23,10 @@ samples, guidance on mobile development, and a full API reference.
 [Flutter 官方原生接口封装集合](https://blog.csdn.net/u011623470/article/details/100089378)
 
 
-TODO 想实现 数据分层， 将 网络、数据库、本地封装为一层；
+TODO 想实现 数据分层， 将 网络、数据库、本地封装为一层；  
+
+<br/>
+<br/>
+<br/>
+
+[《Flutter实战》](https://book.flutterchina.club/)
