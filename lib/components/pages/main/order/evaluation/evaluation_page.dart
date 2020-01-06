@@ -17,7 +17,7 @@ class EvaluationPage extends StatefulWidget {
 
 class _EvaluationPageState extends State<EvaluationPage> {
   bool isSatisfied = true;
-  int inputNum=0;
+  int inputNum = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,9 +93,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
                           flex: 1,
                           child: Container(
                             color: Colors.orange,
-                            child:TextField(
-
-                            ),
+                            child: TextField(),
                           ),
                         ),
                         Container(
