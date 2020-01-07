@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/head_title_bar.dart';
+import 'package:flutter_demo/config/application.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 ///```
 /// 订单评价页面
@@ -18,16 +21,59 @@ class EvaluationPage extends StatefulWidget {
 class _EvaluationPageState extends State<EvaluationPage> {
   bool isSatisfied = true;
   int inputNum = 0;
+
+  String inputOdlOk = "", inputOdlNo = '';
+  final TextEditingController _controller = TextEditingController();
+  void setText(text) {
+    _controller.value = _controller.value.copyWith(
+      text: text,
+      selection:
+          TextSelection(baseOffset: text.length, extentOffset: text.length),
+      composing: TextRange.empty,
+    );
+    inputNum = text.length;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      if (_controller.text.length > 200) {
+        Log.d("亲，您已输入了200个字符");
+        showToast("亲，您已输入了200个字符");
+        setText(_controller.text.substring(0, 200));
+      }
+      if (isSatisfied)
+        inputOdlOk = _controller.text;
+      else
+        inputOdlNo = _controller.text;
+      setState(() {
+        inputNum = _controller.text.length;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    this._controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: HeadTitleBar(
         title: "评价",
+        leftCheck: (){
+          Application.router.pop(this.context);
+    FocusScope.of(context).requestFocus(FocusNode());
+
+        },
       ),
       body: Container(
         color: Colors.white,
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Container(
               child: Column(
@@ -56,7 +102,10 @@ class _EvaluationPageState extends State<EvaluationPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            if (!this.isSatisfied) this.isSatisfied = true;
+                            if (!this.isSatisfied) {
+                              this.isSatisfied = true;
+                              setText(inputOdlOk);
+                            }
                           });
                         },
                       ),
@@ -74,7 +123,10 @@ class _EvaluationPageState extends State<EvaluationPage> {
                         ),
                         onTap: () {
                           setState(() {
-                            if (this.isSatisfied) this.isSatisfied = false;
+                            if (this.isSatisfied) {
+                              this.isSatisfied = false;
+                              setText(inputOdlNo);
+                            }
                           });
                         },
                       ),
@@ -83,7 +135,6 @@ class _EvaluationPageState extends State<EvaluationPage> {
                   Container(
                     height: 125.0,
                     margin: EdgeInsets.fromLTRB(16.0, 29.0, 16.0, 19.0),
-                    padding: EdgeInsets.all(10.0),
                     width: double.infinity,
                     color: Color(0xfff8f8f8),
                     child: Column(
@@ -92,13 +143,34 @@ class _EvaluationPageState extends State<EvaluationPage> {
                         Expanded(
                           flex: 1,
                           child: Container(
-                            color: Colors.orange,
-                            child: TextField(),
+                            margin: EdgeInsets.only(
+                                left: 10.0, top: 10.0, right: 10.0),
+                            child: TextField(
+                              controller: _controller,
+                              textAlign: TextAlign.start,
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.go,
+                              maxLines: 8,
+                              autocorrect: true,
+                              style: TextStyle(
+                                fontSize: 13.0,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: "请输入评价内容（可不填）",
+                                contentPadding: EdgeInsets.all(2),
+                                hintStyle: TextStyle(
+                                  fontSize: 13.0,
+                                  color: Color(0xffa6a6a6),
+                                ),
+                                border: InputBorder.none,
+                              ),
+                            ),
                           ),
                         ),
                         Container(
                           height: 20.0,
                           width: double.infinity,
+                          margin: EdgeInsets.only(right: 10.0),
                           alignment: Alignment.centerRight,
                           child: Text(
                             "$inputNum/200",
@@ -143,6 +215,7 @@ class _EvaluationPageState extends State<EvaluationPage> {
                       highlightShape: BoxShape.rectangle,
                       radius: 0.0,
                       onTap: () {
+                        showToast("${_controller.text}");
                         Log.d(" 你点击了提交按钮");
                       },
                       child: Container(

@@ -11,6 +11,11 @@ const Color backgroundColor = Color(0xfff8f8f8);
 const Color appBarTitleColor = Color(0xff383838);
 
 ///```
+/// Toast 中间文字的颜色
+///```
+const Color toastTextColor = Color(0xff9E9E9E);
+
+///```
 /// appbar高度
 ///```
 const double appBarHeight = 44.0;

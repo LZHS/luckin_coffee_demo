@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/config/resources.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 const bool kReleaseMode =
     bool.fromEnvironment('dart.vm.product', defaultValue: false);
@@ -6,7 +8,7 @@ const bool kReleaseMode =
 ///```
 /// 日志工具类
 ///```
-class Log { 
+class Log {
   static const String _TAG_DEF = "### flutter - log ###";
 
   static bool debuggable = !kReleaseMode; //是否是debug模式,true: log v 不输出.
@@ -49,21 +51,45 @@ class Log {
     }
   }
 }
- 
-   final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  /// 获取当前的state
-   NavigatorState getCurrentState() => navigatorKey.currentState;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  /// 获取当前的context
-   BuildContext getCurrentContext() => navigatorKey.currentContext;
+/// 获取当前的state
+NavigatorState getCurrentState() => navigatorKey.currentState;
 
-  /// 获取屏幕上下边距
-  /// 用于兼容全面屏，刘海屏
-   EdgeInsets screenPadding() => MediaQuery.of(getCurrentContext()).padding;
+/// 获取当前的context
+BuildContext getCurrentContext() => navigatorKey.currentContext;
 
-  /// 获取屏幕宽度
-   double screenWidth() => MediaQuery.of(getCurrentContext()).size.width;
+/// 获取屏幕上下边距
+/// 用于兼容全面屏，刘海屏
+EdgeInsets screenPadding() => MediaQuery.of(getCurrentContext()).padding;
 
-  /// 获取屏幕高度
-   double screenHeight() => MediaQuery.of(getCurrentContext()).size.height;
+/// 获取屏幕宽度
+double screenWidth() => MediaQuery.of(getCurrentContext()).size.width;
+
+/// 获取屏幕高度
+double screenHeight() => MediaQuery.of(getCurrentContext()).size.height;
+
+///```
+/// 简单封装 Toast
+///```
+void showToast(
+  String msg, {
+  Toast toastLength = Toast.LENGTH_SHORT,
+  int timeInSecForIos = 1,
+  double fontSize = 16.0,
+  ToastGravity gravity = ToastGravity.BOTTOM,
+  Color backgroundColor = toastTextColor,
+  Color textColor = Colors.white,
+  // Function(bool) didTap,
+}) {
+  Fluttertoast.showToast(
+    msg: msg,
+    toastLength: toastLength,
+    timeInSecForIos: timeInSecForIos,
+    fontSize: fontSize,
+    gravity: gravity,
+    backgroundColor: backgroundColor,
+    textColor: textColor,
+  );
+}
