@@ -18,33 +18,37 @@ class _TransitionPageState extends State<TransitionPage> {
   int count = 3;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ConstrainedBox(
-          child: Image.asset(
-            "lib/assets/images/icon_transition.png",
-            fit: BoxFit.cover,
-          ),
-          constraints: BoxConstraints.expand(),
-        ),
-        Align(
-          alignment: FractionalOffset.topRight,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(0.0, 30.0, 10.0, 0.0),
-            child: FlatButton(
-              onPressed: () => navigationPage(),
-              color: Colors.grey,
-              child: Text(
-                "$count 跳过广告",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.0,
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            ConstrainedBox(
+              child: Image.asset(
+                "lib/assets/images/icon_transition.png",
+                fit: BoxFit.cover,
+              ),
+              constraints: BoxConstraints.expand(),
+            ),
+            Align(
+              alignment: FractionalOffset.topRight,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 30.0, 10.0, 0.0),
+                child: FlatButton(
+                  onPressed: () => navigationPage(),
+                  color: Colors.grey,
+                  child: Text(
+                    "$count 跳过广告",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.0,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

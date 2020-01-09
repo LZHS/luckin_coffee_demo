@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter_demo/components/pages/main/beans/tab_info.dart';
 import 'package:flutter_demo/components/pages/main/home/home_page.dart';
 import 'package:flutter_demo/components/pages/main/menu/menu_page.dart';
@@ -70,21 +70,21 @@ class _MainPageState extends State<MainPage>
 
   @override
   bool get wantKeepAlive => true;
-  
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: PageView.builder(
-        itemCount: _pages.length,
-        itemBuilder: (BuildContext context, int indext) =>
-            _pages.elementAt(indext),
-        controller: _pageController,
-        onPageChanged: (int indxt) {
-          setState(() {
-            this.currentIndex = indxt;
-          });
-        },
+      body:  PageView.builder(
+          itemCount: _pages.length,
+          itemBuilder: (BuildContext context, int indext) =>
+              _pages.elementAt(indext),
+          controller: _pageController,
+          onPageChanged: (int indxt) {
+            setState(() {
+              this.currentIndex = indxt;
+            });
+          }, 
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: backgroundColor,
