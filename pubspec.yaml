@@ -49,8 +49,8 @@ flutter:
      - lib/assets/images/menu/
      - lib/assets/images/navigatioinBar/
      - lib/assets/images/order/
-     - lib/assets/images/shopping/
      - lib/assets/images/persion/
+     - lib/assets/images/shopping/
 
      # 加载 测试数据
      - lib/assets/datas/
