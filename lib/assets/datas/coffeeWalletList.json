@@ -1,0 +1,62 @@
+[
+    {
+        "category": "B1",
+        "scopeOf": "全国通用",
+        "price": "21",
+        "remainingNum": "1"
+    },
+    {
+        "category": "B2",
+        "scopeOf": "全国通用",
+        "price": "18",
+        "remainingNum": "2"
+    },
+    {
+        "category": "B3",
+        "scopeOf": "地区通用",
+        "price": "12",
+        "remainingNum": "4"
+    },
+    {
+        "category": "B1",
+        "scopeOf": "市区通用",
+        "price": "25",
+        "remainingNum": "22"
+    },
+    {
+        "category": "B1",
+        "scopeOf": "全国通用",
+        "price": "21",
+        "remainingNum": "1"
+    },
+    {
+        "category": "B4",
+        "scopeOf": "全国通用",
+        "price": "21",
+        "remainingNum": "5"
+    },
+    {
+        "category": "B6",
+        "scopeOf": "全国通用",
+        "price": "21",
+        "remainingNum": "1"
+    },
+    {
+        "category": "B1",
+        "scopeOf": "全国通用",
+        "price": "17",
+        "remainingNum": "15"
+    },
+    {
+        "category": "B2",
+        "scopeOf": "时段专用",
+        "price": "21",
+        "remainingNum": "1"
+    },
+    {
+        "category": "B1",
+        "scopeOf": "全国通用",
+        "price": "21",
+        "remainingNum": "1"
+    }
+]

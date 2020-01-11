@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
+import 'package:flutter_demo/common/fluro/common.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/components/pages/main/persion_center/bean/item_data.dart';
+import 'package:flutter_demo/config/Routes.dart';
+import 'package:flutter_demo/config/application.dart';
 import 'package:flutter_demo/config/resources.dart';
 
 /// ```
@@ -95,50 +98,50 @@ class _PersionCenterPageState extends State<PersionCenterPage> {
                       onTap: () {
                         Log.d("你点击了 用户 信息");
                       },
-                      child:Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: 56.0,
-                              height: 56.0,
-                              margin: EdgeInsets.only(left: 20.0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                borderRadius: BorderRadius.circular(28.0),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    "lib/assets/images/persion/icon_persion_test_head.jpeg",
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                width: 56.0,
+                                height: 56.0,
+                                margin: EdgeInsets.only(left: 20.0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(28.0),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      "lib/assets/images/persion/icon_persion_test_head.jpeg",
+                                    ),
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  "xiaopiu_😋",
+                                  style: TextStyle(
+                                      fontSize: 18.0, color: Colors.white),
+                                ),
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 20.0),
+                            child: Image(
+                              width: 14.0,
+                              height: 14.0,
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                  "lib/assets/images/persion/icon_persion_head_back.png"),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 10.0),
-                              child: Text(
-                                "xiaopiu_😋",
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.white),
-                              ),
-                            )
-                          ],
-                        )
-                      ,
-                      Padding(
-                        padding: EdgeInsets.only(right:20.0),
-                        child: Image(
-                          width: 14.0,
-                          height: 14.0,
-                          fit: BoxFit.fill,
-                          image: AssetImage("lib/assets/images/persion/icon_persion_head_back.png"),
-                        ),
-                      )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
                   ),
                 ],
               ),
@@ -262,6 +265,11 @@ class _PersionCenterPageState extends State<PersionCenterPage> {
       case "个人资料":
         break;
       case "咖啡钱包":
+        Application.router.navigateTo(
+          context,
+          wallet,
+          transition: TransitionType.inFromLeft,
+        );
         break;
       case "优惠券":
         break;

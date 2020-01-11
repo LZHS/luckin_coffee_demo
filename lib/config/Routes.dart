@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/fluro/common.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_demo/common/fluro/router.dart';
 import 'package:flutter_demo/components/pages/main/main_page.dart';
 import 'package:flutter_demo/components/pages/main/order/evaluation/evaluation_page.dart';
 import 'package:flutter_demo/components/pages/transition/transition_page.dart';
+import 'package:flutter_demo/components/pages/wallet/coffee_wallet.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -37,6 +36,18 @@ var _evaluation = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
     return EvaluationPage(orderId: params["orderId"]?.first);
   },
+  
+);
+
+///```
+///咖啡钱包 页面
+///```
+var wallet = "/wallet/coffee_wallet";
+
+var _wallet = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return CoffeeWallet();
+  },
 );
 
 class Routes {
@@ -50,6 +61,7 @@ class Routes {
     router
       ..define(root, handler: _rootHandler)
       ..define(home, handler: _homeHandler)
-      ..define(evaluation, handler: _evaluation);
+      ..define(evaluation, handler: _evaluation)
+      ..define(wallet, handler: _wallet);
   }
 }
