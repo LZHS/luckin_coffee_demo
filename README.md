@@ -1,4 +1,6 @@
-# flutter_demo
+**免责声明**:<span style="color: red($color: #ff0000);">此代码仅学习使用，请勿用于商业用途，如拿去非法使用与本人无关！</span>
+
+# luckin-coffee-demo 项目说明
 
 A new Flutter project.
 
@@ -28,3 +30,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 * [闲鱼 flutter 技术](https://www.yuque.com/xytech/flutter/)
+
