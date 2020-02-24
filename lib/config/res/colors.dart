@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 ///```
@@ -14,13 +15,3 @@ const Color appBarTitleColor = Color(0xff383838);
 /// Toast 中间文字的颜色
 ///```
 const Color toastTextColor = Color(0xff9E9E9E);
-
-///```
-/// appbar高度
-///```
-const double appBarHeight = 44.0;
-
-///```
-/// app 状态栏的高度
-///```
-const double appStartHeight = 21.0;
