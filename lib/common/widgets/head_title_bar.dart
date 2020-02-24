@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/config/application.dart';
-import 'package:flutter_demo/config/resources.dart';
+import 'package:flutter_demo/config/res/dimens.dart';
+import 'package:flutter_demo/config/res/themes.dart';
 
 ///```
 /// 该APP 通用tabBar
@@ -14,9 +15,9 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
 
   ///```
-  /// appBar 中间显示的文字颜色
+  /// appBar 中间显示的文字样式
   ///```
-  final Color textColor;
+  final TextStyle titleTextStyle;
 
   ///```
   /// appBar 高度
@@ -43,7 +44,7 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
   const HeadTitleBar({
     Key key,
     this.title,
-    this.textColor = appBarTitleColor,
+    this.titleTextStyle,
     this.height = appBarHeight,
     this.backageColor = Colors.white,
     this.isShowBack = true,
@@ -57,7 +58,7 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(this.height);
 }
 
-class _HeadTitleBarState extends State<HeadTitleBar> {  
+class _HeadTitleBarState extends State<HeadTitleBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,11 +77,7 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
                   children: <Widget>[
                     Text(
                       this.widget.title,
-                      style: TextStyle(
-                        color: this.widget.textColor,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: this.widget.titleTextStyle ?? titleTextStyle,
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
@@ -90,6 +87,7 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
                         Material(
                           child: Ink(
                             color: Colors.white,
+                            //TODO 工作到这里，这两将要判断是否显示 返回按钮 isShowBack
                             child: InkResponse(
                               highlightColor: Colors.black12,
                               highlightShape: BoxShape.rectangle,

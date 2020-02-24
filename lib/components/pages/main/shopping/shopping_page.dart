@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/config/resources.dart'; 
+import 'package:flutter_demo/config/res/colors.dart'; 
 
 /// 购物车页面
 class ShoppingPage extends StatefulWidget {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
+import 'package:flutter_demo/common/widgets/head_title_bar.dart';
 import 'package:flutter_demo/components/pages/main/order/list/order_list.dart';
-import 'package:flutter_demo/config/resources.dart'; 
+import 'package:flutter_demo/config/res/colors.dart';
 
 /// 订单页面
 class OrderPage extends StatefulWidget {
@@ -43,32 +44,17 @@ class _OrderPageState extends State<OrderPage>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: backgroundColor,
-      child: Column(
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      resizeToAvoidBottomInset: false,
+      appBar: HeadTitleBar(
+        title: "订单列表",
+        isShowBack: true,
+      ),
+      body: Column(
         children: <Widget>[
-          /// 状态栏
           Container(
-            width: double.infinity,
-            height: 20.0,
-          ),
-
-          /// 标题栏
-          Container(
-            width: double.infinity,
-            height: 44.0,
-            alignment: Alignment.center,
-            child: Text(
-              "订单列表",
-              style: TextStyle(
-                fontSize: 17.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          DividerWidget(),
-          Container(
+            color: Colors.white,
             width: double.infinity,
             height: 44.0,
             child: TabBar(
@@ -95,7 +81,6 @@ class _OrderPageState extends State<OrderPage>
               ).toList(),
             ),
           ),
-
           DividerWidget(
             color: 0xffa6a6a6,
           ),

@@ -5,7 +5,7 @@ import 'package:flutter_demo/components/pages/main/menu/menu_page.dart';
 import 'package:flutter_demo/components/pages/main/order/order_page.dart';
 import 'package:flutter_demo/components/pages/main/persion_center/persion_center_page.dart';
 import 'package:flutter_demo/components/pages/main/shopping/shopping_page.dart';
-import 'package:flutter_demo/config/resources.dart';
+import 'package:flutter_demo/config/res/colors.dart'; 
 
 /// ```
 /// 主页面

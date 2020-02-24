@@ -5,7 +5,7 @@ import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/components/pages/main/persion_center/bean/item_data.dart';
 import 'package:flutter_demo/config/Routes.dart';
 import 'package:flutter_demo/config/application.dart';
-import 'package:flutter_demo/config/resources.dart';
+import 'package:flutter_demo/config/res/colors.dart'; 
 
 /// ```
 /// 个人中心页面

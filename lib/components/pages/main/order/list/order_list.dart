@@ -7,8 +7,8 @@ import 'package:flutter_demo/components/pages/main/order/beans/order_bean.dart';
 import 'package:flutter_demo/components/pages/main/order/enums/order_state_enum.dart';
 import 'package:flutter_demo/components/pages/main/order/widgets/order_widge.dart';
 import 'package:flutter_demo/config/Routes.dart';
-import 'package:flutter_demo/config/application.dart'; 
-import 'package:flutter_demo/config/resources.dart';
+import 'package:flutter_demo/config/application.dart';
+import 'package:flutter_demo/config/res/colors.dart';  
 
 ///```
 /// 订单列表 页面

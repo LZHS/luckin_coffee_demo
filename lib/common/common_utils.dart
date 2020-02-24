@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/config/resources.dart';
+import 'package:flutter_demo/config/res/colors.dart'; 
 import 'package:fluttertoast/fluttertoast.dart';
 
 const bool kReleaseMode =
@@ -11,23 +11,21 @@ const bool kReleaseMode =
 class Log {
   static const String _TAG_DEF = "### flutter - log ###";
 
-  static bool debuggable = !kReleaseMode; //是否是debug模式,true: log v 不输出.
-  static String TAG = _TAG_DEF;
+  static bool debuggable = !kReleaseMode; //是否是debug模式,true: log v 不输出. 
 
-  static void init({bool isDebug = false, String tag = _TAG_DEF}) {
-    debuggable = isDebug;
-    TAG = tag;
+  static void init({bool isDebug = false}) {
+    debuggable = isDebug; 
   }
 
-  static void e(Object object, {String tag}) {
+  static void e(Object object, {String tag = _TAG_DEF}) {
     _printLog(tag, '  E  ', object);
   }
 
-  static void v(Object object, {String tag}) {
+  static void v(Object object, {String tag = _TAG_DEF}) {
     if (debuggable) _printLog(tag, '  V  ', object);
   }
 
-  static void d(Object object, {String tag}) {
+  static void d(Object object, {String tag = _TAG_DEF}) {
     if (debuggable) _printLog(tag, '  D  ', object);
   }
 
@@ -35,7 +33,7 @@ class Log {
     String da = object.toString();
     while (da.isNotEmpty) {
       da = "  " +
-          ((tag == null || tag.isEmpty) ? TAG : tag) +
+          ((tag == null || tag.isEmpty) ? _TAG_DEF : tag) +
           "  " +
           DateTime.now().toString() +
           "  " +
