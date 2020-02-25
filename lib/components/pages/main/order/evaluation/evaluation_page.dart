@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/head_title_bar.dart';
 import 'package:flutter_demo/config/application.dart';
+
 ///```
 /// 订单评价页面
 /// orderId 将要评价的 订单ID
@@ -63,10 +64,9 @@ class _EvaluationPageState extends State<EvaluationPage> {
       resizeToAvoidBottomInset: false,
       appBar: HeadTitleBar(
         title: "评价",
-        leftCheck: (){
+        leftCheck: () {
           Application.router.pop(this.context);
-    FocusScope.of(context).requestFocus(FocusNode());
-
+          FocusScope.of(context).requestFocus(FocusNode());
         },
       ),
       body: Container(

@@ -222,15 +222,15 @@ class _OrderWidgeState extends State<OrderWidge> {
               ),
               border: Border.all(
                 width: 1.0,
-                color: Color(0xff90c0ef),
+                color: Color(0x9990c0ef),
               ),
             ),
             child: InkResponse(
               borderRadius: new BorderRadius.all(new Radius.circular(4.0)),
-              highlightColor: Color(0xff90c0ef),
+              highlightColor: Color(0x9990c0ef),
               highlightShape: BoxShape.rectangle,
               radius: 74.0,
-              splashColor: Color(0xff90c0ef),
+              splashColor: Color(0x9990c0ef),
               containedInkWell: true,
               child: Container(
                 alignment: Alignment.center,

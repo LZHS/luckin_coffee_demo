@@ -34,14 +34,15 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
   }
 
   void getAllItems() {
-    rootBundle
-        .loadString("lib/assets/datas/coffeeWalletList.json")
-        .then((valStr) {
-      itemDatas.clear();
-      Map<String, dynamic> tempItem = json.decode(valStr);
-      tempItem.forEach(
-          (key, item) => itemDatas.add(CoffeeWalletItem.fromJson(item)));
-    });
-    itemDatas.forEach((item)=>Log.d("${item.toString()}"));
+    //TODO 20.02.25 获取钱包内的数据并展示出来
+    // rootBundle
+    //     .loadString("lib/assets/datas/coffeeWalletList.json")
+    //     .then((valStr) {
+    //   itemDatas.clear();
+    //   Map<String, dynamic> tempItem = json.decode(valStr);
+    //   tempItem.forEach(
+    //       (key, item) => itemDatas.add(CoffeeWalletItem.fromJson(item)));
+    // });
+    // itemDatas.forEach((item)=>Log.d("${item.toString()}"));
   }
 }

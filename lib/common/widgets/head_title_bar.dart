@@ -47,7 +47,7 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleTextStyle,
     this.height = appBarHeight,
     this.backageColor = Colors.white,
-    this.isShowBack = true,
+    this.isShowBack = false,
     this.leftCheck,
   }) : super(key: key);
 
@@ -79,43 +79,46 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
                       this.widget.title,
                       style: this.widget.titleTextStyle ?? titleTextStyle,
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Material(
-                          child: Ink(
-                            color: Colors.white,
-                            //TODO 工作到这里，这两将要判断是否显示 返回按钮 isShowBack
-                            child: InkResponse(
-                              highlightColor: Colors.black12,
-                              highlightShape: BoxShape.rectangle,
-                              radius: 0.0,
-                              onTap: () {
-                                Log.d("  你点击了 返回按钮");
-                                if (this.widget.leftCheck == null)
-                                  Application.router.pop(this.context);
-                                else
-                                  this.widget.leftCheck();
-                              },
-                              child: Container(
-                                width: this.widget.height,
-                                height: this.widget.height,
-                                alignment: Alignment.center,
-                                child: Image(
-                                  image: AssetImage(
-                                      "lib/assets/images/icon_left_back.png"),
-                                  width: 16.0,
-                                  height: 16.0,
-                                  fit: BoxFit.fill,
+                    Offstage(
+                      offstage: this.widget.isShowBack,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Material(
+                            child: Ink(
+                              color: Colors.white,
+                              //TODO 工作到这里，这两将要判断是否显示 返回按钮 isShowBack
+                              child: InkResponse(
+                                highlightColor: Colors.black12,
+                                highlightShape: BoxShape.rectangle,
+                                radius: 0.0,
+                                onTap: () {
+                                  Log.d("  你点击了 返回按钮");
+                                  if (this.widget.leftCheck == null)
+                                    Application.router.pop(this.context);
+                                  else
+                                    this.widget.leftCheck();
+                                },
+                                child: Container(
+                                  width: this.widget.height,
+                                  height: this.widget.height,
                                   alignment: Alignment.center,
+                                  child: Image(
+                                    image: AssetImage(
+                                        "lib/assets/images/icon_left_back.png"),
+                                    width: 16.0,
+                                    height: 16.0,
+                                    fit: BoxFit.fill,
+                                    alignment: Alignment.center,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),

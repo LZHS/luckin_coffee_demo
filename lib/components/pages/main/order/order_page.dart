@@ -44,9 +44,7 @@ class _OrderPageState extends State<OrderPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      resizeToAvoidBottomInset: false,
+    return Scaffold( 
       appBar: HeadTitleBar(
         title: "订单列表",
         isShowBack: true,
