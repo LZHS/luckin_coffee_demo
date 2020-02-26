@@ -89,7 +89,6 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
                           Material(
                             child: Ink(
                               color: Colors.white,
-                              //TODO 工作到这里，这两将要判断是否显示 返回按钮 isShowBack
                               child: InkResponse(
                                 highlightColor: Colors.black12,
                                 highlightShape: BoxShape.rectangle,

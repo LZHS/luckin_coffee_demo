@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/widgets/head_title_bar.dart';
-import 'package:flutter_demo/config/res/colors.dart';
+import 'package:flutter_demo/common/common_utils.dart';
+import 'package:flutter_demo/common/widgets/head_title_bar.dart'; 
 
 /// 购物车页面
 class ShoppingPage extends StatefulWidget {
@@ -11,19 +11,6 @@ class ShoppingPage extends StatefulWidget {
 class _ShoppingPageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
-    var text = Container(
-      alignment: Alignment.center,
-      width: 100.0,
-      height: 30.0,
-      child: Text(
-        "去喝一杯",
-        style: TextStyle(
-          fontSize: 14.0,
-          color: Color(0xff90c0ef),
-        ),
-      ),
-    );
-
     return Scaffold(
       appBar: HeadTitleBar(
         title: "购物车",
@@ -59,13 +46,31 @@ class _ShoppingPageState extends State<ShoppingPage> {
             ),
             Material(
               child: Ink(
-                //TODO 点击效果未完成  https://www.jb51.net/article/165557.htm
                 decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xff90c0ef)), 
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
+                  border: Border.all(color: Color(0xff90c0ef)),
+                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  color: Colors.transparent,
+                ),
                 child: InkResponse(
                   borderRadius: new BorderRadius.circular(4.0),
-                  child: text,
+                  highlightColor: Color(0x9990c0ef),
+                  highlightShape: BoxShape.rectangle,
+                  splashColor: Color(0xcc90c0ef),
+                  containedInkWell: true,
+                  radius: 100.0,
+                  onTap: goDrink,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 100.0,
+                    height: 30.0,
+                    child: Text(
+                      "去喝一杯",
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Color(0xff90c0ef),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -73,5 +78,12 @@ class _ShoppingPageState extends State<ShoppingPage> {
         ),
       ),
     );
+  }
+
+  /// 点击去喝一杯按钮
+  void goDrink() {
+    Log.d("点击去喝一杯按钮");
+    /// TODO 这里将要判断用户是否登录
+    /// 
   }
 }

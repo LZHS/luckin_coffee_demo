@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
 import 'package:flutter_demo/common/widgets/divider_widget.dart';
 import 'package:flutter_demo/common/widgets/head_title_bar.dart';
-import 'package:flutter_demo/components/pages/main/order/list/order_list.dart';
-import 'package:flutter_demo/config/res/colors.dart';
+import 'package:flutter_demo/components/pages/main/order/list/order_list.dart'; 
 
 /// 订单页面
 class OrderPage extends StatefulWidget {

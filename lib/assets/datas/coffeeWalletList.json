@@ -45,7 +45,7 @@
         "category": "B1",
         "scopeOf": "全国通用",
         "price": "17",
-        "remainingNum": "15"
+        "remainingNum": "1"
     },
     {
         "category": "B2",
@@ -58,5 +58,11 @@
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "1"
+    },
+    {
+        "category": "B11",
+        "scopeOf": "全国通用",
+        "price": "24",
+        "remainingNum": "5"
     }
 ]
