@@ -43,7 +43,7 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
 
   const HeadTitleBar({
     Key key,
-    this.title,
+    this.title="",
     this.titleTextStyle,
     this.height = appBarHeight,
     this.backageColor = Colors.white,

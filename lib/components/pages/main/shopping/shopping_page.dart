@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/widgets/head_title_bar.dart'; 
+import 'package:flutter_demo/common/fluro/common.dart';
+import 'package:flutter_demo/common/widgets/head_title_bar.dart';
+import 'package:flutter_demo/config/Routes.dart';
+import 'package:flutter_demo/config/application.dart';
 
 /// 购物车页面
 class ShoppingPage extends StatefulWidget {
@@ -83,7 +86,12 @@ class _ShoppingPageState extends State<ShoppingPage> {
   /// 点击去喝一杯按钮
   void goDrink() {
     Log.d("点击去喝一杯按钮");
-    /// TODO 这里将要判断用户是否登录
-    /// 
+
+    /// TODO 这里将要判断用户是否登录 这里假设用户未登陆 
+    Application.router.navigateTo(
+      context,
+      login,
+      transition: TransitionType.inFromLeft,
+    );
   }
 }
