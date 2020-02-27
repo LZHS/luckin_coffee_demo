@@ -51,8 +51,8 @@ flutter:
      - lib/assets/images/order/
      - lib/assets/images/shopping/
      - lib/assets/images/persion/
-     - lib/assets/images/login/
      - lib/assets/images/wallet/
+     - lib/assets/images/login/
 
      # 加载 测试数据
      - lib/assets/datas/
