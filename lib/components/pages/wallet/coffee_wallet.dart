@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/widgets/head_title_bar.dart';
-import 'package:flutter_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
-import 'package:flutter_demo/components/pages/wallet/widgets/wallet_widget.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/widgets/wallet_widget.dart';
 
 ///```
 /// 咖啡钱包 页面

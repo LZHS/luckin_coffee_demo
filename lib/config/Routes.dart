@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/fluro/common.dart';
-import 'package:flutter_demo/common/fluro/router.dart';
-import 'package:flutter_demo/components/pages/login/login_page.dart';
-import 'package:flutter_demo/components/pages/login/login_phone_page.dart';
-import 'package:flutter_demo/components/pages/main/main_page.dart';
-import 'package:flutter_demo/components/pages/main/order/evaluation/evaluation_page.dart';
-import 'package:flutter_demo/components/pages/transition/transition_page.dart';
-import 'package:flutter_demo/components/pages/wallet/coffee_wallet.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/fluro/common.dart';
+import 'package:luckin_coffee_demo/common/fluro/router.dart';
+import 'package:luckin_coffee_demo/components/pages/login/login_page.dart';
+import 'package:luckin_coffee_demo/components/pages/login/login_phone_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/main_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/order/evaluation/evaluation_page.dart';
+import 'package:luckin_coffee_demo/components/pages/transition/transition_page.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面

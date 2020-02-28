@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/config/res/colors.dart'; 
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 const bool kReleaseMode =

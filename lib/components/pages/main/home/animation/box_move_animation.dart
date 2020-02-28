@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
 
 /// 位移控件
 class BoxMoveAnimation extends StatefulWidget {

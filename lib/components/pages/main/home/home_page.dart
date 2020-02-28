@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/custom_swiper/custom_swiper.dart';
-import 'package:flutter_demo/components/pages/main/home/animation/box_move_animation.dart';
-import 'package:flutter_demo/config/res/colors.dart'; 
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/custom_swiper/custom_swiper.dart';
+import 'package:luckin_coffee_demo/components/pages/main/home/animation/box_move_animation.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 ///```
 /// 首页页面

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
-import 'package:flutter_demo/config/res/colors.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 ///```
 /// 咖啡钱包 item 布局

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/common/widgets/head_title_bar.dart';
-import 'package:flutter_demo/config/res/colors.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/widgets/divider_widget.dart';
+import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
-///```
-///手机验证码登录 页面
-///```
+
+/// 手机验证码登录 页面
 class LoginPhonePage extends StatefulWidget {
   final String isDeficiencyNum;
   LoginPhonePage({this.isDeficiencyNum});
@@ -16,10 +15,7 @@ class LoginPhonePage extends StatefulWidget {
 }
 
 class _LoginPhonePageState extends State<LoginPhonePage> {
-  List chooseAris = [
-    " 中国 ",
-    "+86"
-  ];
+  List chooseAris = [" 中国 ", "+86"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +85,8 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                           ),
                                           Padding(
                                             padding: EdgeInsets.only(left: 5.0),
-                                            child: Text("${chooseAris.elementAt(0)} (${chooseAris.elementAt(1)})",
+                                            child: Text(
+                                                "${chooseAris.elementAt(0)} (${chooseAris.elementAt(1)})",
                                                 style: TextStyle(
                                                     color: appBarTitleColor,
                                                     fontSize: 14.0)),
@@ -113,14 +110,15 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                         child: Column(
                           children: <Widget>[
                             Expanded(
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
                               child: TextField(
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  labelText: "请输入手机号",
-                                  labelStyle: TextStyle(
-                                      fontSize: 14.0, color: Color(0xffa6a6a6)), 
-
-                                   prefixText: "${chooseAris.elementAt(1)}",
+                                  hintText: "请输入手机号",
+                                  hintStyle: TextStyle(
+                                      fontSize: 14.0, color: Color(0xffa6a6a6)),
+                                  prefixText: "${chooseAris.elementAt(1)}",
                                 ),
                                 keyboardType: TextInputType.phone,
                                 textInputAction: TextInputAction.next,
@@ -128,10 +126,9 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                                 maxLength: null,
                                 inputFormatters: <TextInputFormatter>[
                                   LengthLimitingTextInputFormatter(11)
-                                ], 
-                                // autofocus: true,
+                                ],
                               ),
-                            ),
+                            )),
                             DividerWidget(),
                           ],
                         ),

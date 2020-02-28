@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/custom_swiper/custom_swiper.dart';
-import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/components/pages/main/menu/animation/slide_animation.dart';
-import 'package:flutter_demo/components/pages/main/menu/beans/location.dart';
-import 'package:flutter_demo/components/pages/main/menu/beans/product.dart';
-import 'package:flutter_demo/config/res/colors.dart'; 
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/custom_swiper/custom_swiper.dart';
+import 'package:luckin_coffee_demo/common/widgets/divider_widget.dart';
+import 'package:luckin_coffee_demo/components/pages/main/menu/animation/slide_animation.dart';
+import 'package:luckin_coffee_demo/components/pages/main/menu/beans/location.dart';
+import 'package:luckin_coffee_demo/components/pages/main/menu/beans/product.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 /// 菜单页面
 class MenuPage extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/config/application.dart';
-import 'package:flutter_demo/config/res/dimens.dart';
-import 'package:flutter_demo/config/res/themes.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/widgets/divider_widget.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
+import 'package:luckin_coffee_demo/config/res/dimens.dart';
+import 'package:luckin_coffee_demo/config/res/themes.dart';
 
 ///```
 /// 该APP 通用tabBar

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/fluro/router.dart';
-import 'package:flutter_demo/config/Routes.dart';
-import 'package:flutter_demo/config/application.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/fluro/router.dart';
+import 'package:luckin_coffee_demo/config/Routes.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
 
 class AppComponent extends StatefulWidget {
   @override

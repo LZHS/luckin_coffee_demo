@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/components/pages/main/beans/tab_info.dart';
-import 'package:flutter_demo/components/pages/main/home/home_page.dart';
-import 'package:flutter_demo/components/pages/main/menu/menu_page.dart';
-import 'package:flutter_demo/components/pages/main/order/order_page.dart';
-import 'package:flutter_demo/components/pages/main/persion_center/persion_center_page.dart';
-import 'package:flutter_demo/components/pages/main/shopping/shopping_page.dart';
-import 'package:flutter_demo/config/res/colors.dart'; 
+import 'package:luckin_coffee_demo/components/pages/main/beans/tab_info.dart';
+import 'package:luckin_coffee_demo/components/pages/main/home/home_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/menu/menu_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/order/order_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/persion_center/persion_center_page.dart';
+import 'package:luckin_coffee_demo/components/pages/main/shopping/shopping_page.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 /// ```
 /// 主页面

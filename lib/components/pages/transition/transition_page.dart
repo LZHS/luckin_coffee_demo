@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/fluro/common.dart';
-import 'package:flutter_demo/config/Routes.dart';
-import 'package:flutter_demo/config/application.dart';
+import 'package:luckin_coffee_demo/common/fluro/common.dart';
+import 'package:luckin_coffee_demo/config/Routes.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
 
 ///```
 /// APP 的第一个页面 ，用于展示过度页面

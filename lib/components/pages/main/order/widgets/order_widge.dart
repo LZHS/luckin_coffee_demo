@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/widgets/divider_widget.dart';
-import 'package:flutter_demo/components/pages/main/order/beans/order_bean.dart';
-import 'package:flutter_demo/components/pages/main/order/enums/order_state_enum.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/widgets/divider_widget.dart';
+import 'package:luckin_coffee_demo/components/pages/main/order/beans/order_bean.dart';
+import 'package:luckin_coffee_demo/components/pages/main/order/enums/order_state_enum.dart';
 
 ///```
 /// 订单模块 item 布局

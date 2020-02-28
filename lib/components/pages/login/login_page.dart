@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/common/common_utils.dart';
-import 'package:flutter_demo/common/fluro/common.dart';
-import 'package:flutter_demo/common/widgets/head_title_bar.dart';
-import 'package:flutter_demo/config/Routes.dart';
-import 'package:flutter_demo/config/application.dart';
+import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/fluro/common.dart';
+import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
+import 'package:luckin_coffee_demo/config/Routes.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
 
 ///```
 /// 用户登录， 选择登录方式页面
