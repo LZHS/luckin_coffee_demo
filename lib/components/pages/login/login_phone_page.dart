@@ -19,6 +19,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: HeadTitleBar(),
       body: SafeArea(
         child: Material(
@@ -115,8 +116,8 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                               child: TextField(
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "请输入手机号",
-                                  hintStyle: TextStyle(
+                                  labelText: "请输入手机号",
+                                  labelStyle: TextStyle(
                                       fontSize: 14.0, color: Color(0xffa6a6a6)),
                                   prefixText: "${chooseAris.elementAt(1)}",
                                 ),
@@ -133,6 +134,35 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
                           ],
                         ),
                       ),
+                      Container(
+                        height: 60.0,
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                                child: Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      labelText: "请输入手机验证码",
+                                      labelStyle: TextStyle(
+                                          fontSize: 14.0, color: Color(0xffa6a6a6)),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: 1,
+                                    maxLength: null,
+                                    inputFormatters: <TextInputFormatter>[
+                                      LengthLimitingTextInputFormatter(6)
+                                    ],
+                                  ),
+                                )),
+                            DividerWidget(),
+                          ],
+                        ),
+                      ),
+
+                    /// TODO 这里将要对弹出软键盘 遮挡界面进行处理
                     ]),
                   ))
             ],
