@@ -25,8 +25,6 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   final FocusNode codeFocus = FocusNode();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController codeController = TextEditingController();
-
-  ///TODO 构建 输入以及单击逻辑
   @override
   Widget build(BuildContext context) {
     return Scaffold(
