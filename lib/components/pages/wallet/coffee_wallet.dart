@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/fluro/common.dart';
 import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/widgets/wallet_widget.dart';
+import 'package:luckin_coffee_demo/config/Routes.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
 
 ///```
 /// 咖啡钱包 页面
@@ -179,6 +182,10 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
     );
   }
 
+  /// 底部 功能选项 单击事件<br/>
+  /// 0 -- 充赠优惠<br/>
+  /// 1 -- 我要请客<br/>
+  /// 2 -- 发送红包
   onClickEvent(int tag) {
     switch (tag) {
       case 0:
@@ -197,8 +204,14 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
     }
   }
 
+  /// item 点击 返回数据
   onClickCallBack(CoffeeWalletItem itemBean) {
     Log.d(" 咖啡钱包 点击返回 \n ${itemBean.toString()}");
+    Application.router.navigateTo(
+        context, "$walletInfo?itemBean=${jsonEncode(itemBean)}",
+        transition: TransitionType.inFromLeft);
+
+
   }
 
   void getAllItems() {

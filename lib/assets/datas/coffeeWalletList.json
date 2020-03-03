@@ -1,23 +1,27 @@
 [
     {
+        "id": "WALL000001",
         "category": "B1",
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "1"
     },
     {
+        "id": "WALL000002",
         "category": "B2",
         "scopeOf": "全国通用",
         "price": "18",
         "remainingNum": "2"
     },
     {
+        "id": "WALL000003",
         "category": "B3",
         "scopeOf": "地区通用",
         "price": "12",
         "remainingNum": "4"
     },
     {
+        "id": "WALL000004",
         "category": "B1",
         "scopeOf": "市区通用",
         "price": "25",
@@ -25,41 +29,48 @@
     },
     {
         "category": "B1",
+        "id": "WALL000005",
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "1"
     },
     {
         "category": "B4",
+        "id": "WALL000006",
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "5"
     },
     {
+        "id": "WALL000007",
         "category": "B6",
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "1"
     },
     {
+        "id": "WALL000008",
         "category": "B1",
         "scopeOf": "全国通用",
         "price": "17",
         "remainingNum": "1"
     },
     {
+        "id": "WALL000009",
         "category": "B2",
         "scopeOf": "时段专用",
         "price": "21",
         "remainingNum": "1"
     },
     {
+        "id": "WALL000010",
         "category": "B1",
         "scopeOf": "全国通用",
         "price": "21",
         "remainingNum": "1"
     },
     {
+        "id": "WALL000011",
         "category": "B11",
         "scopeOf": "全国通用",
         "price": "24",

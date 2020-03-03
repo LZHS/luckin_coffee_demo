@@ -10,6 +10,7 @@ import 'package:luckin_coffee_demo/components/pages/main/main_page.dart';
 import 'package:luckin_coffee_demo/components/pages/main/order/evaluation/evaluation_page.dart';
 import 'package:luckin_coffee_demo/components/pages/transition/transition_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet_info.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -52,7 +53,15 @@ var _wallet = Handler(
   },
 );
 
-
+///```
+///咖啡钱包详情 页面
+///```
+var walletInfo = "/wallet/coffee_wallet_info";
+var _walletInfo = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return CoffeeWalletInfo(params["itemBean"]?.first);
+  },
+);
 ///```
 ///用户登录， 选择登录方式页面
 ///```
@@ -93,6 +102,7 @@ var _termsOfService = Handler(
   },
 );
 
+
 class Routes {
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
@@ -106,6 +116,7 @@ class Routes {
       ..define(home, handler: _homeHandler)
       ..define(evaluation, handler: _evaluation)
       ..define(wallet, handler: _wallet)
+      ..define(walletInfo, handler: _walletInfo)
       ..define(login, handler: _login)
       ..define(loginPhoneCode, handler: _loginPhoneCode)
       ..define(chooseAreaPage, handler: _chooseAreaPage)

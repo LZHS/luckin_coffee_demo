@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:luckin_coffee_demo/config/res/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 const bool kReleaseMode =
     bool.fromEnvironment('dart.vm.product', defaultValue: false);
@@ -95,32 +95,27 @@ void showToast(
 /// 校验工具类
 class ValidatorUtil {
   ///正则表达式：验证用户名
-  final RegExp REGEX_USERNAME = RegExp(r"^[a-zA-Z]\\w{5,20}");
+//  final RegExp REGEX_USERNAME = RegExp(r"^[a-zA-Z]\\w{5,20}");
 
   ///正则表达式：验证密码
-  final RegExp REGEX_PASSWORD = RegExp(r"^[a-zA-Z0-9]{6,20}$");
+//  final RegExp REGEX_PASSWORD = RegExp(r"^[a-zA-Z0-9]{6,20}$");
 
-  ///正则表达式：验证手机号
-  final RegExp REGEX_MOBILE = RegExp(
-      r"^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 
   ///正则表达式：验证邮箱
-  final RegExp REGEX_EMAIL = RegExp(
-      r"^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
+  //final RegExp REGEX_EMAIL = RegExp(
+  // r"^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
 
   ///正则表达式：验证汉字
-  final RegExp REGEX_CHINESE = RegExp(r"^[\u4e00-\u9fa5],{0,}$");
+  //final RegExp REGEX_CHINESE = RegExp(r"^[\u4e00-\u9fa5],{0,}$");
 
   /// 正则表达式：验证身份证
-  final RegExp REGEX_ID_CARD = RegExp(r"(^\\d{18}$)|(^\\d{15}$)");
+  // final RegExp REGEX_ID_CARD = RegExp(r"(^\\d{18}$)|(^\\d{15}$)");
 
-  ///正则表达式：验证URL
-//  final RegExp REGEX_URL =
-//      RegExp(r"http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
 
   ///正则表达式：验证IP地址
-  final RegExp REGEX_IP_ADDR =
-      RegExp(r"(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)");
+  static bool isIpAddr(String ip) {
+    return RegExp(r"(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)").hasMatch(ip);
+  }
 
   ///手机号验证
   static bool isChinaPhoneLegal(String phone) {
