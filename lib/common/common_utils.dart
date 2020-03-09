@@ -18,15 +18,15 @@ class Log {
   }
 
   static void e(Object object, {String tag = _TAG_DEF}) {
-    _printLog(tag, '  E  ', object);
+    _printLog(tag, '  E   ', object);
   }
 
   static void v(Object object, {String tag = _TAG_DEF}) {
-    if (debuggable) _printLog(tag, '  V  ', object);
+    if (debuggable) _printLog(tag, '  V   ', object);
   }
 
   static void d(Object object, {String tag = _TAG_DEF}) {
-    if (debuggable) _printLog(tag, '  D  ', object);
+    if (debuggable) _printLog(tag, '  D   ', object);
   }
 
   static void _printLog(String tag, String stag, Object object) {

@@ -41,14 +41,34 @@ class HeadTitleBar extends StatefulWidget implements PreferredSizeWidget {
   ///```
   final VoidCallback leftCheck;
 
+  ///````
+  /// APPBar左边 显示的图片
+  /// 默认显示 箭头返回键
+  /// ```
+  final Image backIcon;
+  ///```
+  /// APPBar 右侧显示的Widget
+  /// 若不传，则默认不显示
+  ///```
+  final Widget rightWidget;
+
+  ///```
+  /// APPBar 右侧显示的Widget 单击事件
+  /// 若不传，则默认实现 输出日志
+  ///```
+  final VoidCallback rightCheck;
+
   const HeadTitleBar({
     Key key,
-    this.title="",
+    this.backIcon,
+    this.title = "",
     this.titleTextStyle,
     this.height = appBarHeight,
     this.backageColor = Colors.white,
     this.isShowBack = false,
     this.leftCheck,
+    this.rightWidget,
+    this.rightCheck,
   }) : super(key: key);
 
   @override
@@ -73,52 +93,10 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
               Expanded(
                 flex: 1,
                 child: Stack(
-                  alignment: Alignment.center,
                   children: <Widget>[
-                    Text(
-                      this.widget.title,
-                      style: this.widget.titleTextStyle ?? titleTextStyle,
-                    ),
-                    Offstage(
-                      offstage: this.widget.isShowBack,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Material(
-                            child: Ink(
-                              color: Colors.white,
-                              child: InkResponse(
-                                highlightColor: Colors.black12,
-                                highlightShape: BoxShape.rectangle,
-                                radius: 0.0,
-                                onTap: () {
-                                  Log.d("  你点击了 返回按钮");
-                                  if (this.widget.leftCheck == null)
-                                    Application.router.pop(this.context);
-                                  else
-                                    this.widget.leftCheck();
-                                },
-                                child: Container(
-                                  width: this.widget.height,
-                                  height: this.widget.height,
-                                  alignment: Alignment.center,
-                                  child: Image(
-                                    image: AssetImage(
-                                        "lib/assets/images/icon_left_back.png"),
-                                    width: 16.0,
-                                    height: 16.0,
-                                    fit: BoxFit.fill,
-                                    alignment: Alignment.center,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                    buildLeftWidget(),
+                    buildTitle(),
+                    buildRightWidget(),
                   ],
                 ),
               ),
@@ -127,6 +105,94 @@ class _HeadTitleBarState extends State<HeadTitleBar> {
           ),
         ),
       ),
+    );
+  }
+
+  /// 创建中间的Title
+  buildTitle() {
+    return Positioned(
+      top: 0.0,
+      bottom: 0.0,
+      right: 0.0,
+      left: 0.0,
+      child: Center(
+        child: Text(
+          this.widget.title,
+          style: this.widget.titleTextStyle ?? titleTextStyle,
+        ),
+      ),
+    );
+  }
+
+  /// 创建左侧的 widget
+  buildLeftWidget() {
+    return Positioned(
+      top: 0.0,
+      bottom: 0.0,
+      left: 0.0,
+      child: Offstage(
+        offstage: this.widget.isShowBack,
+        child: Material(
+          child: Ink(
+            color: Colors.white,
+            child: InkResponse(
+              highlightColor: Colors.black12,
+              highlightShape: BoxShape.rectangle,
+              radius: 0.0,
+              onTap: () {
+                Log.d("  你点击了 返回按钮");
+                if (this.widget.leftCheck == null)
+                  Application.router.pop(this.context);
+                else
+                  this.widget.leftCheck();
+              },
+              child: Container(
+                  width: this.widget.height,
+                  height: this.widget.height,
+                  alignment: Alignment.center,
+                  child: this.widget.backIcon ?? buildDefault()),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 创建又侧 widget
+  buildRightWidget() {
+    return Positioned(
+      top: 0.0,
+      bottom: 0.0,
+      right: 0.0,
+      child: Offstage(
+        offstage: this.widget.rightWidget == null,
+        child: Material(
+            child: Ink(
+          color: Colors.white,
+          child: InkResponse(
+            highlightColor: Colors.black12,
+            highlightShape: BoxShape.rectangle,
+            radius: 0.0,
+            onTap: () {
+              Log.d("  你点击了 右侧按钮");
+              if (this.widget.rightCheck != null)
+                this.widget.rightCheck();
+            },
+            child: this.widget.rightWidget ?? Container(),
+          ),
+        )),
+      ),
+    );
+  }
+
+  buildDefault() {
+    const String _defaultIconPath = "lib/assets/images/icon_left_back.png";
+    return Image(
+      image: AssetImage(_defaultIconPath),
+      width: 16.0,
+      height: 16.0,
+      fit: BoxFit.fill,
+      alignment: Alignment.center,
     );
   }
 }

@@ -53,6 +53,7 @@ flutter:
      - lib/assets/images/persion/
      - lib/assets/images/wallet/
      - lib/assets/images/login/
+     - lib/assets/images/specification/
 
      # 加载 测试数据
      - lib/assets/datas/

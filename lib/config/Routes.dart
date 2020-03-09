@@ -11,6 +11,8 @@ import 'package:luckin_coffee_demo/components/pages/main/order/evaluation/evalua
 import 'package:luckin_coffee_demo/components/pages/transition/transition_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet_info.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_page.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -40,7 +42,6 @@ var _evaluation = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
     return EvaluationPage(orderId: params["orderId"]?.first);
   },
-  
 );
 
 ///```
@@ -62,6 +63,28 @@ var _walletInfo = Handler(
     return CoffeeWalletInfo(params["itemBean"]?.first);
   },
 );
+
+///```
+///咖啡钱包 使用规则 页面
+///```
+var serviceRegulationsPage = "/wallet/specification/service_regulations_page";
+var _serviceRegulationsPage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return ServiceRegulationsPage();
+  },
+);
+
+///```
+/// 充值咖啡钱包 页面
+///```
+var rechargePage = "wallet/recharge/recharge_page";
+var _rechargePage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return RechargePage();
+  },
+);
+
+
 ///```
 ///用户登录， 选择登录方式页面
 ///```
@@ -78,7 +101,7 @@ var _login = Handler(
 var loginPhoneCode = "/login/login_phone_code";
 var _loginPhoneCode = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return LoginPhonePage(isDeficiencyNum:params["isDeficiencyNum"]?.first);
+    return LoginPhonePage(isDeficiencyNum: params["isDeficiencyNum"]?.first);
   },
 );
 
@@ -102,7 +125,6 @@ var _termsOfService = Handler(
   },
 );
 
-
 class Routes {
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
@@ -117,10 +139,11 @@ class Routes {
       ..define(evaluation, handler: _evaluation)
       ..define(wallet, handler: _wallet)
       ..define(walletInfo, handler: _walletInfo)
+      ..define(serviceRegulationsPage, handler: _serviceRegulationsPage)
+      ..define(rechargePage, handler: _rechargePage)
       ..define(login, handler: _login)
       ..define(loginPhoneCode, handler: _loginPhoneCode)
       ..define(chooseAreaPage, handler: _chooseAreaPage)
-      ..define(termsOfService, handler: _termsOfService)
-      ;
+      ..define(termsOfService, handler: _termsOfService);
   }
 }
