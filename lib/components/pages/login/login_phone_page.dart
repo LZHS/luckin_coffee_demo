@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
 import 'package:luckin_coffee_demo/common/fluro/common.dart';
-import 'package:luckin_coffee_demo/common/widgets/divider_widget.dart';
 import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
 import 'package:luckin_coffee_demo/config/Routes.dart';
 import 'package:luckin_coffee_demo/config/application.dart';

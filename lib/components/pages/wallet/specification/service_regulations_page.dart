@@ -10,8 +10,6 @@ class ServiceRegulationsPage extends StatefulWidget {
 }
 
 class _ServiceRegulationsPageState extends State<ServiceRegulationsPage> {
-  static const String _iconPath =
-      "lib/assets/images/specification/icon_close.png";
 
   @override
   Widget build(BuildContext context) {

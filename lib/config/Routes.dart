@@ -11,6 +11,8 @@ import 'package:luckin_coffee_demo/components/pages/main/order/evaluation/evalua
 import 'package:luckin_coffee_demo/components/pages/transition/transition_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet_info.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_all_page.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
 
@@ -84,6 +86,25 @@ var _rechargePage = Handler(
   },
 );
 
+///```
+/// 优惠活动页面
+///```
+var privilegePage = "wallet/privilege/privilege_page";
+var _privilegePage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return PrivilegePage();
+  },
+);
+
+///```
+/// 全部优惠 页面
+///```
+var privilegeAllPage = "wallet/privilege/privilege_all_page";
+var _privilegeAllPage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return PrivilegeAllPage();
+  },
+);
 
 ///```
 ///用户登录， 选择登录方式页面
@@ -141,6 +162,8 @@ class Routes {
       ..define(walletInfo, handler: _walletInfo)
       ..define(serviceRegulationsPage, handler: _serviceRegulationsPage)
       ..define(rechargePage, handler: _rechargePage)
+      ..define(privilegePage, handler: _privilegePage)
+      ..define(privilegeAllPage, handler: _privilegeAllPage)
       ..define(login, handler: _login)
       ..define(loginPhoneCode, handler: _loginPhoneCode)
       ..define(chooseAreaPage, handler: _chooseAreaPage)

@@ -6,47 +6,29 @@ import 'package:luckin_coffee_demo/config/Routes.dart';
 import 'package:luckin_coffee_demo/config/application.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
 
-/// 充值咖啡钱包 页面
-class RechargePage extends StatefulWidget {
-  RechargePage({Key key}) : super(key: key);
+/// 优惠活动页面
+class PrivilegePage extends StatefulWidget {
+  PrivilegePage({Key key}) : super(key: key);
 
   @override
-  _RechargePageState createState() => _RechargePageState();
+  _PrivilegePageState createState() => _PrivilegePageState();
 }
 
-class _RechargePageState extends State<RechargePage> {
+class _PrivilegePageState extends State<PrivilegePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HeadTitleBar(
-        title: "充值咖啡钱包",
+        title: "优惠活动",
         rightWidget: buildRightWidget(),
         rightCheck: onClickRight,
       ),
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            buildContentWidget(),
-            buildBottomWidget(),
-          ],
+        child: Container(
+          alignment: Alignment.center,
+          child: Text("优惠活动"),
         ),
       ),
-    );
-  }
-
-  /// 创建中间 内容控件
-  buildContentWidget() {
-    return Expanded(
-      child: Column(),
-    );
-  }
-
-  /// 创建底部 控件
-  buildBottomWidget() {
-    return Container(
-      width: double.infinity,
-      height: 60.0,
-      color: Colors.white,
     );
   }
 
@@ -56,17 +38,17 @@ class _RechargePageState extends State<RechargePage> {
       alignment: Alignment.center,
       padding: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: Text(
-        "更多优惠",
+        "全部优惠",
         style: TextStyle(fontSize: 14.0, color: appBarTitleColor),
       ),
     );
   }
 
   onClickRight() {
-    Log.d("更多优惠");
+    Log.d("全部优惠");
     Application.router.navigateTo(
       context,
-      privilegePage,
+      privilegeAllPage,
       transition: TransitionType.inFromLeft,
     );
   }
