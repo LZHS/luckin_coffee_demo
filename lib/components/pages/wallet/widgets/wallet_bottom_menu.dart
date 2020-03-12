@@ -150,7 +150,7 @@ class WalletBottomMenu extends StatelessWidget {
         Application.router.navigateTo(
           context,
           rechargePage,
-          transition: TransitionType.inFromLeft,
+          transition: TransitionType.inFromRight,
         );
 
         break;

@@ -91,7 +91,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
     Application.router.navigateTo(
       context,
       login,
-      transition: TransitionType.inFromLeft,
+      transition: TransitionType.inFromRight,
     );
   }
 }

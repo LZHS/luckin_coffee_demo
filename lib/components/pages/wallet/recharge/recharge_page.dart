@@ -37,7 +37,10 @@ class _RechargePageState extends State<RechargePage> {
   /// 创建中间 内容控件
   buildContentWidget() {
     return Expanded(
-      child: Column(),
+      child: Column(
+
+
+      ),
     );
   }
 
@@ -67,7 +70,7 @@ class _RechargePageState extends State<RechargePage> {
     Application.router.navigateTo(
       context,
       privilegePage,
-      transition: TransitionType.inFromLeft,
+      transition: TransitionType.inFromRight,
     );
   }
 }

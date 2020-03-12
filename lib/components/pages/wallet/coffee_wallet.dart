@@ -59,7 +59,7 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
     Log.d(" 咖啡钱包 点击返回 \n ${itemBean.toString()}");
     Application.router.navigateTo(
         context, "$walletInfo?itemBean=${jsonEncode(itemBean)}",
-        transition: TransitionType.inFromLeft);
+        transition: TransitionType.inFromRight);
   }
 
   void getAllItems() {

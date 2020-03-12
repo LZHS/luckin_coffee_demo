@@ -78,7 +78,7 @@ class _TransitionPageState extends State<TransitionPage> {
       context,
       "$home?message=过度页面传递的数据",
       replace: true,
-      transition: TransitionType.inFromLeft,
+      transition: TransitionType.inFromRight,
     ); //要跳转的页面
   }
 }

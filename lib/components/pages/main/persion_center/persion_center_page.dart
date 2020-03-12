@@ -268,7 +268,7 @@ class _PersionCenterPageState extends State<PersionCenterPage> {
         Application.router.navigateTo(
           context,
           wallet,
-          transition: TransitionType.inFromLeft,
+          transition: TransitionType.inFromRight,
         );
         break;
       case "优惠券":

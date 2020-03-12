@@ -49,7 +49,7 @@ class _PrivilegePageState extends State<PrivilegePage> {
     Application.router.navigateTo(
       context,
       privilegeAllPage,
-      transition: TransitionType.inFromLeft,
+      transition: TransitionType.inFromRight,
     );
   }
 }

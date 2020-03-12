@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
     Log.d("手机验证码登录");
     Application.router.navigateTo(
         context, loginPhoneCode + "?isDeficiencyNum=false",
-        transition: TransitionType.inFromLeft);
+        transition: TransitionType.inFromRight);
   }
 
   goWeChatLogin() {

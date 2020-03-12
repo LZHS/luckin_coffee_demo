@@ -85,7 +85,7 @@ class _OrderListState extends State<OrderList> {
         Application.router.navigateTo(
           context,
           "$evaluation?orderId=$orderId",
-          transition: TransitionType.inFromLeft,
+          transition: TransitionType.inFromRight,
         );
         break;
       default:

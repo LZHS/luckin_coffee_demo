@@ -270,7 +270,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
   checkTermsOfService() {
     Log.d("点击服务条款");
     Application.router.navigateTo(context, termsOfService,
-        transition: TransitionType.inFromLeft);
+        transition: TransitionType.inFromRight);
   }
 
   /// 確認 登錄 按鈕單機事件
@@ -284,7 +284,7 @@ class _LoginPhonePageState extends State<LoginPhonePage> {
     Log.d("选择国家/地区");
     Application.router
         .navigateTo(context, chooseAreaPage,
-            transition: TransitionType.inFromLeft)
+            transition: TransitionType.inFromRight)
         .then((result) {
       if (result != null && result.length == 2)
         setState(() => chooseAris = result);
