@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
 import 'package:luckin_coffee_demo/common/fluro/common.dart';
 import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/animates/slide_transition_x.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/widgets/add_animate_widget.dart';
 import 'package:luckin_coffee_demo/config/Routes.dart';
 import 'package:luckin_coffee_demo/config/application.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
@@ -15,6 +17,9 @@ class RechargePage extends StatefulWidget {
 }
 
 class _RechargePageState extends State<RechargePage> {
+
+  int _count = 0;
+  bool isAdd = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,9 +42,21 @@ class _RechargePageState extends State<RechargePage> {
   /// 创建中间 内容控件
   buildContentWidget() {
     return Expanded(
-      child: Column(
-
-
+      child: Center(
+        child: AddAnimateWidget(_count, isAdd, (action) {
+          setState(() {
+            switch (action) {
+              case ActionEnum.add:
+                _count++;
+                isAdd = true;
+                break;
+              case ActionEnum.subtraction:
+                _count--;
+                isAdd = false;
+                break;
+            }
+          });
+        }),
       ),
     );
   }

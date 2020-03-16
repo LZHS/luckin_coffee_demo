@@ -22,7 +22,10 @@ import 'package:luckin_coffee_demo/components/pages/wallet/specification/service
 var root = "/";
 var _rootHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return TransitionPage();
+    /// TODO 临时测试 动画效果
+    return RechargePage();
+
+//    return TransitionPage();
   },
 );
 
