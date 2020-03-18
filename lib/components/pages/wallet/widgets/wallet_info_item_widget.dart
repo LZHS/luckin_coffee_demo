@@ -8,12 +8,13 @@ import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 ///
 class WalletInfoItemWidget extends StatelessWidget {
-
   final CoffeeWalletItem itemData;
+
   WalletInfoItemWidget(this.itemData);
+
   @override
   Widget build(BuildContext context) {
-         return Material(
+    return Material(
       color: Colors.white,
       child: Container(
         height: 80.0,
@@ -35,7 +36,7 @@ class WalletInfoItemWidget extends StatelessWidget {
               highlightShape: BoxShape.rectangle,
               radius: 0.0,
               containedInkWell: true,
-              onTap:()=> onClickItem(context),
+              onTap: () => onClickItem(context),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,21 +47,19 @@ class WalletInfoItemWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: <Widget>[
-                            Text(
-                              "¥",
+                        RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                              text: "¥",
                               style: TextStyle(
-                                  fontSize: 14.0, color: Color(0xff383838)),
+                                  fontSize: 14.0, color: appBarTitleColor),
                             ),
-                            Text(
-                              itemData.price,
+                            TextSpan(
+                              text: itemData.price,
                               style: TextStyle(
-                                  fontSize: 24.0, color: Color(0xff383838)),
+                                  fontSize: 24.0, color: appBarTitleColor),
                             ),
-                          ],
+                          ]),
                         ),
                         Padding(
                           padding: EdgeInsets.only(top: 2.0),
@@ -104,7 +103,6 @@ class WalletInfoItemWidget extends StatelessWidget {
         ),
       ),
     );
-
   }
 
   /// 点击Item
