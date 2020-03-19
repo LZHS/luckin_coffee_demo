@@ -20,3 +20,8 @@ const Color textHintColor = Color(0xffa6a6a6);
 /// Toast 中间文字的颜色
 ///```
 const Color toastTextColor = Color(0xff9E9E9E);
+
+
+const Color text505050=Color(0xff505050);
+const Color textff8d1a=Color(0xffff8d1a);
+

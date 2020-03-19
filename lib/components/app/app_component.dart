@@ -20,7 +20,7 @@ class _AppComponentState extends State<AppComponent> {
     final app = MaterialApp(
       navigatorKey: navigatorKey,
       title: 'Fluro',
-      theme: ThemeData(primarySwatch: Colors.lime, primaryColor: Colors.white),
+      theme: ThemeData( primaryColor:Colors.white),
       onGenerateRoute: Application.router.generator,
     );
     return app;

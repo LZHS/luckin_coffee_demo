@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
 import 'package:luckin_coffee_demo/common/fluro/common.dart';
@@ -76,24 +77,24 @@ class WalletInfoItemWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 48.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          itemData.category + itemData.scopeOf,
+                    child: RichText(
+                      text: TextSpan(
+                          text: itemData.category + itemData.scopeOf,
                           style: TextStyle(
                               color: appBarTitleColor, fontSize: 14.0),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Image(
-                            image: AssetImage(
-                                "lib/assets/images/wallet/icon_hint.png"),
-                            width: 14.0,
-                            height: 14.0,
-                          ),
-                        )
-                      ],
+                          children: [
+                            WidgetSpan(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5.0),
+                                child: Image.asset(
+                                  "lib/assets/images/wallet/icon_hint.png",
+                                  width: 14.0,
+                                  height: 14.0,
+                                ),
+                              ),
+                              alignment: PlaceholderAlignment.middle
+                            ),
+                          ]),
                     ),
                   )
                 ],
