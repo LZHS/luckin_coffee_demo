@@ -8,6 +8,7 @@
 
 ## 需要用到的资源
  
+ https://github.com/flutter/flutter/blob/master/examples/catalog/lib/animated_list.dart
 
 *  [原型设计图地址](https://www.xiaopiu.com/square?libPop=project&libId=5c306b252d5cd56e70a1e640)
 
