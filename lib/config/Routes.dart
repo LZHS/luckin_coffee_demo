@@ -15,6 +15,7 @@ import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_a
 import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
+import 'package:luckin_coffee_demo/test_demo/animated_list_sample.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -22,7 +23,13 @@ import 'package:luckin_coffee_demo/components/pages/wallet/specification/service
 var root = "/";
 var _rootHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return TransitionPage();
+    return RechargePage();
+    /*
+         AnimatedListSample
+        TransitionPage();
+
+     */
+
   },
 );
 

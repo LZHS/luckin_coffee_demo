@@ -14,9 +14,22 @@ class RechargePage extends StatefulWidget {
   _RechargePageState createState() => _RechargePageState();
 }
 
-class _RechargePageState extends State<RechargePage> {
+class _RechargePageState extends State<RechargePage>  with SingleTickerProviderStateMixin {
   int _count = 0;
   bool isAdd = true;
+  AnimationController _controller;
+  Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    _animation = Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
+        .animate(_controller);
+    _controller.repeat(reverse: true);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +42,7 @@ class _RechargePageState extends State<RechargePage> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            buildHintWidget(),
             buildContentWidget(),
             buildBottomWidget(),
           ],
@@ -36,16 +50,21 @@ class _RechargePageState extends State<RechargePage> {
       ),
     );
   }
-
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
   /// 创建中间 内容控件
   buildContentWidget() {
     return Expanded(
         child: Container(
       width: double.infinity,
+      height: double.infinity,
+      color: Colors.yellow,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-         buildHintWidget(),
         ],
       ),
     ));
@@ -83,8 +102,7 @@ class _RechargePageState extends State<RechargePage> {
 /// 创建 提示 widget
   buildHintWidget() {
     return  FractionalTranslation(
-
-      translation: const Offset(0.0, 0.0),
+      translation: _animation.value,
       child: Container(
         width: double.infinity,
         height: 68.0,
