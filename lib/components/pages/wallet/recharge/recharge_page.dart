@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
-import 'package:luckin_coffee_demo/common/fluro/common.dart';
 import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
-import 'package:luckin_coffee_demo/config/Routes.dart';
-import 'package:luckin_coffee_demo/config/application.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/widgets/wallet_info_hint_widget.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
 
 /// 充值咖啡钱包 页面
@@ -14,22 +17,30 @@ class RechargePage extends StatefulWidget {
   _RechargePageState createState() => _RechargePageState();
 }
 
-class _RechargePageState extends State<RechargePage>  with SingleTickerProviderStateMixin {
+class _RechargePageState extends State<RechargePage>
+    with SingleTickerProviderStateMixin {
+  final dataTye = [0, 1];
+  final itemDatas = <CoffeeWalletItem>[];
+  final _globalKey = GlobalKey<AnimatedListState>();
+  var isShow = false;
   int _count = 0;
-  bool isAdd = true;
-  AnimationController _controller;
-  Animation<Offset> _animation;
+  final _tweenIn = Tween<Offset>(
+    begin: Offset(0, 1),
+    end: Offset(0, 0),
+  );
+  final _tweenOut = Tween<Offset>(
+    begin: Offset(0, 0),
+    end: Offset(0, 1),
+  );
+
+  _RechargePageState() {
+    getAllItems();
+  }
 
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
-    _animation = Tween<Offset>(begin: Offset(0.0, -1.0), end: Offset(0.0, 0.0))
-        .animate(_controller);
-    _controller.repeat(reverse: true);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +53,6 @@ class _RechargePageState extends State<RechargePage>  with SingleTickerProviderS
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            buildHintWidget(),
             buildContentWidget(),
             buildBottomWidget(),
           ],
@@ -50,24 +60,37 @@ class _RechargePageState extends State<RechargePage>  with SingleTickerProviderS
       ),
     );
   }
+
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
   }
+
   /// 创建中间 内容控件
   buildContentWidget() {
     return Expanded(
         child: Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.yellow,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-        ],
+      child: AnimatedList(
+        key: _globalKey,
+        initialItemCount: itemDatas.length,
+        itemBuilder:
+            (BuildContext context, int index, Animation<double> animation) =>
+                _itemBuilder(context, index, animation),
       ),
     ));
+  }
+
+  _itemBuilder(BuildContext context, int index, Animation<double> animation) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: double.infinity,
+        height: 70.0,
+        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+      ),
+    );
   }
 
   /// 创建底部 控件
@@ -93,53 +116,37 @@ class _RechargePageState extends State<RechargePage>  with SingleTickerProviderS
 
   onClickRight() {
     Log.d("更多优惠");
-    Application.router.navigateTo(
-      context,
-      privilegePage,
-      transition: TransitionType.inFromRight,
-    );
+
+//    Application.router.navigateTo(
+//      context,
+//      privilegePage,
+//      transition: TransitionType.inFromRight,
+//    );
   }
-/// 创建 提示 widget
-  buildHintWidget() {
-    return  FractionalTranslation(
-      translation: _animation.value,
-      child: Container(
-        width: double.infinity,
-        height: 68.0,
-        alignment: Alignment.centerLeft,
-        child: RichText(
-          text: TextSpan(children: [
-            WidgetSpan(
-              alignment: PlaceholderAlignment.middle,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 15.0,
-                  right: 4.0,
-                ),
-                child: Image.asset(
-                  "lib/assets/images/wallet/icon_hint.png",
-                  width: 14.0,
-                  height: 14.0,
-                ),
-              ),
-            ),
-            TextSpan(
-                text: "购买以下饮品券享",
-                style: TextStyle(fontSize: 13.0, color: text505050),
-                children: [
-                  TextSpan(
-                    text: "充2赠1",
-                    style: TextStyle(fontSize: 13.0, color: textff8d1a),
-                  ),
-                ]),
-            TextSpan(
-              text: "，不同饮品券可组合购买。",
-              style: TextStyle(fontSize: 13.0, color: text505050),
-            ),
-          ]),
-        ),
-      ),
-    );
+
+  /// 创建 提示 widget
+  buildHintWidget(animation) {
+    return SlideTransition(
+        position: animation.drive(isShow ? _tweenIn : _tweenOut),
+        child: WalletInfoHintWidget());
+  }
+
+  void getAllItems() {
+    changData(index, item) {
+      Log.d("changData $index");
+      _globalKey.currentState.insertItem(index, duration: Duration(seconds: 1));
+      itemDatas.add(CoffeeWalletItem.fromJson(item));
+    }
+
+    rootBundle
+        .loadString("lib/assets/datas/coffeeWalletList.json")
+        .then((valStr) {
+      itemDatas.clear();
+      List tempItem = json.decode(valStr);
+      for(int index=0 ;index<tempItem.length;index++ ){
+        changData(index,tempItem.elementAt(index));
+      }
+    });
   }
 }
 
