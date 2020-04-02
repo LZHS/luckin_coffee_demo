@@ -8,6 +8,7 @@ import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/widgets/wallet_info_hint_widget.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
+import 'package:rxdart/rxdart.dart';
 
 /// 充值咖啡钱包 页面
 class RechargePage extends StatefulWidget {
@@ -19,27 +20,20 @@ class RechargePage extends StatefulWidget {
 
 class _RechargePageState extends State<RechargePage>
     with SingleTickerProviderStateMixin {
-  final dataTye = [0, 1];
   final itemDatas = <CoffeeWalletItem>[];
-  final _globalKey = GlobalKey<AnimatedListState>();
-  var isShow = false;
-  int _count = 0;
-  final _tweenIn = Tween<Offset>(
-    begin: Offset(0, 1),
-    end: Offset(0, 0),
-  );
-  final _tweenOut = Tween<Offset>(
-    begin: Offset(0, 0),
-    end: Offset(0, 1),
-  );
+  Animation<double> animation;
+  AnimationController controller;
 
   _RechargePageState() {
     getAllItems();
+    Rx.timer("begin", Duration(seconds: 5)).listen((event) {});
   }
 
   @override
   void initState() {
     super.initState();
+    controller = new AnimationController(
+        duration: const Duration(seconds: 3), vsync: this);
   }
 
   @override
@@ -53,6 +47,7 @@ class _RechargePageState extends State<RechargePage>
       body: SafeArea(
         child: Column(
           children: <Widget>[
+            buildHintWidget(),
             buildContentWidget(),
             buildBottomWidget(),
           ],
@@ -69,28 +64,12 @@ class _RechargePageState extends State<RechargePage>
   /// 创建中间 内容控件
   buildContentWidget() {
     return Expanded(
-        child: Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: AnimatedList(
-        key: _globalKey,
-        initialItemCount: itemDatas.length,
-        itemBuilder:
-            (BuildContext context, int index, Animation<double> animation) =>
-                _itemBuilder(context, index, animation),
-      ),
+        child: ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return buildItemWidget(itemDatas.elementAt(index));
+      },
+      itemCount: itemDatas.length,
     ));
-  }
-
-  _itemBuilder(BuildContext context, int index, Animation<double> animation) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        width: double.infinity,
-        height: 70.0,
-        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-      ),
-    );
   }
 
   /// 创建底部 控件
@@ -116,7 +95,8 @@ class _RechargePageState extends State<RechargePage>
 
   onClickRight() {
     Log.d("更多优惠");
-
+    //启动动画(正向执行)
+    controller.forward();
 //    Application.router.navigateTo(
 //      context,
 //      privilegePage,
@@ -124,28 +104,36 @@ class _RechargePageState extends State<RechargePage>
 //    );
   }
 
+
   /// 创建 提示 widget
-  buildHintWidget(animation) {
-    return SlideTransition(
-        position: animation.drive(isShow ? _tweenIn : _tweenOut),
-        child: WalletInfoHintWidget());
+  buildHintWidget() {
+    return WalletInfoHintWidget(
+      controller: controller,
+    );
+  }
+
+  buildItemWidget(CoffeeWalletItem walletItem) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        width: double.infinity,
+        height: 70.0,
+        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+        alignment: Alignment.center,
+        child: Text("类别 ${walletItem.category}"),
+      ),
+    );
   }
 
   void getAllItems() {
-    changData(index, item) {
-      Log.d("changData $index");
-      _globalKey.currentState.insertItem(index, duration: Duration(seconds: 1));
-      itemDatas.add(CoffeeWalletItem.fromJson(item));
-    }
-
+    changData(item) =>
+        setState(() => itemDatas.add(CoffeeWalletItem.fromJson(item)));
     rootBundle
         .loadString("lib/assets/datas/coffeeWalletList.json")
         .then((valStr) {
       itemDatas.clear();
-      List tempItem = json.decode(valStr);
-      for(int index=0 ;index<tempItem.length;index++ ){
-        changData(index,tempItem.elementAt(index));
-      }
+      var tempItem = json.decode(valStr);
+      tempItem.forEach(changData);
     });
   }
 }

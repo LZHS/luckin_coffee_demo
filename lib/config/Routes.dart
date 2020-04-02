@@ -17,6 +17,7 @@ import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_pag
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
 import 'package:luckin_coffee_demo/test_demo/animated_list_sample.dart';
 import 'package:luckin_coffee_demo/test_demo/animated_list_sample_demo.dart';
+import 'package:luckin_coffee_demo/test_demo/stagger_animation.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -27,6 +28,7 @@ var _rootHandler = Handler(
     return RechargePage();
     /*
     RechargePage
+    StaggerAnimation
         TransitionPage();
          AnimatedListSample
         AnimatedListSampleDemo()
