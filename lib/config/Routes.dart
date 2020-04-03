@@ -8,16 +8,14 @@ import 'package:luckin_coffee_demo/components/pages/login/login_phone_page.dart'
 import 'package:luckin_coffee_demo/components/pages/login/terms_of_service.dart';
 import 'package:luckin_coffee_demo/components/pages/main/main_page.dart';
 import 'package:luckin_coffee_demo/components/pages/main/order/evaluation/evaluation_page.dart';
-import 'package:luckin_coffee_demo/components/pages/transition/transition_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/coffee_wallet_info.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/order/make_sure_order_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_all_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_page.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/specification/activity_description_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
-import 'package:luckin_coffee_demo/test_demo/animated_list_sample.dart';
-import 'package:luckin_coffee_demo/test_demo/animated_list_sample_demo.dart';
-import 'package:luckin_coffee_demo/test_demo/stagger_animation.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -34,7 +32,6 @@ var _rootHandler = Handler(
         AnimatedListSampleDemo()
 
      */
-
   },
 );
 
@@ -89,6 +86,17 @@ var _serviceRegulationsPage = Handler(
 );
 
 ///```
+///咖啡钱包 活动描述 页面
+///```
+var activityDescriptionPage =
+    "/wallet/specification/activity_description_page.";
+var _activityDescriptionPage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return ActivityDescriptionPage();
+  },
+);
+
+///```
 /// 充值咖啡钱包 页面
 ///```
 var rechargePage = "wallet/recharge/recharge_page";
@@ -115,6 +123,16 @@ var privilegeAllPage = "wallet/privilege/privilege_all_page";
 var _privilegeAllPage = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
     return PrivilegeAllPage();
+  },
+);
+
+///```
+/// 全部优惠 页面
+///```
+var makeSureOrderPage = "/wallet/order/make_sure_order_page";
+var _makeSureOrderPage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return MakeSureOrderPage(productListStr: params["productList"].first);
   },
 );
 
@@ -173,9 +191,11 @@ class Routes {
       ..define(wallet, handler: _wallet)
       ..define(walletInfo, handler: _walletInfo)
       ..define(serviceRegulationsPage, handler: _serviceRegulationsPage)
+      ..define(activityDescriptionPage, handler: _activityDescriptionPage)
       ..define(rechargePage, handler: _rechargePage)
       ..define(privilegePage, handler: _privilegePage)
       ..define(privilegeAllPage, handler: _privilegeAllPage)
+      ..define(makeSureOrderPage, handler: _makeSureOrderPage)
       ..define(login, handler: _login)
       ..define(loginPhoneCode, handler: _loginPhoneCode)
       ..define(chooseAreaPage, handler: _chooseAreaPage)

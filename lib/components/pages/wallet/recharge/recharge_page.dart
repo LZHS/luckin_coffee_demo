@@ -1,14 +1,16 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common_utils.dart';
+import 'package:luckin_coffee_demo/common/fluro/common.dart';
 import 'package:luckin_coffee_demo/common/widgets/head_title_bar.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/beans/coffee_wallet_item.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/widgets/product_item_widget.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/widgets/wallet_info_hint_widget.dart';
+import 'package:luckin_coffee_demo/config/Routes.dart';
+import 'package:luckin_coffee_demo/config/application.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
-import 'package:rxdart/rxdart.dart';
 
 /// 充值咖啡钱包 页面
 class RechargePage extends StatefulWidget {
@@ -18,22 +20,18 @@ class RechargePage extends StatefulWidget {
   _RechargePageState createState() => _RechargePageState();
 }
 
-class _RechargePageState extends State<RechargePage>
-    with SingleTickerProviderStateMixin {
+class _RechargePageState extends State<RechargePage> {
+  final Set productList = Set<CoffeeWalletItem>();
   final itemDatas = <CoffeeWalletItem>[];
-  Animation<double> animation;
-  AnimationController controller;
+  double totalPrice = 0.0;
 
   _RechargePageState() {
     getAllItems();
-    Rx.timer("begin", Duration(seconds: 5)).listen((event) {});
   }
 
   @override
   void initState() {
     super.initState();
-    controller = new AnimationController(
-        duration: const Duration(seconds: 3), vsync: this);
   }
 
   @override
@@ -47,7 +45,7 @@ class _RechargePageState extends State<RechargePage>
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            buildHintWidget(),
+            WalletInfoHintWidget(),
             buildContentWidget(),
             buildBottomWidget(),
           ],
@@ -77,7 +75,60 @@ class _RechargePageState extends State<RechargePage>
     return Container(
       width: double.infinity,
       height: 60.0,
-      color: Colors.white,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border(
+            top: BorderSide(color: backgroundColor, width: 1.0),
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            height: double.infinity,
+            margin: const EdgeInsets.only(left: 15.0),
+            alignment: Alignment.center,
+            child: RichText(
+              text: TextSpan(
+                  text: "应付合计",
+                  style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff383838)),
+                  children: [
+                    TextSpan(
+                      text: " ￥$totalPrice",
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff383838)),
+                    )
+                  ]),
+            ),
+          ),
+          Material(
+              color: const Color(0xff90c0ef),
+              child: Ink(
+                  child: InkResponse(
+                highlightColor: Color(0xff60a0ff),
+                highlightShape: BoxShape.rectangle,
+                radius: 0.0,
+                containedInkWell: true,
+                onTap: toSettleAccounts,
+                child: Container(
+                  width: 120.0,
+                  height: double.infinity,
+                  alignment: Alignment.center,
+                  child: Text(
+                    "去结算",
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ))),
+        ],
+      ),
     );
   }
 
@@ -95,64 +146,56 @@ class _RechargePageState extends State<RechargePage>
 
   onClickRight() {
     Log.d("更多优惠");
-    //启动动画(正向执行)
-    controller.forward();
-//    Application.router.navigateTo(
-//      context,
-//      privilegePage,
-//      transition: TransitionType.inFromRight,
-//    );
-  }
-
-
-  /// 创建 提示 widget
-  buildHintWidget() {
-    return WalletInfoHintWidget(
-      controller: controller,
+    Application.router.navigateTo(
+      context,
+      privilegePage,
+      transition: TransitionType.inFromRight,
     );
   }
 
   buildItemWidget(CoffeeWalletItem walletItem) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        width: double.infinity,
-        height: 70.0,
-        color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-        alignment: Alignment.center,
-        child: Text("类别 ${walletItem.category}"),
-      ),
+    return ProductItemWidget(
+      itemData: walletItem,
+      itemActionCallback: itemCheck,
     );
   }
 
+  void toSettleAccounts() {
+    Log.d("去结算");
+    if (productList.length == 0 || totalPrice == 0.0) {
+      showToast("请先选择商品");
+      return;
+    }
+    Application.router.navigateTo(
+      context,
+      makeSureOrderPage+"?productList=${jsonEncode(productList.toList())}",
+      transition: TransitionType.inFromRight,
+    );
+  }
+
+  void itemCheck(CoffeeWalletItem item) {
+    productList.add(item);
+    totalPrice = 0.0;
+    productList.forEach((element) {
+      int remainingNum = int.parse(element.remainingNum);
+      double price = double.parse(element.price);
+      totalPrice += (remainingNum * price);
+    });
+    setState(() {});
+  }
+
   void getAllItems() {
-    changData(item) =>
-        setState(() => itemDatas.add(CoffeeWalletItem.fromJson(item)));
+    changData(item) {
+      CoffeeWalletItem tempItem = CoffeeWalletItem.fromJson(item);
+      tempItem.remainingNum = "0";
+      setState(() => itemDatas.add(tempItem));
+    }
+
     rootBundle
         .loadString("lib/assets/datas/coffeeWalletList.json")
         .then((valStr) {
       itemDatas.clear();
-      var tempItem = json.decode(valStr);
-      tempItem.forEach(changData);
+      json.decode(valStr).forEach(changData);
     });
   }
 }
-
-/**
-    Center(
-    child: AddAnimateWidget(_count, isAdd, (action) {
-    setState(() {
-    switch (action) {
-    case ActionEnum.add:
-    _count++;
-    isAdd = true;
-    break;
-    case ActionEnum.subtraction:
-    _count--;
-    isAdd = false;
-    break;
-    }
-    });
-    }),
-    ),
- */

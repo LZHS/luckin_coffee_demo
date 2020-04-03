@@ -20,7 +20,8 @@ class _ServiceRegulationsPageState extends State<ServiceRegulationsPage> {
       ),
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.only(left: 30.0, right: 30.0,top: 30.0),
+          color: Colors.white,
+          padding: EdgeInsets.only(left: 30.0, right: 30.0,top: 30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

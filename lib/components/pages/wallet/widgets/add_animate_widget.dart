@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/animates/slide_transition_x.dart';
 
 class AddAnimateWidget extends StatefulWidget {
-  final int count;
-  final bool isAdd;
+  int initVal=0;
+  bool isAdd =true;
   final OnClickCallBack onClickCallBack;
 
   AddAnimateWidget(
-    this.count,
-    this.isAdd,
+    this.initVal,
     this.onClickCallBack, {
     Key key,
   }) : super(key: key);
@@ -42,7 +41,8 @@ class _AddAnimateWidgetState extends State<AddAnimateWidget> {
     Color textColor2 = Color(0x9988afd5);
 
     return GestureDetector(
-      onTap: () => onClick(text),
+      onTap: () =>
+          onClick(text == "+" ? ActionEnum.add : ActionEnum.subtraction),
       child: Container(
         width: 22.0,
         height: 22.0,
@@ -50,15 +50,16 @@ class _AddAnimateWidgetState extends State<AddAnimateWidget> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(13.0)),
             border: Border.all(
-                color: text == "-" && this.widget.count <= 0
+                color: text == "-" && this.widget.initVal <= 0
                     ? textColor2
                     : textColor1)),
         child: Text(
           "$text",
           style: TextStyle(
             fontSize: 16.0,
-            color:
-                text == "-" && this.widget.count <= 0 ? textColor2 : textColor1,
+            color: text == "-" && this.widget.initVal <= 0
+                ? textColor2
+                : textColor1,
           ),
         ),
       ),
@@ -82,8 +83,8 @@ class _AddAnimateWidgetState extends State<AddAnimateWidget> {
         );
       },
       child: Text(
-        "${this.widget.count}",
-        key: ValueKey<int>(this.widget.count),
+        "${this.widget.initVal}",
+        key: ValueKey<int>(this.widget.initVal),
         style: TextStyle(
           fontSize: 16.0,
           color: Color(0xff88afd5),
@@ -92,16 +93,28 @@ class _AddAnimateWidgetState extends State<AddAnimateWidget> {
     );
   }
 
-  onClick(String tagText) {
-    if (tagText == "-") {
-      this.widget.onClickCallBack(ActionEnum.subtraction);
-    } else if (tagText == "+") {
-      this.widget.onClickCallBack(ActionEnum.add);
+  onClick(ActionEnum action) {
+    switch (action) {
+      case ActionEnum.add:
+        setState(() {
+          this.widget.initVal++;
+          this.widget.isAdd = true;
+        });
+        this.widget.onClickCallBack(this.widget.initVal);
+        break;
+      case ActionEnum.subtraction:
+        if (this.widget.initVal == 0) break;
+        setState(() {
+          this.widget.initVal--;
+          this.widget.isAdd = false;
+        });
+        this.widget.onClickCallBack(this.widget.initVal);
+        break;
     }
   }
 }
 
-typedef OnClickCallBack(ActionEnum action);
+typedef OnClickCallBack(int result);
 
 enum ActionEnum {
   add,

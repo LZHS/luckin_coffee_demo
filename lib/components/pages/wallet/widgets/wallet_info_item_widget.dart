@@ -7,7 +7,7 @@ import 'package:luckin_coffee_demo/config/Routes.dart';
 import 'package:luckin_coffee_demo/config/application.dart';
 import 'package:luckin_coffee_demo/config/res/colors.dart';
 
-///
+/// 咖啡钱包 item 详情页面
 class WalletInfoItemWidget extends StatelessWidget {
   final CoffeeWalletItem itemData;
 
