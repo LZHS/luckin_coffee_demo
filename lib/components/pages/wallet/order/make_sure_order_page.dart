@@ -28,7 +28,9 @@ class _MakeSureOrderPageState extends State<MakeSureOrderPage> {
     return Scaffold(
       appBar: HeadTitleBar(title: "确认订单"),
       body: SafeArea(
-        child: Container(),
+        child: Container(
+          //TODO 这里将要完成 确认订单页面布局
+        ),
       ),
     );
   }
