@@ -24,4 +24,6 @@ const Color toastTextColor = Color(0xff9E9E9E);
 
 const Color text505050=Color(0xff505050);
 const Color textff8d1a=Color(0xffff8d1a);
+const Color text808080=Color(0xff808080);
+const Color text557a9d=Color(0xff557a9d);
 

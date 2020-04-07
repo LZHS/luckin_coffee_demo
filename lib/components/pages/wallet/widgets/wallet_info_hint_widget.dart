@@ -25,7 +25,7 @@ class WalletInfoHintWidgetState extends State<WalletInfoHintWidget>
   void initState() {
     super.initState();
     controller = new AnimationController(
-        duration: const Duration(seconds: 3), vsync: this);
+        duration: const Duration(milliseconds: 1500), vsync: this);
 
     Rx.timer("begion", const Duration(seconds: 5))
         .listen((event) => controller.forward().orCancel);
@@ -37,20 +37,21 @@ class WalletInfoHintWidgetState extends State<WalletInfoHintWidget>
       end: 68.0,
     ).animate(CurvedAnimation(
       parent: controller,
-      curve: Interval(0.0, 0.1, curve: Curves.ease),
+      curve: Interval(0.0, 1.0, curve: Curves.ease),
     ));
     opacity = Tween<double>(
       begin: 0.2,
       end: 1.0,
     ).animate(CurvedAnimation(
       parent: controller,
-      curve: Interval(0.0, 0.1, curve: Curves.ease),
+      curve: Interval(0.0, 1.0, curve: Curves.ease),
     ));
   }
 
   @override
   void dispose() {
     super.dispose();
+    controller.dispose();
   }
 
   @override

@@ -15,6 +15,7 @@ import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_a
 import 'package:luckin_coffee_demo/components/pages/wallet/privilege/privilege_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/activity_description_page.dart';
+import 'package:luckin_coffee_demo/components/pages/wallet/specification/payment_agreement_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
 
 ///```
@@ -136,6 +137,18 @@ var _makeSureOrderPage = Handler(
   },
 );
 
+
+///```
+/// 支付协议 页面
+///```
+var paymentAgreementPage = "/wallet/specification/payment_agreement_page";
+var _paymentAgreementPage = Handler(
+  handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    return PaymentAgreementPage();
+  },
+);
+
+
 ///```
 ///用户登录， 选择登录方式页面
 ///```
@@ -196,6 +209,7 @@ class Routes {
       ..define(privilegePage, handler: _privilegePage)
       ..define(privilegeAllPage, handler: _privilegeAllPage)
       ..define(makeSureOrderPage, handler: _makeSureOrderPage)
+      ..define(paymentAgreementPage, handler: _paymentAgreementPage)
       ..define(login, handler: _login)
       ..define(loginPhoneCode, handler: _loginPhoneCode)
       ..define(chooseAreaPage, handler: _chooseAreaPage)
