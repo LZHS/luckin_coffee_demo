@@ -35,19 +35,17 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
       body: SafeArea(
         child: Column(children: <Widget>[
           Expanded(
-            flex: 1,
-            child: Container(
-              width: double.infinity,
-              margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-              child: GridView.builder(
-                itemCount: itemDatas.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1.6),
-                itemBuilder: (context, index) =>
-                    WalletWidget(itemDatas[index], onClickCallBack),
-              ),
-            ),
-          ),
+              flex: 1,
+              child: Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+                  child: GridView.builder(
+                    itemCount: itemDatas.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, childAspectRatio: 1.6),
+                    itemBuilder: (context, index) =>
+                        WalletWidget(itemDatas[index], onClickCallBack),
+                  ))),
           WalletBottomMenu()
         ]),
       ),
@@ -63,14 +61,14 @@ class _CoffeeWalletState extends State<CoffeeWallet> {
   }
 
   void getAllItems() {
-    changData(item) =>
-        setState(() => itemDatas.add(CoffeeWalletItem.fromJson(item)));
     rootBundle
         .loadString("lib/assets/datas/coffeeWalletList.json")
         .then((valStr) {
       itemDatas.clear();
       var tempItem = json.decode(valStr);
-      tempItem.forEach(changData);
+      tempItem
+          .forEach((item) => itemDatas.add(CoffeeWalletItem.fromJson(item)));
+      setState(() {});
     });
   }
 }

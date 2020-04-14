@@ -168,7 +168,7 @@ class _RechargePageState extends State<RechargePage> {
     }
     Application.router.navigateTo(
       context,
-      makeSureOrderPage+"?productList=${jsonEncode(productList.toList())}",
+      makeSureOrderPage + "?productList=${jsonEncode(productList.toList())}",
       transition: TransitionType.inFromRight,
     );
   }
@@ -185,17 +185,16 @@ class _RechargePageState extends State<RechargePage> {
   }
 
   void getAllItems() {
-    changData(item) {
-      CoffeeWalletItem tempItem = CoffeeWalletItem.fromJson(item);
-      tempItem.remainingNum = "0";
-      setState(() => itemDatas.add(tempItem));
-    }
-
     rootBundle
         .loadString("lib/assets/datas/coffeeWalletList.json")
         .then((valStr) {
       itemDatas.clear();
-      json.decode(valStr).forEach(changData);
+      json.decode(valStr).forEach((item) {
+        CoffeeWalletItem tempItem = CoffeeWalletItem.fromJson(item);
+        tempItem.remainingNum = "0";
+        itemDatas.add(tempItem);
+      });
+      setState(() {});
     });
   }
 }

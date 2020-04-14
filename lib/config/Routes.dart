@@ -17,6 +17,7 @@ import 'package:luckin_coffee_demo/components/pages/wallet/recharge/recharge_pag
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/activity_description_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/payment_agreement_page.dart';
 import 'package:luckin_coffee_demo/components/pages/wallet/specification/service_regulations_page.dart';
+import 'package:luckin_coffee_demo/test_widget/test_dialog_widget.dart';
 
 ///```
 /// 根页面 --- 用于 过度 页面
@@ -24,7 +25,7 @@ import 'package:luckin_coffee_demo/components/pages/wallet/specification/service
 var root = "/";
 var _rootHandler = Handler(
   handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-    return RechargePage();
+    return TestDialogWidget();
     /*
     RechargePage
     StaggerAnimation
