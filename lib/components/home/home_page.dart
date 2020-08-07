@@ -21,9 +21,6 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: FloatingActionButton(
               onPressed: () {
-                log.d("log.d message");
-                log.v("log.v message");
-                log.e("log.e message");
               },
               child: Icon(
                 Icons.ac_unit,

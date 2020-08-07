@@ -3,18 +3,26 @@ import 'package:logger/logger.dart';
 class Log {
   final bool isOut;
 
-  Log({this.isOut: true});
+  const Log({this.isOut: true});
 
   void v(dynamic message) {
     if (isOut)
       Logger(
-        printer: PrettyPrinter(colors: false, printTime: true),
+        printer: PrettyPrinter(methodCount: 8, colors: false, printTime: true),
+      ).v(message);
+  }
+
+  void i(dynamic message) {
+    if (isOut)
+      Logger(
+        printer: PrettyPrinter(methodCount: 0, colors: false, printTime: true),
       ).v(message);
   }
 
   void e(dynamic message) {
+    if (isOut)
       Logger(
-        printer: PrettyPrinter( printTime: true),
+        printer: PrettyPrinter(colors: false, printTime: true),
       ).e(message);
   }
 
