@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:luckin_coffee_demo/common/common_utils.dart';
-import 'package:luckin_coffee_demo/common/fluro/router.dart';
-import 'package:luckin_coffee_demo/config/Routes.dart';
-import 'package:luckin_coffee_demo/config/application.dart';
+import 'package:flutter/widgets.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 class AppComponent extends StatefulWidget {
   @override
@@ -14,15 +13,24 @@ class _AppComponentState extends State<AppComponent> {
     final router = Router();
     Routes.configureRoutes(router);
     Application.router = router;
+    Application.init();
   }
+
   @override
   Widget build(BuildContext context) {
-    final app = MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Fluro',
-      theme: ThemeData( primaryColor:Colors.white),
-      onGenerateRoute: Application.router.generator,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (_, state) {
+          return MaterialApp(
+            title: 'Luckin',
+            theme: state.theme,
+            onGenerateRoute: Application.router.generator,
+          );
+        },
+      ),
     );
-    return app;
   }
 }

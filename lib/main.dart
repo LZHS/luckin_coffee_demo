@@ -1,8 +1,7 @@
- 
-import 'package:flutter/cupertino.dart';
-import 'package:luckin_coffee_demo/components/app/app_component.dart';
+import 'package:flutter/material.dart';
 
-void main() {    
+import 'components/components.dart';
+
+void main() {
   runApp(AppComponent());
 }
-
