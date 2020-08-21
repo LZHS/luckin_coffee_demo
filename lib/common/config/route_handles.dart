@@ -4,5 +4,5 @@ import 'package:luckin_coffee_demo/components/components.dart';
 
 var rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return HomePage();
+  return TransitionsPage();
 });

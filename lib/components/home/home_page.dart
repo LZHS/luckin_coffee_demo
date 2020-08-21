@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:logger/logger.dart';
-import 'package:luckin_coffee_demo/common/global.dart';
-import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override
