@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.luckin_coffee.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,38 +13,37 @@ import java.util.Date;
 @Entity
 @Data
 @DynamicInsert
-public class AppInfo implements Serializable {
-    private static final long serialVersionUID = 4996878151888767937L;
+public class AppNotice implements Serializable {
+    private static final long serialVersionUID = 957085224654685767L;
     /**
-     * app 应用 ID
+     * 公告 ID
      */
     @Id
+    private String noticeId;
+    /**
+     * App平台对应 APPID
+     */
     private String appId;
     /**
-     * 平台名称
+     * 公告生效时间
      */
-    private String platformtName;
+    private String forceTime;
     /**
-     * app 版本号名称
+     * 公告有效时长（单位小时）
      */
-    private String appVersion;
+    private Integer validDuration;
     /**
-     * app 版本号
+     * 公告是否永久有效 0有效1短时间有效
      */
-    private Integer appVersionCode;
+    private boolean isEverValid;
     /**
-     * 是否强制用户更新升级,0可用1不可用
+     * 公告信息 信息 描述
      */
-    private boolean isForceUpdate;
+    private String noticeInfo;
     /**
-     * app 应用 下载地址
+     * APP状态,0可用1不可用
      */
-    private String appUrl;
-    /**
-     * app 信息 描述
-     */
-    private String appDescription;
-
+    private boolean enabledStatus;
     /**
      * 创建时间.
      */

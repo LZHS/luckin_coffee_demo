@@ -1,0 +1,37 @@
+create table `app_info`
+(
+    `app_id`           CHAR(20)     NOT NULL COMMENT 'app 应用ID',
+    `platformt_name`   VARCHAR(32)  NOT NULL COMMENT '平台名称',
+    `app_version`      CHAR(20)     NOT NULL DEFAULT 'V1.0.0' COMMENT 'app 版本号名称',
+    `app_version_code` SMALLINT     NOT NULL DEFAULT '0' COMMENT 'app 版本号',
+    `is_force_update`  TINYINT(1)   NOT NULL DEFAULT '0' COMMENT '是否强制用户更新升级',
+    `app_url`          VARCHAR(255) NOT NULL COMMENT 'app 应用 下载地址',
+    `app_description`  TEXT COMMENT 'app 信息 描述',
+    `create_time`      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`app_id`)
+) COMMENT ' app 应用信息';
+
+DROP TABLE `app_info`;
+
+INSERT INTO `app_info`
+(`app_id`,
+ `platformt_name`,
+ `app_version`,
+ `app_version_code`,
+ `app_url`,
+ `app_description`,
+ `is_force_update`)
+values ('1597818873300545668',
+        'Android',
+        'V1.0.0',
+        1,
+        'https://imtt.dd.qq.com/16891/apk/F0F77A2D3CB9F96B2C912DE7452AA3FD.apk?fsname=com.moji.mjweather_8.0405.02_8040502.apk&csr=1bbd',
+        '全球天气服务类平台，支持约199个国家、超过20万个城市的生活类天气查询，截至目前，拥有约6.5亿用户，天气日查询次数过6亿。基于领先的专业技术和庞大的气象、用户数据，提供全球任意经纬度天气信息，以及近40天的天气预报服务。更优的界面设计、更贴心的场景化服务、更快的启动速度，全新8.0版本如期而至，为你的生活保驾护航',
+        0);
+
+select *
+from `app_info`;
+
+
+

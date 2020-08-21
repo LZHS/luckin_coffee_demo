@@ -28,15 +28,14 @@ public class AppInfoServiceImpTest {
     @Test
     public void save() {
         AppInfo info = new AppInfo();
-        info.setAppId(KeyUtil.genUniqueKey());
-        info.setAppDescription("测试数据");
-        info.setAppUrl("APP 下载地址");
-        info.setAppVersion("V1.0.0");
-        info.setAppVersionCode(1);
-        info.setEnabledStatus(true);
-        info.setPlatformtName("Android");
-        AppInfo saveInfo = service.save(info);
-        Assert.assertNotNull("保存一条记录", saveInfo);
+//        info.setAppId(KeyUtil.genUniqueKey());
+//        info.setAppDescription("测试数据");
+//        info.setAppUrl("APP 下载地址");
+//        info.setAppVersion("V1.0.0");
+//        info.setAppVersionCode(1);
+//        info.setPlatformtName("Android");
+//        AppInfo saveInfo = service.save(info);
+//        Assert.assertNotNull("保存一条记录", saveInfo);
     }
 
     @Test

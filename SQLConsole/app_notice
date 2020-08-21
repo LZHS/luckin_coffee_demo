@@ -1,0 +1,33 @@
+create table `app_notice`
+(
+    `notice_id`      CHAR(20)  NOT NULL COMMENT '公告 ID',
+    `app_id`         CHAR(20)  NOT NULL COMMENT 'App平台对应 APPID',
+    `force_time`     TIMESTAMP COMMENT '公告生效时间',
+    `valid_duration` INTEGER UNSIGNED COMMENT '公告有效时长（单位小时）',
+    `is_ever_valid`  TINYINT(1) UNSIGNED DEFAULT '0' COMMENT '公告是否永久有效 0有效1短时间有效',
+    `notice_info`    TEXT      NOT NULL COMMENT '公告信息 信息 描述',
+    `enabled_status` TINYINT(1) UNSIGNED DEFAULT '0' COMMENT 'APP状态,0可用1不可用',
+    `create_time`    TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`    TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+    PRIMARY KEY (`notice_id`)
+) COMMENT ' app 公告信息';
+
+
+DROP TABLE `app_notice`;
+# 全平台 永久生效
+INSERT INTO `app_notice`
+(`notice_id`,
+ `app_id`,
+ `is_ever_valid`,
+ `notice_info`,
+ `enabled_status`)
+values ('1597977956634953966',
+        '1597818873300545668',
+        0,
+        '全球天气服务类平台，支持约199个国家、超过20万个城市的生活类天气查询，截至目前，拥有约6.5亿用户，天气日查询次数过6亿。基于领先的专业技术和庞大的气象、用户数据，提供全球任意经纬度天气信息，以及近40天的天气预报服务。更优的界面设计、更贴心的场景化服务、更快的启动速度，全新8.0版本如期而至，为你的生活保驾护航',
+        1);
+select *
+from `app_notice`;
+
+
+

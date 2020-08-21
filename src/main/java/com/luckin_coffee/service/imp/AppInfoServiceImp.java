@@ -21,10 +21,7 @@ public class AppInfoServiceImp implements AppInfoService {
 
     @Override
     public AppInfo findOne(String appId) {
-        log.debug("AppInfoServiceImp - findOne  appId = " + appId);
-        AppInfo info = repository.findById(appId).orElse(null);
-        if (info == null) throw new CommonException(ResultEnum.NULL_DATA);
-        return info;
+       return repository.findById(appId).orElse(null);
     }
 
     @Override
