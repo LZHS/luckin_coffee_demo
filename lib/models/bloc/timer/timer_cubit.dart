@@ -1,16 +1,39 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
 
-part 'timer_state.dart';
+class TimerCubit extends Cubit<int> {
+  static const _TICKS = 45;
+  StreamSubscription<int> _tickerSubscription;
 
-class TimerCubit extends Cubit<TimerState> {
-  TimerCubit() : super(TimerState());
-
-  timerStarted(){
-
+  TimerCubit() : super(0) {
+    timerStarted();
   }
 
-  Stream<int> tick({int ticks}) {
+  timerStarted() async {
+    _tickerSubscription?.cancel();
+    _tickerSubscription = _tick(ticks: _TICKS).listen((duration) {
+      // 正在计时
+      emit(duration);
+    }, onDone: () {
+      // 计时结束
+      timerComplete();
+    });
+  }
+
+  timerComplete() {
+    _tickerSubscription?.cancel();
+    emit(0);
+  }
+
+  @override
+  Future<void> close() {
+    _tickerSubscription?.cancel();
+    return super.close();
+  }
+
+  Stream<int> _tick({int ticks}) {
     return Stream.periodic(Duration(seconds: 1), (x) => ticks - x - 1)
         .take(ticks);
   }

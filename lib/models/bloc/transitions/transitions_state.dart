@@ -1,7 +1,7 @@
 part of 'transitions_cubit.dart';
 
 class TransitionsState {
-  TransitionsType type = TransitionsType.INIT;
+  TransitionsType type = TransitionsType.NO_ACTION;
 
   AppInfo info;
   AppNoticeInfo noticeInfo;
@@ -11,8 +11,6 @@ class TransitionsState {
 }
 
 enum TransitionsType {
-  /// 初始化状态
-  INIT,
   /// 不做任何操作
   NO_ACTION,
   /// 显示 更新对话框

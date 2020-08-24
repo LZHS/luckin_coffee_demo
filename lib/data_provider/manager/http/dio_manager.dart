@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/exceptions/exception.dart';
@@ -83,12 +85,13 @@ class DioManager {
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         return BaseEntity(code: -1, message: "响应超时");
-        break;
       case DioErrorType.RESPONSE:
         return BaseEntity(code: -1, message: "未知错误");
-        break;
       default:
-        return BaseEntity(code: -1, message: error.error);
+        if (error.error is SocketException)
+          return BaseEntity(code: -1, message: "请检查网络连接");
+        else
+          return BaseEntity(code: -1, message: error.error);
     }
   }
 }
