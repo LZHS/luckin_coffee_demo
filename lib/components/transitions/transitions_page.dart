@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/common/global.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
@@ -20,10 +21,15 @@ class TransitionsPage extends StatelessWidget {
         child: BlocBuilder<TransitionsCubit, TransitionsState>(
           builder: (context, state) {
             if (state.type == TransitionsType.SHOW_NOTICE)
-              _showNoticeDialog(context);
+              Future.delayed(
+                Duration.zero,
+                () => _showNoticeDialog(context, state.noticeInfo),
+              );
             if (state.type == TransitionsType.NO_ACTION)
               return _buildTimerWidget();
-            return Container();
+            return Container(
+
+            );
           },
         ),
       ),
@@ -58,26 +64,14 @@ class TransitionsPage extends StatelessWidget {
       );
 
 
-  _showNoticeDialog(context) {
+  _showNoticeDialog(context, noticeInfo) {
     log.d("showNoticeDialog");
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text('title'),
-          content: Text('dialogBody'),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('buttonText'),
-              onPressed: () {
-                Navigator.of(dialogContext).pop(); // Dismiss alert dialog
-              },
-            ),
-          ],
-        );
+        return NoticeDialog(noticeInfo: noticeInfo);
       },
     );
-
   }
 }
