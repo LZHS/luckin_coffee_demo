@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 
+// ignore: must_be_immutable
 class NoticeDialog extends Dialog {
   final AppNoticeInfo noticeInfo;
+  final VoidCallback onTap;
   DateTime _lastPressedAt; //上次点击时间
 
-  NoticeDialog({@required this.noticeInfo}) : assert(noticeInfo != null);
+  NoticeDialog({@required this.noticeInfo, this.onTap})
+      : assert(noticeInfo != null);
   BuildContext context;
 
   @override
@@ -64,47 +67,18 @@ class NoticeDialog extends Dialog {
 
   _buildActionWidget() => Visibility(
 //    visible: noticeInfo.enabledStatus,
-        visible: true,
+    visible: true,
         child: Container(
-          padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-          alignment: Alignment.center,
-          child: Material(
-            child: Ink(
-              decoration: BoxDecoration(
-                color: Colors.purple,
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-              ),
-              child: InkResponse(
-                borderRadius: new BorderRadius.all(new Radius.circular(30.0)),
-                //点击或者toch控件高亮时显示的控件在控件上层,水波纹下层
-                highlightColor: Colors.purple[800],
-                //点击或者toch控件高亮的shape形状
-                highlightShape: BoxShape.rectangle,
-                //.InkResponse内部的radius这个需要注意的是，我们需要半径大于控件的宽，如果radius过小，显示的水波纹就是一个很小的圆，
-                //水波纹的半径
-                radius: 0.0,
-                //水波纹的颜色 设置了highlightColor属性后 splashColor将不起效果
-                splashColor: Colors.red,
-                //true表示要剪裁水波纹响应的界面 false不剪裁 如果控件是圆角不剪裁的话水波纹是矩形
-                containedInkWell: true,
-                onTap: () {
-                  print('click');
-                },
-                child: new Container(
-                  //不能在InkResponse的child容器内部设置装饰器颜色，否则会遮盖住水波纹颜色的，containedInkWell设置为false就能看到是否是遮盖了。
-                  width: 300.0,
-                  height: 50.0,
-                  //设置child 居中
-                  alignment: Alignment(0, 0),
-                  child: Text(
-                    "登录",
-                    style: TextStyle(color: Colors.white, fontSize: 16.0),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+            padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+            alignment: Alignment.center,
+            child: AppButton(
+              text: "知道了",
+              width: 130,
+              onTap: () {
+                onTap?.call();
+                Navigator.of(context).pop();
+              },
+            )),
       );
 
   _buildContentWidget() => ConstrainedBox(
@@ -114,9 +88,10 @@ class NoticeDialog extends Dialog {
           padding: const EdgeInsets.all(18.0),
           child: SingleChildScrollView(
             child: Text(
-              "${noticeInfo.noticeInfo}",
+              """${noticeInfo.noticeInfo}""",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  height: 1.2,
                   fontSize: 13.0,
                   color: AppColors.appTextColor),
             ),
@@ -125,7 +100,7 @@ class NoticeDialog extends Dialog {
       );
 
   _buildTitleWidget() => Container(
-        padding: const EdgeInsets.only(top: 14.0, bottom: 14.0),
+        padding: const EdgeInsets.only(top: 18.0, bottom: 14.0),
         child: Text(
           "公 告",
           style: TextStyle(

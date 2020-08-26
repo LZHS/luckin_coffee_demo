@@ -64,13 +64,16 @@ class TransitionsPage extends StatelessWidget {
       );
 
 
-  _showNoticeDialog(context, noticeInfo) {
+  _showNoticeDialog(BuildContext context, noticeInfo) {
     log.d("showNoticeDialog");
     showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
-        return NoticeDialog(noticeInfo: noticeInfo);
+        return NoticeDialog(noticeInfo: noticeInfo,onTap: (){
+          log.d("对话框退出了");
+          context.bloc<TransitionsCubit>().closeNoticeDialog();
+        },);
       },
     );
   }

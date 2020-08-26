@@ -11,14 +11,14 @@ class TransitionsCubit extends Cubit<TransitionsState> {
   final AppService _service = AppServiceImp();
 
   TransitionsCubit(this.context) : super(TransitionsState()) {
-    state.type = TransitionsType.SHOW_NOTICE;
-    state.noticeInfo=AppNoticeInfo();
-    emit(state);
-//    requestAppInfo();
+//    state.type = TransitionsType.SHOW_NOTICE;
+//    state.noticeInfo=AppNoticeInfo();
+//    emit(state);
+    requestAppInfo();
   }
 
   requestAppInfo() async {
-    await _service.getAppVersion(Global.APP_ID).then(
+    _service.getAppVersion(Global.APP_ID).then(
       (entity) {
         AppNoticeInfo noticeInfo = entity.result.appNoticeInfo;
         if (noticeInfo != null) {
@@ -42,4 +42,8 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     ).whenComplete(() {});
   }
 
+  void closeNoticeDialog() {
+    /// 关闭了 公告对话框 将检查 应用是否需要更新
+    log.d("关闭了 公告对话框 将检查 应用是否需要更新");
+  }
 }

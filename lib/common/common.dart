@@ -17,4 +17,5 @@ export 'config/routes.dart';
 export 'widgets/base_page.dart';
 export 'widgets/divider_widget.dart';
 export 'widgets/dialog/notice_dialog.dart';
+export 'widgets/button/app_button.dart';
 //endregion

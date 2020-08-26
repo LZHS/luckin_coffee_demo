@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AppColors  {
-  static const appBackColor= Color(0xffd0cfd1);
+  static const appBackColor = Color(0xffd0cfd1);
 
+  static const appTitleColor = Color(0xff383838);
 
-  static const appTitleColor= Color(0xff383838);
+  static const appTextColor = Color(0xff505050);
 
-  static const appTextColor= Color(0xff505050);
-
+  static const appTheme88afd5 = Color(0xff88afd5);
+  static const appTheme4280BD = Color(0xff4280BD);
+  static const appTheme1e88afd5 = Color(0x1e88afd5);
 }
