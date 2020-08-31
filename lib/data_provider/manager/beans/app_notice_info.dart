@@ -19,8 +19,9 @@ class AppNoticeInfo {
 
   AppNoticeInfo.fromJson(Map<String, dynamic> json) {
     forceTime = json['forceTime'];
-    validDuration = json['validDuration'];
+    validDuration = json['validDuration']; 
     noticeInfo = json['noticeInfo'];
+    noticeInfo.replaceAll(RegExp("\n"), " \n ");
     enabledStatus = json['enabledStatus'];
     everValid = json['everValid'];
   }

@@ -21,15 +21,10 @@ class TransitionsPage extends StatelessWidget {
         child: BlocBuilder<TransitionsCubit, TransitionsState>(
           builder: (context, state) {
             if (state.type == TransitionsType.SHOW_NOTICE)
-              Future.delayed(
-                Duration.zero,
-                () => _showNoticeDialog(context, state.noticeInfo),
-              );
+              _showNoticeDialog(context, state.noticeInfo);
             if (state.type == TransitionsType.NO_ACTION)
               return _buildTimerWidget();
-            return Container(
-
-            );
+            return Container();
           },
         ),
       ),
@@ -38,7 +33,7 @@ class TransitionsPage extends StatelessWidget {
 
   /// 创建 倒计时控件
   _buildTimerWidget() => BlocProvider<TimerCubit>(
-        create: (_) => TimerCubit(),
+    create: (context) => TimerCubit(context),
         child: BlocBuilder<TimerCubit, int>(
           builder: (context, duration) {
             return Visibility(
@@ -63,18 +58,23 @@ class TransitionsPage extends StatelessWidget {
         ),
       );
 
-
   _showNoticeDialog(BuildContext context, noticeInfo) {
-    log.d("showNoticeDialog");
-    showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        return NoticeDialog(noticeInfo: noticeInfo,onTap: (){
-          log.d("对话框退出了");
-          context.bloc<TransitionsCubit>().closeNoticeDialog();
-        },);
-      },
+    Future.delayed(
+      Duration.zero,
+          () =>
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext dialogContext) {
+              return NoticeDialog(
+                noticeInfo: noticeInfo,
+                onTap: () {
+                  log.d("对话框退出了");
+                  context.bloc<TransitionsCubit>().closeNoticeDialog();
+                },
+              );
+            },
+          ),
     );
   }
 }

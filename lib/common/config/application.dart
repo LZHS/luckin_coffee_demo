@@ -1,4 +1,5 @@
 import 'package:fluro/fluro.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/models/models.dart';
 
 class Application {
@@ -8,4 +9,5 @@ class Application {
   static void init() {
     Bloc.observer = SimpleBlocObserver();
   }
+
 }

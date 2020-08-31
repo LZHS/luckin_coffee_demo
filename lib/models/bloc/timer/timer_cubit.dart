@@ -1,13 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 
 class TimerCubit extends Cubit<int> {
   static const _TICKS = 45;
   StreamSubscription<int> _tickerSubscription;
+  final BuildContext context;
 
-  TimerCubit() : super(0) {
+  TimerCubit(this.context) : super(0) {
     timerStarted();
   }
 
@@ -25,6 +27,7 @@ class TimerCubit extends Cubit<int> {
   timerComplete() {
     _tickerSubscription?.cancel();
     emit(0);
+    Routes.goMainPage(context);
   }
 
   @override

@@ -11,25 +11,25 @@ class TransitionsCubit extends Cubit<TransitionsState> {
   final AppService _service = AppServiceImp();
 
   TransitionsCubit(this.context) : super(TransitionsState()) {
-//    state.type = TransitionsType.SHOW_NOTICE;
-//    state.noticeInfo=AppNoticeInfo();
-//    emit(state);
     requestAppInfo();
   }
 
   requestAppInfo() async {
     _service.getAppVersion(Global.APP_ID).then(
       (entity) {
-        AppNoticeInfo noticeInfo = entity.result.appNoticeInfo;
-        if (noticeInfo != null) {
-          state.noticeInfo = noticeInfo;
-          if (noticeInfo.everValid) {
+        this.state.noticeInfo = entity.result.appNoticeInfo;
+        this.state.appInfo = entity.result.appInfo;
+        if (this.state.noticeInfo != null) {
+          if (this.state.noticeInfo.everValid) {
             state.type = TransitionsType.SHOW_NOTICE;
             emit(state);
             return;
           }
+        } else if (this.state.appInfo != null) {
         } else {
-          AppInfo info = entity.result.appInfo;
+          // 没有公告，没有更新信息直接跳转
+          state.type = TransitionsType.NO_ACTION;
+          emit(state);
         }
       },
       onError: (err) {
@@ -41,9 +41,18 @@ class TransitionsCubit extends Cubit<TransitionsState> {
       },
     ).whenComplete(() {});
   }
-
+/// 关闭了 公告对话框 将检查 应用是否需要更新
   void closeNoticeDialog() {
-    /// 关闭了 公告对话框 将检查 应用是否需要更新
-    log.d("关闭了 公告对话框 将检查 应用是否需要更新");
+    AppInfo appInfo = this.state.appInfo;
+    if (appInfo != null) {
+
+    } else {
+      // 没有公告，没有更新信息直接跳转
+      state.type = TransitionsType.NO_ACTION;
+      emit(state);
+    }
   }
+
+
+
 }

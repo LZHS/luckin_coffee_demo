@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
+import 'package:rxdart/rxdart.dart';
 
 // ignore: must_be_immutable
 class NoticeDialog extends Dialog {
@@ -88,7 +89,7 @@ class NoticeDialog extends Dialog {
           padding: const EdgeInsets.all(18.0),
           child: SingleChildScrollView(
             child: Text(
-              """${noticeInfo.noticeInfo}""",
+              "${_buildNoticeContext(noticeInfo.noticeInfo)}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   height: 1.2,
@@ -109,4 +110,10 @@ class NoticeDialog extends Dialog {
               color: AppColors.appTitleColor),
         ),
       );
+
+  String _buildNoticeContext(String noticeInfo) {
+
+    return "";
+
+  }
 }
