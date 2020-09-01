@@ -21,7 +21,6 @@ class AppNoticeInfo {
     forceTime = json['forceTime'];
     validDuration = json['validDuration']; 
     noticeInfo = json['noticeInfo'];
-    noticeInfo.replaceAll(RegExp("\n"), " \n ");
     enabledStatus = json['enabledStatus'];
     everValid = json['everValid'];
   }

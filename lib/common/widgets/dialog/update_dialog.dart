@@ -5,13 +5,12 @@ import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 // ignore: must_be_immutable
-class NoticeDialog extends Dialog {
-  final AppNoticeInfo noticeInfo;
+class UpdateDialog extends Dialog {
+  final AppInfo appInfo;
   final VoidCallback onTap;
-  DateTime _lastPressedAt; //上次点击时间
 
-  NoticeDialog({@required this.noticeInfo, this.onTap})
-      : assert(noticeInfo != null);
+  UpdateDialog({@required this.appInfo, this.onTap})
+      : assert(appInfo != null);
   BuildContext context;
 
   @override
@@ -27,15 +26,7 @@ class NoticeDialog extends Dialog {
   }
 
   Future<bool> _onNavigationClickEvent() async {
-    if (_lastPressedAt == null ||
-        DateTime.now().difference(_lastPressedAt) > Duration(seconds: 1)) {
-      //两次点击间隔超过1秒则重新计时
-      _lastPressedAt = DateTime.now();
-      showToast('再按一次 Back 按钮退出');
       return Future.value(false);
-    }
-    closeApp();
-    return Future.value(true);
   }
 
   Future<void> closeApp() async {
@@ -89,7 +80,7 @@ class NoticeDialog extends Dialog {
           padding: const EdgeInsets.all(18.0),
           child: SingleChildScrollView(
             child: Text(
-              "${_buildNoticeContext(noticeInfo.noticeInfo)}",
+              "${_buildInfoContext(appInfo.appDescription)}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   height: 1.2,
@@ -103,7 +94,7 @@ class NoticeDialog extends Dialog {
   _buildTitleWidget() => Container(
         padding: const EdgeInsets.only(top: 18.0, bottom: 14.0),
         child: Text(
-          "公 告",
+          "${appInfo.appVersion} 更新",
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18.0,
@@ -111,8 +102,8 @@ class NoticeDialog extends Dialog {
         ),
       );
 
-  String _buildNoticeContext(noticeInfo) {
-    List<String> arr=noticeInfo.split(RegExp("<br/>"));
+  String _buildInfoContext(appDescription) {
+    List<String> arr=appDescription.split(RegExp("<br/>"));
     String result="";
     arr.forEach((element)=> result+="\n$element");
     return result;

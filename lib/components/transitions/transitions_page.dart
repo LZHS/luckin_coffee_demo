@@ -20,9 +20,7 @@ class TransitionsPage extends StatelessWidget {
         ),
         child: BlocBuilder<TransitionsCubit, TransitionsState>(
           builder: (context, state) {
-            if (state.type == TransitionsType.SHOW_NOTICE)
-              _showNoticeDialog(context, state.noticeInfo);
-            if (state.type == TransitionsType.NO_ACTION)
+            if (state.type == TransitionsType.START_TIMER)
               return _buildTimerWidget();
             return Container();
           },
@@ -58,23 +56,4 @@ class TransitionsPage extends StatelessWidget {
         ),
       );
 
-  _showNoticeDialog(BuildContext context, noticeInfo) {
-    Future.delayed(
-      Duration.zero,
-          () =>
-          showDialog<void>(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext dialogContext) {
-              return NoticeDialog(
-                noticeInfo: noticeInfo,
-                onTap: () {
-                  log.d("对话框退出了");
-                  context.bloc<TransitionsCubit>().closeNoticeDialog();
-                },
-              );
-            },
-          ),
-    );
-  }
 }
