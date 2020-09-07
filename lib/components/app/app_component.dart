@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
+import 'package:fluro/fluro.dart' as fluro_router;
+
 
 class AppComponent extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class AppComponent extends StatefulWidget {
 
 class _AppComponentState extends State<AppComponent> {
   _AppComponentState() {
-    final router = Router();
+    final router = fluro_router.Router();
     Routes.configureRoutes(router);
     Application.router = router;
     Application.init();

@@ -6,7 +6,8 @@ import 'package:luckin_coffee_demo/components/menu/menu_page.dart';
 /// 根页面 -- 应用闪屏页面
 var rootHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return TransitionsPage();
+      return ProgressTest();
+//      return TransitionsPage();
 });
 
 /// 主页面

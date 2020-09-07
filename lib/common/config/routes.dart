@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as fluro_router;
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/components/error/error_page.dart';
@@ -18,8 +18,8 @@ class Routes {
   /// 菜单页面
   static String menu = "/menu/menu_page";
 
-  static void configureRoutes(Router router) {
-    router.notFoundHandler = Handler(
+  static void configureRoutes(fluro_router.Router router) {
+    router.notFoundHandler = fluro_router.Handler(
       handlerFunc: (_, parameters) => ErrorPage(),
     );
     router
@@ -34,7 +34,7 @@ class Routes {
       context,
       Routes.main,
       clearStack: true,
-      transition: TransitionType.fadeIn,
+      transition: fluro_router.TransitionType.fadeIn,
     );
   }
 }
