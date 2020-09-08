@@ -11,7 +11,7 @@ class DownProgress extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: double.infinity,
-          minHeight: 35.0,
+          minHeight: 30.0,
           maxWidth: double.infinity,
           maxHeight: double.infinity,
         ),
@@ -23,7 +23,7 @@ class DownProgress extends StatelessWidget {
                 child: Container(
                   constraints: BoxConstraints.tightFor(
                     width: double.infinity,
-                    height: double.infinity,
+                    height: 30.0,
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(

@@ -9,8 +9,9 @@ import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 class TransitionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TransitionsCubit>(
-      create: (context) => TransitionsCubit(context),
+    return BlocProvider(
+      create: (_) => TransitionsCubit(context),
+      lazy: false,
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -31,7 +32,7 @@ class TransitionsPage extends StatelessWidget {
 
   /// 创建 倒计时控件
   _buildTimerWidget() => BlocProvider<TimerCubit>(
-    create: (context) => TimerCubit(context),
+        create: (context) => TimerCubit(context),
         child: BlocBuilder<TimerCubit, int>(
           builder: (context, duration) {
             return Visibility(
@@ -55,5 +56,4 @@ class TransitionsPage extends StatelessWidget {
           },
         ),
       );
-
 }

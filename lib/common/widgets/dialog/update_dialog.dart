@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
+
 // ignore: must_be_immutable
 class UpdateDialog extends Dialog {
   final AppInfo appInfo;
   final VoidCallback onTap;
 
-  UpdateDialog({@required this.appInfo, this.onTap})
-      : assert(appInfo != null);
+  UpdateDialog({@required this.appInfo, this.onTap}) : assert(appInfo != null);
   BuildContext context;
 
   @override
@@ -24,7 +24,7 @@ class UpdateDialog extends Dialog {
   }
 
   Future<bool> _onNavigationClickEvent() async {
-      return Future.value(false);
+    return Future.value(false);
   }
 
   Future<void> closeApp() async {
@@ -47,6 +47,7 @@ class UpdateDialog extends Dialog {
               _buildTitleWidget(),
               DividerWidget(),
               _buildContentWidget(),
+              _buildProgressWidget(),
               _buildActionWidget()
             ],
           ),
@@ -57,17 +58,14 @@ class UpdateDialog extends Dialog {
 
   _buildActionWidget() => Visibility(
 //    visible: noticeInfo.enabledStatus,
-    visible: true,
+        visible: true,
         child: Container(
             padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
             alignment: Alignment.center,
             child: AppButton(
               text: "更新",
               width: 130,
-              onTap: () {
-                onTap?.call();
-                Navigator.of(context).pop();
-              },
+              onTap: () {},
             )),
       );
 
@@ -101,10 +99,15 @@ class UpdateDialog extends Dialog {
       );
 
   String _buildInfoContext(appDescription) {
-    List<String> arr=appDescription.split(RegExp("<br/>"));
-    String result="";
-    arr.forEach((element)=> result+="\n$element");
+    List<String> arr = appDescription.split(RegExp("<br/>"));
+    String result = "";
+    arr.forEach((element) => result += "\n$element");
     return result;
-
   }
+
+  _buildProgressWidget() => Container(
+        margin: const EdgeInsets.only(left: 15.0, right: 15.0),
+        alignment: Alignment.center,
+        child: DownProgress(),
+      );
 }

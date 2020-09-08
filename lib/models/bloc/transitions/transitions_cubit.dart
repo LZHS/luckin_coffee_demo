@@ -15,8 +15,10 @@ class TransitionsCubit extends Cubit<TransitionsState> {
   final BuildContext context;
   final AppService _service = AppServiceImp();
   AppVersion _appVersion;
+  TransitionsCubit transitionsCubit;
 
   TransitionsCubit(this.context) : super(TransitionsState()) {
+    this.transitionsCubit=this;
     requestAppInfo();
   }
 
@@ -30,7 +32,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
             return;
           }
         } else if (this._appVersion.appInfo != null) {
-          _checkUpdate();
+          checkUpdate();
         } else {
           // 没有公告，没有更新信息直接跳转
           state.type = TransitionsType.START_TIMER;
@@ -47,23 +49,22 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     ).whenComplete(() {});
   }
 
-  downApkProgress(){
-
-  }
+  downApkProgress() {}
 
   /// 检查版本是否更新
-  _checkUpdate() {
+  checkUpdate() {
+    log.d("检查版本跟新");
     AppInfo appInfo = this._appVersion.appInfo;
     if (appInfo != null) {
       PackageInfo.fromPlatform().then((packageInfo) {
-        if (appInfo.appVersionCode - int.parse(packageInfo.buildNumber)  > 0) {
+        if (appInfo.appVersionCode - int.parse(packageInfo.buildNumber) > 0) {
           /// 说明服务器有新版本
           /// 在android 只能强制更新apk或者跳转到谷歌stop去下载。
           /// 在ios，只能提醒去 App Store 官网下载。
           // if(Platform.isIOS){
           //   //ios相关代码
           // }else
-          if(Platform.isAndroid){
+          if (Platform.isAndroid) {
             //android相关代码
             _showUpdateDialog();
           }
@@ -80,31 +81,33 @@ class TransitionsCubit extends Cubit<TransitionsState> {
   _showNoticeDialog() {
     Future.delayed(
       Duration.zero,
-          () => showDialog<void>(
+      () => showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext dialogContext) {
           return NoticeDialog(
             noticeInfo: this._appVersion.appNoticeInfo,
-            onTap: ()=>_checkUpdate,
+            onTap: checkUpdate,
           );
         },
       ),
     );
   }
 
-
   /// 显示 跟新 对话框
   _showUpdateDialog() {
     Future.delayed(
       Duration.zero,
-          () => showDialog<void>(
+      () => showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext dialogContext) {
-          return UpdateDialog(
-            appInfo: this._appVersion.appInfo,
-            onTap: ()=>_checkUpdate,
+          return BlocProvider.value(
+            value: transitionsCubit,
+            child: UpdateDialog(
+              appInfo: this._appVersion.appInfo,
+              onTap: () {},
+            ),
           );
         },
       ),
