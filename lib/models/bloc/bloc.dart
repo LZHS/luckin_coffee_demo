@@ -5,3 +5,4 @@ export 'simple_bloc_observer.dart';
 export 'transitions/transitions_cubit.dart';
 
 export 'timer/timer_cubit.dart';
+export 'down/down_cubit.dart';
