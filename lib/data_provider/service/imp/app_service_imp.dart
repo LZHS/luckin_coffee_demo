@@ -21,4 +21,10 @@ class AppServiceImp extends AppService{
    return _dioManager.get<AppVersion>(GET_APP_VERSION,params: {"appId":appId});
   }
 
+  @override
+  Future<BaseEntity> download(String urlPath, savePath, onReceiveProgress) {
+    _dioManager.getDio.download(urlPath, savePath,onReceiveProgress: onReceiveProgress);
+
+  }
+
 }

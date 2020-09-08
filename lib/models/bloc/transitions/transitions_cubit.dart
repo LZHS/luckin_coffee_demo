@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,22 +47,26 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     ).whenComplete(() {});
   }
 
+  downApkProgress(){
+
+  }
+
   /// 检查版本是否更新
   _checkUpdate() {
     AppInfo appInfo = this._appVersion.appInfo;
     if (appInfo != null) {
       PackageInfo.fromPlatform().then((packageInfo) {
-        if (int.parse(packageInfo.buildNumber) - appInfo.appVersionCode > 0) {
+        if (appInfo.appVersionCode - int.parse(packageInfo.buildNumber)  > 0) {
           /// 说明服务器有新版本
           /// 在android 只能强制更新apk或者跳转到谷歌stop去下载。
           /// 在ios，只能提醒去 App Store 官网下载。
           // if(Platform.isIOS){
           //   //ios相关代码
-          // }else if(Platform.isAndroid){
-          //   //android相关代码
-          //
-          // }
-          _showUpdateDialog();
+          // }else
+          if(Platform.isAndroid){
+            //android相关代码
+            _showUpdateDialog();
+          }
         }
       });
     } else {
@@ -80,7 +86,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
         builder: (BuildContext dialogContext) {
           return NoticeDialog(
             noticeInfo: this._appVersion.appNoticeInfo,
-            onTap: _checkUpdate(),
+            onTap: ()=>_checkUpdate,
           );
         },
       ),
@@ -98,7 +104,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
         builder: (BuildContext dialogContext) {
           return UpdateDialog(
             appInfo: this._appVersion.appInfo,
-            onTap: _checkUpdate(),
+            onTap: ()=>_checkUpdate,
           );
         },
       ),

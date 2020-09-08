@@ -7,7 +7,7 @@ class DownProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<DownCubit>(
-      create: (_) => DownCubit(),
+      create: (context) => DownCubit(BlocProvider.of<TransitionsCubit>(context)),
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minWidth: double.infinity,
@@ -15,9 +15,10 @@ class DownProgress extends StatelessWidget {
           maxWidth: double.infinity,
           maxHeight: double.infinity,
         ),
-        child: Stack(
-          children: [
-            ClipRRect(
+        child: BlocBuilder<DownCubit, DownState>(
+          builder: (_, state) => Stack(
+            children: [
+              ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: Container(
                   constraints: BoxConstraints.tightFor(
@@ -34,14 +35,16 @@ class DownProgress extends StatelessWidget {
                     backgroundColor: Colors.transparent,
                     valueColor:
                         AlwaysStoppedAnimation(AppColors.appTheme4280BD),
-                    value: .3,
+                    value: state.getScale,
                   ),
-                )),
-            Center(
-                child: BlocBuilder<DownCubit, DownState>(
-              builder: (_, state) => const Text("33.08/33.08(MB)   100%"),
-            ))
-          ],
+                ),
+              ),
+              Center(
+                child: Text(
+                    "${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%"),
+              )
+            ],
+          ),
         ),
       ),
     );

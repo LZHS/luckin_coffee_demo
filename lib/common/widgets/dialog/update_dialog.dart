@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-import 'package:rxdart/rxdart.dart';
-
 // ignore: must_be_immutable
 class UpdateDialog extends Dialog {
   final AppInfo appInfo;
@@ -64,7 +62,7 @@ class UpdateDialog extends Dialog {
             padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
             alignment: Alignment.center,
             child: AppButton(
-              text: "知道了",
+              text: "更新",
               width: 130,
               onTap: () {
                 onTap?.call();

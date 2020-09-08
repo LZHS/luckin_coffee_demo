@@ -1,7 +1,7 @@
 name: luckin_coffee_demo
 description: A new Flutter project.
 
-version: 1.0.1+2
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

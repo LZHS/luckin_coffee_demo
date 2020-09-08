@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-import 'package:rxdart/rxdart.dart';
 
 // ignore: must_be_immutable
 class NoticeDialog extends Dialog {
@@ -76,8 +75,8 @@ class NoticeDialog extends Dialog {
               text: "知道了",
               width: 130,
               onTap: () {
-                onTap?.call();
                 Navigator.of(context).pop();
+                onTap?.call();
               },
             )),
       );
