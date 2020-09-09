@@ -9,10 +9,17 @@ class DownCubit extends Cubit<DownState> {
   TransitionsCubit transitionsCubit;
   StreamSubscription subscription;
 
-  DownCubit(this.transitionsCubit) : super(DownState()){
-    subscription=transitionsCubit.listen((state) {
-
-    });
+  DownCubit(this.transitionsCubit) : super(DownState()) {
+    subscription = transitionsCubit.listen(
+      (state) {
+        if (state.type == TransitionsType.DOWN_PROGRESS) {
+          emit(DownState.build(
+            received: state.receiveProgress?.count,
+            total: state.receiveProgress?.total,
+          ));
+        }
+      },
+    );
   }
 
   @override

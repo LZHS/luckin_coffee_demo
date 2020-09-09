@@ -65,10 +65,7 @@ class NoticeDialog extends Dialog {
     );
   }
 
-  _buildActionWidget() => Visibility(
-//    visible: noticeInfo.enabledStatus,
-    visible: true,
-        child: Container(
+  _buildActionWidget() => Container(
             padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
             alignment: Alignment.center,
             child: AppButton(
@@ -78,7 +75,7 @@ class NoticeDialog extends Dialog {
                 Navigator.of(context).pop();
                 onTap?.call();
               },
-            )),
+            )
       );
 
   _buildContentWidget() => ConstrainedBox(

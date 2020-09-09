@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-
 // ignore: must_be_immutable
 class UpdateDialog extends Dialog {
   final AppInfo appInfo;
-  final VoidCallback onTap;
+  final VoidCallback updateApp, next;
 
-  UpdateDialog({@required this.appInfo, this.onTap}) : assert(appInfo != null);
+  UpdateDialog({@required this.appInfo, this.updateApp, this.next})
+      : assert(appInfo != null);
   BuildContext context;
 
   @override
@@ -56,18 +56,45 @@ class UpdateDialog extends Dialog {
     );
   }
 
-  _buildActionWidget() => Visibility(
-//    visible: noticeInfo.enabledStatus,
-        visible: true,
-        child: Container(
-            padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-            alignment: Alignment.center,
-            child: AppButton(
-              text: "更新",
-              width: 130,
-              onTap: () {},
-            )),
-      );
+  _buildActionWidget() => Container(
+      padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 1,
+            child: UnconstrainedBox(
+              alignment: Alignment.center,
+              child: AppButton(
+                width: 120.0,
+                text: "更新",
+                onTap: () {
+                  updateApp?.call();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ),
+          Visibility(
+            visible: !appInfo.forceUpdate,
+            child: Expanded(
+              flex: 1,
+              child: UnconstrainedBox(
+                alignment: Alignment.center,
+                child: AppButton(
+                  width: 120.0,
+                  text: "更新",
+                  onTap: () {
+                    updateApp?.call();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+            ),
+          )
+        ],
+      ));
 
   _buildContentWidget() => ConstrainedBox(
         constraints: BoxConstraints(
@@ -87,7 +114,8 @@ class UpdateDialog extends Dialog {
         ),
       );
 
-  _buildTitleWidget() => Container(
+  _buildTitleWidget() =>
+      Container(
         padding: const EdgeInsets.only(top: 18.0, bottom: 14.0),
         child: Text(
           "${appInfo.appVersion} 更新",
@@ -105,8 +133,9 @@ class UpdateDialog extends Dialog {
     return result;
   }
 
-  _buildProgressWidget() => Container(
-        margin: const EdgeInsets.only(left: 15.0, right: 15.0),
+  _buildProgressWidget() =>
+      Container(
+        margin: const EdgeInsets.only(left: 20.0, right: 20.0),
         alignment: Alignment.center,
         child: DownProgress(),
       );

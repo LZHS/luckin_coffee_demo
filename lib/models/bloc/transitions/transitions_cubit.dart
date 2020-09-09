@@ -49,7 +49,9 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     ).whenComplete(() {});
   }
 
-  downApkProgress() {}
+  downApkProgress(){
+
+  }
 
   /// 检查版本是否更新
   checkUpdate() {
@@ -94,22 +96,21 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     );
   }
 
+
   /// 显示 跟新 对话框
   _showUpdateDialog() {
     Future.delayed(
       Duration.zero,
-      () => showDialog<void>(
+          () => showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext dialogContext) {
-          return BlocProvider.value(
+        builder: (BuildContext dialogContext) => BlocProvider.value(
             value: transitionsCubit,
             child: UpdateDialog(
               appInfo: this._appVersion.appInfo,
-              onTap: () {},
-            ),
-          );
-        },
+              updateApp: () {},
+              next: () {},
+            ),)
       ),
     );
   }

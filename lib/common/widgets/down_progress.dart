@@ -17,6 +17,7 @@ class DownProgress extends StatelessWidget {
         ),
         child: BlocBuilder<DownCubit, DownState>(
           builder: (_, state) => Stack(
+            alignment: Alignment.center,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
@@ -39,10 +40,8 @@ class DownProgress extends StatelessWidget {
                   ),
                 ),
               ),
-              Center(
-                child: Text(
-                    "${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%"),
-              )
+              Text(
+                  "${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%"),
             ],
           ),
         ),
