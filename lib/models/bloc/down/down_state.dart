@@ -13,8 +13,8 @@ class DownState {
 
   get getScale {
     if (total <= 0) return 0.0;
-    return double.parse((received * 1.0 / total).toStringAsFixed(4));
+    return (received * 1.0 / total);
   }
 
-  get getScaleValue => getScale * 100.0;
+  get getScaleValue => (getScale * 100.0).toStringAsFixed(2);
 }

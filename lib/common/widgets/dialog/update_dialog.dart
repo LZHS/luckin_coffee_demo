@@ -71,7 +71,6 @@ class UpdateDialog extends Dialog {
                 text: "更新",
                 onTap: () {
                   updateApp?.call();
-                  Navigator.of(context).pop();
                 },
               ),
             ),
@@ -84,9 +83,9 @@ class UpdateDialog extends Dialog {
                 alignment: Alignment.center,
                 child: AppButton(
                   width: 120.0,
-                  text: "更新",
+                  text: "跳过",
                   onTap: () {
-                    updateApp?.call();
+                    next?.call();
                     Navigator.of(context).pop();
                   },
                 ),

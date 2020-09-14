@@ -8,6 +8,7 @@ import 'package:luckin_coffee_demo/common/widgets/dialog/update_dialog.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 import 'package:package_info/package_info.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'transitions_state.dart';
 
@@ -18,7 +19,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
   TransitionsCubit transitionsCubit;
 
   TransitionsCubit(this.context) : super(TransitionsState()) {
-    this.transitionsCubit=this;
+    this.transitionsCubit = this;
     requestAppInfo();
   }
 
@@ -49,9 +50,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
     ).whenComplete(() {});
   }
 
-  downApkProgress(){
-
-  }
+  downApkProgress() {}
 
   /// 检查版本是否更新
   checkUpdate() {
@@ -70,6 +69,8 @@ class TransitionsCubit extends Cubit<TransitionsState> {
             //android相关代码
             _showUpdateDialog();
           }
+        } else {
+          goHome();
         }
       });
     } else {
@@ -86,32 +87,47 @@ class TransitionsCubit extends Cubit<TransitionsState> {
       () => showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext dialogContext) {
-          return NoticeDialog(
-            noticeInfo: this._appVersion.appNoticeInfo,
-            onTap: checkUpdate,
-          );
-        },
+        builder: (BuildContext dialogContext) => NoticeDialog(
+          noticeInfo: this._appVersion.appNoticeInfo,
+          onTap: checkUpdate,
+        ),
       ),
     );
   }
-
 
   /// 显示 跟新 对话框
   _showUpdateDialog() {
     Future.delayed(
       Duration.zero,
-          () => showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext dialogContext) => BlocProvider.value(
-            value: transitionsCubit,
-            child: UpdateDialog(
-              appInfo: this._appVersion.appInfo,
-              updateApp: () {},
-              next: () {},
-            ),)
-      ),
+      () => showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext dialogContext) => BlocProvider.value(
+                value: transitionsCubit,
+                child: UpdateDialog(
+                    appInfo: this._appVersion.appInfo,
+                    updateApp: () =>
+                        _startDown(this._appVersion.appInfo.appUrl),
+                    next: () => goHome),
+              )),
     );
+  }
+
+  goHome() => Routes.goMainPage(context);
+
+  _startDown(urlPath) async {
+    await getExternalStorageDirectory().then((value) {
+      log.d(" 文件存储路径： ${value.path}");
+      _service.download(
+        urlPath,
+        value.path + "/${this._appVersion.appInfo.appVersion}.apk",
+        (count, total) {
+          TransitionsState _state=TransitionsState();
+          _state.type = TransitionsType.DOWN_PROGRESS;
+          _state.receiveProgress = ReceiveProgress(count, total);
+          emit(_state);
+        },
+      );
+    });
   }
 }

@@ -13,10 +13,12 @@ class DownCubit extends Cubit<DownState> {
     subscription = transitionsCubit.listen(
       (state) {
         if (state.type == TransitionsType.DOWN_PROGRESS) {
-          emit(DownState.build(
-            received: state.receiveProgress?.count,
-            total: state.receiveProgress?.total,
-          ));
+          emit(
+            DownState.build(
+              received: state.receiveProgress?.count,
+              total: state.receiveProgress?.total,
+            ),
+          );
         }
       },
     );

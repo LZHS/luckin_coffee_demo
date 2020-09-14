@@ -3,13 +3,20 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 class TimerCubit extends Cubit<int> {
   static const _TICKS = 45;
   StreamSubscription<int> _tickerSubscription;
   final BuildContext context;
 
+  TransitionsCubit transitionsCubit;
+
+  StreamSubscription subscription;
+
   TimerCubit(this.context) : super(0) {
+    transitionsCubit=context.bloc<TransitionsCubit>();
+    subscription=transitionsCubit.listen((_) { });
     timerStarted();
   }
 
@@ -27,12 +34,13 @@ class TimerCubit extends Cubit<int> {
   timerComplete() {
     _tickerSubscription?.cancel();
     emit(0);
-    Routes.goMainPage(context);
+    transitionsCubit.goHome();
   }
 
   @override
   Future<void> close() {
     _tickerSubscription?.cancel();
+    subscription?.cancel();
     return super.close();
   }
 

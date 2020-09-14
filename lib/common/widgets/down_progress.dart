@@ -16,35 +16,38 @@ class DownProgress extends StatelessWidget {
           maxHeight: double.infinity,
         ),
         child: BlocBuilder<DownCubit, DownState>(
-          builder: (_, state) => Stack(
-            alignment: Alignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5.0),
-                child: Container(
-                  constraints: BoxConstraints.tightFor(
-                    width: double.infinity,
-                    height: 30.0,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.appTheme4280BD,
+          builder: (_, state) {
+            log.d("${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%");
+          return  Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child: Container(
+                    constraints: BoxConstraints.tightFor(
+                      width: double.infinity,
+                      height: 30.0,
                     ),
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.transparent,
-                    valueColor:
-                        AlwaysStoppedAnimation(AppColors.appTheme4280BD),
-                    value: state.getScale,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppColors.appTheme4280BD,
+                      ),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: LinearProgressIndicator(
+                      backgroundColor: Colors.transparent,
+                      valueColor:
+                      AlwaysStoppedAnimation(AppColors.appTheme4280BD),
+                      value: state.getScale,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                  "${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%"),
-            ],
-          ),
-        ),
+                Text(
+                    "${state.getReceived}/${state.getTotal}(MB)   ${state.getScaleValue}%"),
+              ],
+            );
+
+          }),
       ),
     );
   }
