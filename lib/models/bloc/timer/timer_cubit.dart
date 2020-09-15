@@ -6,7 +6,6 @@ import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 class TimerCubit extends Cubit<int> {
-  static const _TICKS = 45;
   StreamSubscription<int> _tickerSubscription;
   final BuildContext context;
 
@@ -22,7 +21,7 @@ class TimerCubit extends Cubit<int> {
 
   timerStarted() async {
     _tickerSubscription?.cancel();
-    _tickerSubscription = _tick(ticks: _TICKS).listen((duration) {
+    _tickerSubscription = _tick(ticks: Global.TIMER_TICKS).listen((duration) {
       // 正在计时
       emit(duration);
     }, onDone: () {
