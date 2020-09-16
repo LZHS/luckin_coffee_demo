@@ -31,7 +31,7 @@ class MainPage extends StatelessWidget {
               currentIndex: _getCurrentIndex(state),
               type: BottomNavigationBarType.fixed,
               onTap: (index) =>
-                  context.bloc<MainCubit>().emit(MainCurrentState(index)),
+                  context.bloc<MainCubit>().changeCurrentPage(index),
               items: _buildBottomNavItems(),
             ),
             body: IndexedStack(
@@ -45,64 +45,101 @@ class MainPage extends StatelessWidget {
   }
 
   _buildBottomNavItems() => [
-        BottomNavigationBarItem(
-          icon: _buildBarIcon(
-            "lib/assets/images/navigatioinBar/icon_home_page.png",
-          ),
-          activeIcon: _buildBarIcon(
-            "lib/assets/images/navigatioinBar/icon_home_page_down.png",
-          ),
-          title: Text("首页"),
-        ),
-    BottomNavigationBarItem(
-      icon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_men.png",
-      ),
-      activeIcon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_men_down.png",
-      ),
-      title: Text("菜单"),
-    ),
-    BottomNavigationBarItem(
-      icon: Image.asset(
-        "lib/assets/images/navigatioinBar/icon_order.png",
-        width: 22.0,
-        height: 27.0,
-        fit: BoxFit.scaleDown,
-      ),
-      activeIcon: Image.asset(
-        "lib/assets/images/navigatioinBar/icon_order_down.png", width: 22.0,
-        height: 27.0,
-        fit: BoxFit.scaleDown,
-      ),
-      title: Text("订单"),
-    ),
-    BottomNavigationBarItem(
-      icon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_shopping.png",
-      ),
-      activeIcon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_shopping_down.png",
-      ),
-      title: Text("购物车"),
-    ),
-    BottomNavigationBarItem(
-      icon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_persion_center.png",
-      ),
-      activeIcon: _buildBarIcon(
-        "lib/assets/images/navigatioinBar/icon_persion_center_down.png",
-      ),
-      title: Text("我的"),
-    ),
-  ];
 
-  _buildBarIcon(name) =>
-      Image.asset(
-        name,
-        width: 22.0,
-        height: 27.0,
-        fit: BoxFit.scaleDown,
+    /// 首页
+        BottomNavigationBarItem(
+          icon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_home_page.png",
+            width: 22.0,
+            height: 27.0,
+          ),
+          activeIcon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_home_page_down.png",
+            width: 22.0,
+            height: 27.0,
+          ),
+          title: _buildText("首页"),
+        ),
+
+        /// 菜单
+        BottomNavigationBarItem(
+          icon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_men.png",
+            width: 20.0,
+            height: 26.0,
+          ),
+          activeIcon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_men_down.png",
+            width: 20.0,
+            height: 26.0,
+          ),
+          title: _buildText("菜单"),
+        ),
+
+        /// 订单
+        BottomNavigationBarItem(
+          icon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_order.png",
+            width: 20.0,
+            height: 25.0,
+          ),
+          activeIcon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_order_down.png",
+            width: 20.0,
+            height: 25.0,
+          ),
+          title: _buildText("订单"),
+        ),
+
+        /// 购物车
+        BottomNavigationBarItem(
+          icon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_shopping.png",
+            width: 24.0,
+            height: 24.0,
+          ),
+          activeIcon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_shopping_down.png",
+            width: 24.0,
+            height: 24.0,
+          ),
+          title: _buildText("购物车"),
+        ),
+
+        /// 我的
+        BottomNavigationBarItem(
+          icon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_persion_center.png",
+            width: 20.0,
+            height: 23.0,
+          ),
+          activeIcon: _buildImage(
+            "lib/assets/images/navigatioinBar/icon_persion_center_down.png",
+            width: 20.0,
+            height: 23.0,
+          ),
+          title: _buildText("我的"),
+        ),
+      ];
+
+  _buildImage(path, {width: 24.0, height: 27.0}) => Container(
+        width: 25.0,
+        height: 30.0,
+        alignment: Alignment.center,
+        child: Image.asset(
+          path,
+          width: width,
+          height: height,
+          fit: BoxFit.scaleDown,
+        ),
+      );
+
+  _buildText(text) => Text(
+        text,
+        style: TextStyle(
+          fontSize: 10.0,
+          color: AppColors.appMunTextColor,
+        ),
       );
 
   int _getCurrentIndex(state) {
