@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
@@ -13,12 +14,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc(this.context)
       : assert(context != null),
-        super(HomeInitial());
+        super(HomeInitial()){
+    add(RequestData());
+  }
 
   @override
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is RequestData)
+      yield _requestHomeData();
   }
+
+   _requestHomeData() async{
+     LoadingDialog.show();
+
+   }
 }

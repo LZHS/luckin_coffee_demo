@@ -20,6 +20,7 @@ class _AppComponentState extends State<AppComponent> {
 
   @override
   Widget build(BuildContext context) {
+    Application.context=context;
     return MultiBlocProvider(
       providers: [
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),

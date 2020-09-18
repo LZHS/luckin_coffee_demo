@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          _buildBannerWidget(),
-        ],
+      child: BlocProvider<HomeBloc>(
+        create: (context) => HomeBloc(context),
+        child: Column(
+          children: [
+            _buildBannerWidget(),
+          ],
+        ),
       ),
     );
   }
 
+  /// 创建 Banner 块的
   _buildBannerWidget() => Stack(
         children: [
           Container(
             width: double.infinity,
             height: 203.0,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.yellow)
+            child: BlocBuilder<HomeBloc, HomeState>(
+              buildWhen: (_, state) =>
+                  state is HomeInitial || state is RefreshBanner,
+              builder: (_, state) {
+                if (state is HomeInitial)
+                  return Image.asset(
+                    "lib/assets/images/banners/icon_banner01.jpg",
+                    width: double.infinity,
+                    height: 203.0,
+                    fit: BoxFit.scaleDown,
+                  );
+                else if (state is RefreshBanner) return Container();
+                return Container();
+              },
             ),
-            child: Text("123123"),
           ),
           _buildScanWidget()
         ],

@@ -1,9 +1,12 @@
 import 'package:fluro/fluro.dart';
+import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/models/models.dart';
 
 class Application {
   static Router router;
+
+  static BuildContext context;
 
   /// 一些 初始化
   static void init() {
