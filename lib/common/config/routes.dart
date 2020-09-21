@@ -18,6 +18,9 @@ class Routes {
   /// 菜单页面
   static String menu = "/menu/menu_page";
 
+  /// 扫描页面
+  static String scan = "scan/scan_page";
+
   static void configureRoutes(fluro_router.Router router) {
     router.notFoundHandler = fluro_router.Handler(
       handlerFunc: (_, parameters) => ErrorPage(),
@@ -26,13 +29,22 @@ class Routes {
       ..define(root, handler: rootHandler)
       ..define(main, handler: mainHandler)
       ..define(home, handler: homeHandler)
-      ..define(menu, handler: menuHandler);
+      ..define(menu, handler: menuHandler)
+      ..define(scan, handler: scanHandler);
   }
 
   static void goMainPage(BuildContext context) {
     Application.router.navigateTo(
       context,
       Routes.main,
+      clearStack: true,
+      transition: fluro_router.TransitionType.fadeIn,
+    );
+  }
+  static void goScanPage(BuildContext context) {
+    Application.router.navigateTo(
+      context,
+      Routes.scan,
       clearStack: true,
       transition: fluro_router.TransitionType.fadeIn,
     );

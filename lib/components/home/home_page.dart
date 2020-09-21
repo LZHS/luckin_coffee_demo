@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
         create: (context) => HomeBloc(context),
         child: Column(
           children: [
-            _buildBannerWidget(),
+            _buildBannerWidget(context),
           ],
         ),
       ),
@@ -19,47 +19,51 @@ class HomePage extends StatelessWidget {
   }
 
   /// 创建 Banner 块的
-  _buildBannerWidget() => Stack(
+  _buildBannerWidget(context) =>
+      Stack(
         children: [
           Container(
             width: double.infinity,
             height: 203.0,
             child: BlocBuilder<HomeBloc, HomeState>(
               buildWhen: (_, state) =>
-                  state is HomeInitial || state is RefreshBanner,
+              state is HomeInitial || state is RefreshBanner,
               builder: (_, state) {
                 if (state is HomeInitial)
                   return Image.asset(
                     "lib/assets/images/banners/icon_banner01.jpg",
                     width: double.infinity,
                     height: 203.0,
-                    fit: BoxFit.scaleDown,
+                    fit: BoxFit.fill,
                   );
                 else if (state is RefreshBanner) return Container();
                 return Container();
               },
             ),
           ),
-          _buildScanWidget()
+          _buildScanWidget(context)
         ],
       );
 
-  _buildScanWidget() => Positioned(
+  _buildScanWidget(context) =>
+      Positioned(
         top: 30.0,
         right: 10.0,
         child: GestureDetector(
-          onTap: () {
-            log.d("跳转只扫描页面，");
-          },
-          child: Container(
-            width: 40.0,
-            height: 40.0,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: AppColors.appScanBackgroundColor,
-                borderRadius: BorderRadius.circular(20.0)),
-            child: Image.asset(
-              "lib/assets/images/home/icon_scanning.png",
+            onTap: ()  {
+            // Routes.goScanPage(context)
+            LoadingDialog.show(context);
+
+      },
+        child: Container(
+          width: 40.0,
+          height: 40.0,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: AppColors.appScanBackgroundColor,
+              borderRadius: BorderRadius.circular(20.0)),
+          child: Image.asset(
+            "lib/assets/images/home/icon_scanning.png",
               width: 24.0,
               height: 20.0,
             ),

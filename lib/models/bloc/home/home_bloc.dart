@@ -6,7 +6,6 @@ import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:meta/meta.dart';
 
 part 'home_event.dart';
-
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -14,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc(this.context)
       : assert(context != null),
-        super(HomeInitial()){
+        super(HomeInitial()) {
     add(RequestData());
   }
 
@@ -22,12 +21,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    if (event is RequestData)
-      yield _requestHomeData();
+    if (event is RequestData) yield null;
   }
 
-   _requestHomeData() async{
-     LoadingDialog.show();
+  _requestHomeData() async {
+  }
 
-   }
 }

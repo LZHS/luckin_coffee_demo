@@ -4,4 +4,10 @@ export 'app/app_component.dart';
 
 
 export 'transitions/transitions_page.dart';
+
+export 'main/main_page.dart';
 export 'home/home_page.dart';
+export 'menu/menu_page.dart';
+export 'order/order_page.dart';
+export 'shopping/shopping_page.dart';
+export 'scan/scan_page.dart';
