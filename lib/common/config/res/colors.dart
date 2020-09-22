@@ -14,8 +14,10 @@ class AppColors  {
   static const appTextColor = Color(0xff505050);
 
   static const appTheme88afd5 = Color(0xff88afd5);
+
   static const appTheme4280BD = Color(0xff4280BD);
+
   static const appTheme1e88afd5 = Color(0x1e88afd5);
 
-  static const appScanBackgroundColor=Color(0x1e000000);
+  static const appScanBackgroundColor = Color(0x1e000000);
 }

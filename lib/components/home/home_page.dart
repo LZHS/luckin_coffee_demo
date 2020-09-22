@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
@@ -50,20 +52,31 @@ class HomePage extends StatelessWidget {
         top: 30.0,
         right: 10.0,
         child: GestureDetector(
-            onTap: ()  {
+          onTap: () {
             // Routes.goScanPage(context)
-            LoadingDialog.show(context);
+            // LoadingDialog.show(context);
+            //
+            // Future.delayed(
+            //   Duration(seconds: 20),
+            // ).whenComplete(() {
+            //   LoadingDialog.cancel(context);
+            // });
 
-      },
-        child: Container(
-          width: 40.0,
-          height: 40.0,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: AppColors.appScanBackgroundColor,
-              borderRadius: BorderRadius.circular(20.0)),
-          child: Image.asset(
-            "lib/assets/images/home/icon_scanning.png",
+            InternetAddress.lookup("baidu.com").then((value) {
+              log.d("$value");
+            }).catchError((Object  exception) {
+              log.d("message - $exception");
+            });
+          },
+          child: Container(
+            width: 40.0,
+            height: 40.0,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                color: AppColors.appScanBackgroundColor,
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Image.asset(
+              "lib/assets/images/home/icon_scanning.png",
               width: 24.0,
               height: 20.0,
             ),

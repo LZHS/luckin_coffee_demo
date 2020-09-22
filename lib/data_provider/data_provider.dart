@@ -5,6 +5,9 @@ export 'manager/http/DioExt.dart';
 export 'service/app_service.dart';
 export 'service/imp/app_service_imp.dart';
 
+export 'service/home_service.dart';
+export 'service/imp/home_service_imp.dart';
+
 //region beans
 export 'manager/beans/base/base_entity.dart';
 export 'manager/beans/app_info.dart';

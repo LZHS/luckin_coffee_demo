@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/beans/app_version.dart';
 
