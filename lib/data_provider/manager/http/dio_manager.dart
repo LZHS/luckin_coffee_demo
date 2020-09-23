@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/exceptions/exception.dart';
 
+/// DIO 网络请求 简单封装
 class DioManager {
   static final DioManager _instance = DioManager._internal();
   Dio _dio;

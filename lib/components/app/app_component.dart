@@ -10,7 +10,7 @@ class AppComponent extends StatefulWidget {
   _AppComponentState createState() => _AppComponentState();
 }
 
-class _AppComponentState extends State<AppComponent> {
+class _AppComponentState extends State<AppComponent> with WidgetsBindingObserver {
   _AppComponentState() {
     final router = fluro_router.Router();
     Routes.configureRoutes(router);
@@ -18,6 +18,11 @@ class _AppComponentState extends State<AppComponent> {
     Application.init();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
   @override
   Widget build(BuildContext context) {
     Application.context=context;
@@ -35,5 +40,11 @@ class _AppComponentState extends State<AppComponent> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
   }
 }

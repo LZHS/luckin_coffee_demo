@@ -8,7 +8,11 @@ class MenuPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       alignment: Alignment.center,
-      child: Text("彩蛋页面"),
+      child: Column(
+        children: [
+
+        ],
+      ),
     );
   }
 }

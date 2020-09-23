@@ -1,5 +1,7 @@
 export 'manager/http/dio_manager.dart';
 
+export 'manager/local/database_manager.dart';
+
 export 'manager/http/DioExt.dart';
 // service
 export 'service/app_service.dart';
