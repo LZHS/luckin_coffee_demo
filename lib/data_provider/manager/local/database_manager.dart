@@ -10,26 +10,16 @@ class DatabaseManager {
 
   Database _database;
 
-  /// true when onConfigure is called.
-  bool onConfigureCalled;
-
-  /// true when onOpen is called.
-  bool onOpenCalled;
-
-  /// true when onCreate is called.
-  bool onCreateCalled;
-
-  /// true when onDowngrade is called.
-  bool onDowngradeCalled;
-
-  /// true when onUpgrade is called.
-  bool onUpgradeCalled;
+  bool onConfigureCalled,
+      onOpenCalled,
+      onCreateCalled,
+      onDowngradeCalled,
+      onUpgradeCalled;
 
   DatabaseManager._internal() {
     if (_database == null)
       getDatabasesPath().then((path) {
         this.db_path = join(path, DATA_BASE_NAME);
-        log.d("数据库路径:${this.db_path}");
         return _open(this.db_path);
       }).then((database) => this._database = database);
   }
@@ -49,18 +39,23 @@ class DatabaseManager {
         options: OpenDatabaseOptions(
             version: DATA_BASE_CURRENT_VERSION,
             onCreate: (Database db, int version) {
+              _onCreateMethod(db, version);
               onCreateCalled = true;
             },
             onConfigure: (Database db) {
+              _onConfigureMethod(db);
               onConfigureCalled = true;
             },
             onDowngrade: (Database db, int oldVersion, int newVersion) {
+              _onDowngradeMethod(db, oldVersion, newVersion);
               onDowngradeCalled = true;
             },
             onUpgrade: (Database db, int oldVersion, int newVersion) {
+              _onUpgradeMethod(db, oldVersion, newVersion);
               onUpgradeCalled = true;
             },
             onOpen: (Database db) {
+              _onOpenMethod(db);
               onOpenCalled = true;
             }));
   }
@@ -78,5 +73,26 @@ class DatabaseManager {
       await db?.close();
     }
     return isDatabase;
+  }
+
+  _onCreateMethod(Database db, int version) {
+    log.d("onCreate");
+    showToast("msg");
+  }
+
+  _onConfigureMethod(Database db) {
+    log.d("");
+  }
+
+  _onDowngradeMethod(Database db, int oldVersion, int newVersion) {
+    log.d("");
+  }
+
+  _onUpgradeMethod(Database db, int oldVersion, int newVersion) {
+    log.d("");
+  }
+
+  _onOpenMethod(Database db) {
+    log.d("");
   }
 }

@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             _buildBannerWidget(context),
+            _buildMenusWidget(),
           ],
         ),
       ),
@@ -83,4 +84,83 @@ class HomePage extends StatelessWidget {
           ),
         ),
       );
+
+  _buildMenusWidget() => Column(
+        children: [
+          _buildMenusItemWidget("现在下单", "ORDER NOW",
+              "lib/assets/images/home/icon_coffee_cup.png", coffeeCup()),
+          DividerWidget(left: 20.0, right: 20.0),
+          _buildMenusItemWidget("咖啡钱包", "COFFRR WALLET",
+              "lib/assets/images/home/icon_coffee_wallet.png", coffeeWallet()),
+          DividerWidget(left: 20.0, right: 20.0),
+          _buildMenusItemWidget("送Ta咖啡", "SEND COFFEE",
+              "lib/assets/images/home/icon_coffee_gift.png", coffeeGift()),
+          DividerWidget(left: 20.0, right: 20.0),
+          _buildMenusItemWidget(
+              "企业账户",
+              "SENTERPRISE ACCOUNT",
+              "lib/assets/images/home/icon_coffee_account.png",
+              coffeeAccount()),
+        ],
+      );
+
+  _buildMenusItemWidget(
+          String title, String subTitle, String iconPath, VoidCallback onTap) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Container(
+          width: double.infinity,
+          height: 70.0,
+          margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                        color: AppColors.appTitleColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(
+                      subTitle,
+                      style: TextStyle(
+                          color: AppColors.appSubTitleColor, fontSize: 11),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                width: 40.0,
+                height: 40.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  border: Border.all(color: AppColors.appHomeMenusBorderColor),
+                ),
+                child: Image.asset(
+                  iconPath,
+                  width: 24.0,
+                  height: 24.0,
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+  coffeeCup() {}
+
+  coffeeWallet() {}
+
+  coffeeGift() {}
+
+  coffeeAccount() {}
 }

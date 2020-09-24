@@ -21,5 +21,6 @@ class Global {
   // ignore: non_constant_identifier_names
   static final APP_ID = "1597818873300545668";
 
-  static final TIMER_TICKS=15;
+  // ignore: non_constant_identifier_names
+  static final TIMER_TICKS=10;
 }
