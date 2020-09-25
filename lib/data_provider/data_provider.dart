@@ -16,4 +16,5 @@ export 'manager/beans/app_info.dart';
 export 'manager/beans/app_notice_info.dart';
 export 'manager/beans/app_version.dart';
 export 'manager/beans/entity_factory.dart';
+export 'manager/beans/locating_information.dart';
 //endregion

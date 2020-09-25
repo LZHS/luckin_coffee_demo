@@ -24,4 +24,6 @@ class AppColors  {
   static const appScanBackgroundColor = Color(0x1e000000);
 
   static const appHomeMenusBorderColor = Color(0xff63473a);
+
+  static const appDividerColor = Color(0xfff2f2f2);
 }

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:luckin_coffee_demo/common/common.dart';
+
 ///`
 /// 横线 分割线 控件
 ///`
 class DividerWidget extends StatelessWidget {
   final double height, left, right;
-  final int color;
+  final Color color;
+
   DividerWidget({
     this.height = 1.0,
     this.left = 0.0,
     this.right = 0.0,
-    this.color = 0xfff2f2f2,
+    this.color = AppColors.appDividerColor,
   });
 
   @override
@@ -22,7 +25,7 @@ class DividerWidget extends StatelessWidget {
         right: this.right,
       ),
       decoration: BoxDecoration(
-        color: Color(this.color),
+        color: color,
       ),
       alignment: Alignment.center,
     );
