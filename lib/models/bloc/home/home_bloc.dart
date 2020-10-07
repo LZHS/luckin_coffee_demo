@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -22,23 +23,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    if (event is RequestData)
-      yield null;
-     if (event is RefreshMenu)
-      yield RefreshMenuBottom();
-     if (event is RefreshLocating)
-      yield LocatingRefresh(
-          LocatingInformation(storeName: "青年汇店", distance: "1.3公里", isTakeTheir: false));
+    if (event is RequestData) yield null;
+    if (event is RefreshMenu) yield RefreshMenuBottom();
+    if (event is RefreshLocating)
+      yield LocatingRefresh(LocatingInformation(
+          storeName: "青年汇店", distance: "1.3公里", isTakeTheir: false));
   }
 
   _requestHomeData() async {}
 
   clickSan() {
     log.d("clickSan = HomeBloc");
-    Future.delayed(Duration(seconds: 15), () => add(RefreshMenu()));
+    LoadingDialog.show(context);
 
-    Future.delayed(Duration(seconds: 5), () => add(RefreshLocating()));
+    Future.delayed(Duration(seconds: 15), () => LoadingDialog.cancel(context));
 
+    // Future.delayed(Duration(seconds: 5), () => add(RefreshLocating()));
   }
 
   menuItemClick(int type) {

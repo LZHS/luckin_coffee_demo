@@ -1,11 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:loading_indicator_view/loading_indicator_view.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 
 // ignore: must_be_immutable
 class LoadingDialog extends Dialog {
   static bool isDisable = false;
+  static StreamController<int> _streamController;
+  final String progressText = "加载中...";
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,7 @@ class LoadingDialog extends Dialog {
           child: SizedBox(
             width: _dialogWidth,
             height: _dialogWidth,
-            child:
-                _buildContentView(_dialogWidth /  2, _dialogWidth /  2),
+            child: _buildContentView(_dialogWidth / 2, _dialogWidth / 2),
           ),
         ),
       ),
@@ -27,11 +29,15 @@ class LoadingDialog extends Dialog {
   }
 
   _buildContentView(width, height) => Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: AppColors.appBackColor,
-          borderRadius: BorderRadius.circular(10.0)),
-      child: LoadingAnimationWidget(width, height));
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: AppColors.appBackColor,
+            borderRadius: BorderRadius.circular(10.0)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [_buildProgressWidget(width), _buildProgressText(height)],
+        ),
+      );
 
   /// 显示 跟新 对话框
   static void show(context) {
@@ -40,7 +46,9 @@ class LoadingDialog extends Dialog {
       () => showDialog<void>(
         context: context,
         barrierDismissible: false,
-        builder: (_) => LoadingDialog(),
+        builder: (_) {
+          return LoadingDialog();
+        },
       ),
     );
     isDisable = true;
@@ -49,80 +57,46 @@ class LoadingDialog extends Dialog {
   static void cancel(context) {
     Future.delayed(
       Duration.zero,
-          () => Navigator.of(context).pop(),
+          () {
+        if (_streamController.isClosed) _streamController.close();
+        _streamController = null;
+        Navigator.of(context).pop();
+      },
     );
     isDisable = false;
   }
-}
 
-/// 现在加载中动画的组件
-class LoadingAnimationWidget extends StatefulWidget {
-  final double width, height;
+  _buildProgressText(width) =>
+      Container(
+        margin: const EdgeInsets.only(left: 22, top: 10.0),
+        width: double.infinity,
+        child: StreamBuilder(
+          stream: _buildStream(),
+          initialData: 0,
+          builder: (_, snapshot) {
+            int endIndex = 3 + snapshot.data % 4;
+            return Text(progressText.substring(0, endIndex));
+          },
+        ),);
 
-  LoadingAnimationWidget(this.width, this.height, {Key key})
-      : super(key: key);
-
-  @override
-  _LoadingAnimationWidgetState createState() => _LoadingAnimationWidgetState();
-}
-
-class _LoadingAnimationWidgetState extends State<LoadingAnimationWidget>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
-  String textCon = "加载中...";
-  Timer _timer;
-final   Duration duration=Duration(milliseconds: 900);
-
-  @override
-  void initState() {
-    _controller = new AnimationController(
-        duration: duration, vsync: this);
-    CurvedAnimation curved = CurvedAnimation(
-        parent: _controller, curve: Curves.linear);
-    _animation = new Tween(begin: 0.0, end: 1.0).animate(curved);
-    //启动动画
-    _controller.repeat();
-    _timer = Timer.periodic(duration, (timer) {
-      setState(() {
-        if (timer.tick % 3 == 0)
-          textCon = "加载中.";
-        else if (timer.tick % 3 == 1)
-          textCon = "加载中..";
-        else if (timer.tick % 3 == 2) textCon = "加载中...";
-      });
-    });
-
-    super.initState();
+  Stream<int> _buildStream() {
+    _streamController = StreamController();
+    Stream<int>.periodic(Duration(seconds: 1), (data) => data)
+        .takeWhile((element) {
+      return (_streamController != null && !_streamController.isClosed);
+    }).listen((event) =>
+        _streamController.add(event));
+    return _streamController.stream;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        RotationTransition(
-          turns: _animation,
-          child: Image.asset(
-            "lib/assets/images/icon_loading.png",
-            width: this.widget.width,
-            height: this.widget.height,
-          ),
+  _buildProgressWidget(width) =>
+      SizedBox.fromSize(
+        child: BallSpinFadeLoaderIndicator(
+          radius: 40,
+          ballColor: AppColors.appTheme4280BD,
         ),
-        Padding(
-            padding: const EdgeInsets.only(top: 12.0), child: Text(textCon))
-      ],
-    )
-    ;
-  }
+        size: Size(width, width),
+      );
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    _timer.cancel();
-    super.dispose();
-  }
+
 }
-
-
-
