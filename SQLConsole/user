@@ -1,0 +1,10 @@
+create table `user`
+(
+    `user_id`     varchar(32) not null comment '用户ID',
+    `user_name`    varchar(32) not null comment  '用户名称',
+    `password`    varchar(32) not null comment '用户ID （Base64 加密 ，不能存储明文）',
+    `headImg`     varchar(32)  comment '用户头像',
+    `create_time` timestamp   not null default current_timestamp comment '创建时间',
+    `update_time` timestamp   not null default current_timestamp on update current_timestamp comment '修改时间',
+    primary key (`user_id`)
+);
