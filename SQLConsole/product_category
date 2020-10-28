@@ -8,8 +8,11 @@ create table `product_category`
     `update_time`   timestamp   not null     default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`category_id`),
     UNIQUE KEY `uqe_category_type` (`category_type`)
-);
+) comment  '类目';
+
 desc `product_category`;
+
+drop table  `product_category`;
 
 delete
 from `product_category`;

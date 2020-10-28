@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /luckin
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1050629507@QQ.com
+    url: jdbc:mysql://47.110.55.76:3306/LuckinCoffeeData?characterEncoding=utf-8&useSSL=false
+  jpa:
+    show-sql: true
+  logging:
+    level:
+      root: info
+    path: ./logs
+    config:
+      classpath: /logback-spring.xml
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+##  path: /var/log/tomcat/
+#  file: /var/log/tomcat/sell.log
+

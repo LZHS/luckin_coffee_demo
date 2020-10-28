@@ -7,4 +7,6 @@ create table `user`
     `create_time` timestamp   not null default current_timestamp comment '创建时间',
     `update_time` timestamp   not null default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`user_id`)
-);
+) comment  '用户基本信息';
+
+drop table `user`;

@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/web")
 public class IndexController {
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(Model model){
-        model.addAttribute("message","IndexController index");
-        return "index";
-    }
+
 
 }
