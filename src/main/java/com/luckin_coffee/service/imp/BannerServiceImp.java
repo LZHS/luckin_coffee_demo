@@ -4,8 +4,10 @@ import com.luckin_coffee.beans.banner.Banner;
 import com.luckin_coffee.beans.banner.BannerItem;
 import com.luckin_coffee.repository.BannerItemServiceRepository;
 import com.luckin_coffee.repository.BannerServiceRepository;
+import com.luckin_coffee.repository.specs.BannerSpec;
 import com.luckin_coffee.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,12 +47,12 @@ public class BannerServiceImp implements BannerService {
 
     @Override
     public BannerItem updateBannerItem(BannerItem bean) {
-        return null;
+        return bannerItemRepository.save(bean);
     }
 
     @Override
     public List<BannerItem> queryBannerItemList(List<Integer> bannerIds) {
-        return null;
+        return bannerItemRepository.findAll(BannerSpec.findByBannerIds(bannerIds));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class Banner implements Serializable {
      */
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     /**
      * Banner 名称， 通常作为标识
      */

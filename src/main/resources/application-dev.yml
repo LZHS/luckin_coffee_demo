@@ -26,9 +26,6 @@ spring:
     test-on-return: false
   jpa:
     show-sql: true
-  logging:
-    level:
-      root: info
 
 #logging:
 #  pattern:
