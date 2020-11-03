@@ -2,6 +2,7 @@ package com.luckin_coffee.beans.VO;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,7 +23,7 @@ public class BannerVO {
     private List<BannerItemVO> banners;
 
     @Data
-    public class BannerItemVO {
+    public static class BannerItemVO {
         /**
          * banner ID
          */

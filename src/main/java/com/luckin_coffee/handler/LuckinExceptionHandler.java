@@ -22,6 +22,7 @@ public class LuckinExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultVO handlerException(Exception e) {
+        log.error(e.toString());
         return ResultVOUtil.error(ResultEnum.FALL.getCode(), ResultEnum.FALL.getMessage());
     }
 }
