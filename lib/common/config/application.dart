@@ -1,10 +1,10 @@
-import 'package:fluro/fluro.dart';
+import 'package:fluro/fluro.dart' as fluro;
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/models/models.dart';
 
 class Application {
-  static Router router;
+  static fluro.Router router;
 
   static BuildContext context;
 
