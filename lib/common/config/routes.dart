@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart' as fluro_router;
+import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/components/error/error_page.dart';
@@ -21,8 +21,8 @@ class Routes {
   /// 扫描页面
   static String scan = "scan/scan_page";
 
-  static void configureRoutes(fluro_router.Router router) {
-    router.notFoundHandler = fluro_router.Handler(
+  static void configureRoutes(FluroRouter router) {
+    router.notFoundHandler = Handler(
       handlerFunc: (_, parameters) => ErrorPage(),
     );
     router
@@ -38,7 +38,7 @@ class Routes {
       context,
       Routes.main,
       clearStack: true,
-      transition: fluro_router.TransitionType.fadeIn,
+      transition: TransitionType.fadeIn,
     );
   }
   static void goScanPage(BuildContext context) {
@@ -46,7 +46,7 @@ class Routes {
       context,
       Routes.scan,
       clearStack: true,
-      transition: fluro_router.TransitionType.fadeIn,
+      transition: TransitionType.fadeIn,
     );
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:luckin_coffee_demo/common/common.dart';
-import 'package:luckin_coffee_demo/common/global.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 /// 应用的第一个页面 过渡页面

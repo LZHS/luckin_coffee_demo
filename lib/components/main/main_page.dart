@@ -27,7 +27,9 @@ class MainPage extends StatelessWidget {
         child: BlocBuilder<MainCubit, MainState>(
           builder: (context, state) => Scaffold(
             bottomNavigationBar: BottomNavigationBar(
-              fixedColor: AppColors.appBarColor,
+              selectedItemColor: AppColors.appMunTextColor,
+              selectedFontSize: 11.0,
+              unselectedFontSize: 10.0,
               currentIndex: _getCurrentIndex(state),
               type: BottomNavigationBarType.fixed,
               onTap: (index) =>
@@ -58,7 +60,7 @@ class MainPage extends StatelessWidget {
             width: 22.0,
             height: 27.0,
           ),
-          title: _buildText("首页"),
+          label: "首页",
         ),
 
         /// 菜单
@@ -73,7 +75,7 @@ class MainPage extends StatelessWidget {
             width: 20.0,
             height: 26.0,
           ),
-          title: _buildText("菜单"),
+          label: "菜单",
         ),
 
         /// 订单
@@ -88,7 +90,7 @@ class MainPage extends StatelessWidget {
             width: 20.0,
             height: 25.0,
           ),
-          title: _buildText("订单"),
+          label: "订单",
         ),
 
         /// 购物车
@@ -103,7 +105,7 @@ class MainPage extends StatelessWidget {
             width: 24.0,
             height: 24.0,
           ),
-          title: _buildText("购物车"),
+          label: "购物车",
         ),
 
         /// 我的
@@ -118,7 +120,7 @@ class MainPage extends StatelessWidget {
             width: 20.0,
             height: 23.0,
           ),
-          title: _buildText("我的"),
+          label: "我的",
         ),
       ];
 
@@ -131,14 +133,6 @@ class MainPage extends StatelessWidget {
           width: width,
           height: height,
           fit: BoxFit.scaleDown,
-        ),
-      );
-
-  _buildText(text) => Text(
-        text,
-        style: TextStyle(
-          fontSize: 10.0,
-          color: AppColors.appMunTextColor,
         ),
       );
 

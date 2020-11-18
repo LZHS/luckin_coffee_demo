@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:luckin_coffee_demo/common/common.dart';
 
 import 'hero_page_b.dart';
 

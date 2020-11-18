@@ -6,6 +6,6 @@ class PersonCenterPage extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Text("我的页面"),
-    );;
+    );
   }
 }

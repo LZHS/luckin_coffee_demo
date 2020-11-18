@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:luckin_coffee_demo/common/common.dart';
 
 void main() {
   test("description ", () async {
@@ -13,5 +12,6 @@ void main() {
     sc.addStream(stream);
     // 监听
    await sc.stream.forEach((element) =>print);
+   sc.close();
   });
 }

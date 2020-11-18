@@ -1,8 +1,8 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
-import 'package:fluro/fluro.dart' as fluro_router;
 
 
 class AppComponent extends StatefulWidget {
@@ -12,7 +12,7 @@ class AppComponent extends StatefulWidget {
 
 class _AppComponentState extends State<AppComponent> with WidgetsBindingObserver {
   _AppComponentState() {
-    final router = fluro_router.Router();
+    final router = FluroRouter();
     Routes.configureRoutes(router);
     Application.router = router;
     Application.init();
@@ -23,12 +23,14 @@ class _AppComponentState extends State<AppComponent> with WidgetsBindingObserver
     super.initState();
     WidgetsBinding.instance.addObserver(this);
   }
+
   @override
   Widget build(BuildContext context) {
     Application.context=context;
     return MultiBlocProvider(
       providers: [
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
+        BlocProvider<ConnectivityCubit>(create: (_) => ConnectivityCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (_, state) {

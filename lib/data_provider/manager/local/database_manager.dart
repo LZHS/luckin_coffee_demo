@@ -6,7 +6,7 @@ class DatabaseManager {
   static final DatabaseManager _instance = DatabaseManager._internal();
 
   factory DatabaseManager() => _instance;
-  String db_path = "";
+  String dbPath = "";
 
   Database _database;
 
@@ -19,8 +19,8 @@ class DatabaseManager {
   DatabaseManager._internal() {
     if (_database == null)
       getDatabasesPath().then((path) {
-        this.db_path = join(path, DATA_BASE_NAME);
-        return _open(this.db_path);
+        this.dbPath = join(path, DATA_BASE_NAME);
+        return _open(this.dbPath);
       }).then((database) => this._database = database);
   }
 

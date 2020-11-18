@@ -29,5 +29,6 @@ class AppServiceImp extends AppService {
         onReceiveProgress: ((int count, int total) {
       onReceiveProgress(count, total);
     }));
+    return null;
   }
 }

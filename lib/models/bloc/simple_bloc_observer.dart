@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 
 import 'bloc.dart';

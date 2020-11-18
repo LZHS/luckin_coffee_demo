@@ -1,6 +1,5 @@
 
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-import 'package:sqflite/sqflite.dart';
 
 class HomeServiceImp extends HomeService {
   static const GET_APP_BANNER = "app/home/getBanner";

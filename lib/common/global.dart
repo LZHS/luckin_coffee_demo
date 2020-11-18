@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:luckin_coffee_demo/common/utils/log.dart';
 
@@ -22,5 +23,9 @@ class Global {
   static final APP_ID = "1597818873300545668";
 
   // ignore: non_constant_identifier_names
-  static final TIMER_TICKS=10;
+  static final TIMER_TICKS=5;
+
+ static  ConnectivityResult connectivityResult;
+
+
 }

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:luckin_coffee_demo/common/global.dart';
 
 part 'theme_state.dart';
 
@@ -12,7 +11,6 @@ class ThemeCubit extends Cubit<ThemeState> {
         ));
 
   changedTheme(ThemeEnum themeEnum) {
-
     ThemeState theme;
     switch (themeEnum) {
       case ThemeEnum.defaultTheme:
