@@ -24,8 +24,8 @@ class Global {
 
   // ignore: non_constant_identifier_names
   static final TIMER_TICKS=5;
-
- static  ConnectivityResult connectivityResult;
+/// 动态获取当前设备的网络状态（只能得到连接种类，不能確定连接中是否有网络），默认为无网络连接
+ static  ConnectivityResult connectivityResult=ConnectivityResult.none;
 
 
 }

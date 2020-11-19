@@ -85,8 +85,8 @@ class UpdateDialog extends Dialog {
                   width: 120.0,
                   text: "跳过",
                   onTap: () {
-                    next?.call();
                     Navigator.of(context).pop();
+                    next?.call();
                   },
                 ),
               ),

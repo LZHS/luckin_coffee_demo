@@ -108,7 +108,7 @@ class TransitionsCubit extends Cubit<TransitionsState> {
                     appInfo: this._appVersion.appInfo,
                     updateApp: () =>
                         _startDown(this._appVersion.appInfo.appUrl),
-                    next: () => goHome),
+                    next: goHome),
               )),
     );
   }

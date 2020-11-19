@@ -75,9 +75,12 @@ class DatabaseManager {
     return isDatabase;
   }
 
-  _onCreateMethod(Database db, int version) {
+  _onCreateMethod(Database db, int version) async {
     log.d("onCreate");
     showToast("msg");
+    await db.execute(
+        'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+
   }
 
   _onConfigureMethod(Database db) {

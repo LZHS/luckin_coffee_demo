@@ -30,7 +30,8 @@ class _AppComponentState extends State<AppComponent> with WidgetsBindingObserver
     return MultiBlocProvider(
       providers: [
         BlocProvider<ThemeCubit>(create: (_) => ThemeCubit()),
-        BlocProvider<ConnectivityCubit>(create: (_) => ConnectivityCubit()),
+        BlocProvider<ConnectivityCubit>(
+            create: (_) => ConnectivityCubit(), lazy: false),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (_, state) {
