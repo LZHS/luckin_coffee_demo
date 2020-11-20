@@ -6,6 +6,8 @@ import 'package:sqflite/sqflite.dart';
 import 'provider/product_category_provider.dart';
 
 class DatabaseHelp {
+
+  //TODO https://www.jianshu.com/p/3995ca566d9b
   final Database _database;
 
   Map<String, BaseDBProvider> _map = HashMap();
