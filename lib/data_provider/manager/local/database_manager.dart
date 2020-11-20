@@ -74,13 +74,25 @@ class DatabaseManager {
     }
     return isDatabase;
   }
-
+  ///判断表是否存在
+  Future<bool> isTableExits(String tableName) async {
+    var res=await _database.rawQuery("select * from Sqlite_master where type = 'table' and name = '$tableName'");
+    return res!=null && res.length >0;
+  }
   _onCreateMethod(Database db, int version) async {
-    log.d("onCreate");
-    showToast("msg");
+    if(version==1)
+
     await db.execute(
         'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
 
+
+    db.execute("""
+    CREATE TABLE product_category (
+    category_id   INTEGER PRIMARY KEY NOT NULL,
+    category_name TEXT    NOT NULL,
+    category_sort INT     UNIQUE,
+    update_time   TIME    NOT NULL);
+    """);
   }
 
   _onConfigureMethod(Database db) {
