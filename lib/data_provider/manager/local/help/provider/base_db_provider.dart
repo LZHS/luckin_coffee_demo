@@ -4,7 +4,7 @@ abstract class BaseDBProvider{
 
   createTableString();
 
-  _tableName();
+  String tableName();
 
   ///创建表sql语句
   _tableBaseString(String sql) {

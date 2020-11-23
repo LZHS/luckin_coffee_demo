@@ -1,8 +1,15 @@
+import 'dart:collection';
+
 import 'package:luckin_coffee_demo/common/global.dart';
+import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/product_category_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'help/provider/base_db_provider.dart';
+
 class DatabaseManager {
+  Map<String, BaseDBProvider> _providerMap = HashMap();
+
   static final DatabaseManager _instance = DatabaseManager._internal();
 
   factory DatabaseManager() => _instance;
@@ -60,7 +67,7 @@ class DatabaseManager {
             }));
   }
 
-  Future<bool> isDatabase(String path) async {
+  Future<bool> _isDatabase(String path) async {
     Database db;
     var isDatabase = false;
     try {
@@ -74,29 +81,18 @@ class DatabaseManager {
     }
     return isDatabase;
   }
+
   ///判断表是否存在
   Future<bool> isTableExits(String tableName) async {
     var res=await _database.rawQuery("select * from Sqlite_master where type = 'table' and name = '$tableName'");
     return res!=null && res.length >0;
   }
+
   _onCreateMethod(Database db, int version) async {
-    if(version==1)
 
-    await db.execute(
-        'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
-
-
-    db.execute("""
-    CREATE TABLE product_category (
-    category_id   INTEGER PRIMARY KEY NOT NULL,
-    category_name TEXT    NOT NULL,
-    category_sort INT     UNIQUE,
-    update_time   TIME    NOT NULL);
-    """);
   }
 
   _onConfigureMethod(Database db) {
-    log.d("");
   }
 
   _onDowngradeMethod(Database db, int oldVersion, int newVersion) {
@@ -108,6 +104,24 @@ class DatabaseManager {
   }
 
   _onOpenMethod(Database db) {
-    log.d("");
+    log.d("每次打开数据时");
+    _providerMap.clear();
+    createProductCategoryPro(db);
+  }
+/// 創建并保存一个 产品类目 表 信息
+  void createProductCategoryPro(Database db) {
+     isTableExits(ProductCategoryProvider.className).then((isExits) {
+      BaseDBProvider dbProvider = ProductCategoryProvider(db);
+      _providerMap[ProductCategoryProvider.className] = dbProvider;
+      if (!isExits) {
+        db.execute(dbProvider.createTableString()).then((value) => dbProvider.isTableExits=true);
+      }
+    });
+  }
+
+  Future<BaseDBProvider> getProvider(String providerName) {
+    if (_providerMap.containsKey(providerName))
+      return Future<BaseDBProvider>.value(_providerMap[providerName]);
+    return Future.error("没有找到 与 $providerName 对应的数据提供器");
   }
 }
