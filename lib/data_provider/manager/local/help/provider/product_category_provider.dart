@@ -5,28 +5,43 @@ import 'package:sqflite/sqflite.dart';
 class ProductCategoryProvider extends BaseDBProvider {
   static final className = "ProductCategoryProvider";
   final tabName = "product_category",
-      category_id = "category_id",
-      category_name = "category_name",
-      category_sort = "category_sort",
-      update_time = "update_time";
+      categoryId = "category_id",
+      categoryName = "category_name",
+      categorySort = "category_sort",
+      updateTime = "update_time";
 
   final Database _database;
 
   ProductCategoryProvider(this._database) : assert(_database != null);
- 
+
   @override
   createTableString() => """
     CREATE TABLE $tabName (
-    $category_id   INTEGER PRIMARY KEY NOT NULL,
-    $category_name TEXT    NOT NULL,
-    $category_sort INT     UNIQUE,
-   $update_time   TIME    NOT NULL);
+    $categoryId   INTEGER PRIMARY KEY NOT NULL,
+    $categoryName TEXT    NOT NULL,
+    $categorySort INT     UNIQUE,
+   $updateTime   INT    NOT NULL);
     """;
+
   @override
-  String tableName()=> tabName;
-  
-  Future<List<ProductCategory>> findAll(){
-    if(_database.isOpen)
-      _database.query("table");
+  String tableName() => tabName;
+
+  Future<List<ProductCategory>> findAll() {
+    if (_database.isOpen)
+      return _database.rawQuery(
+        """ SELECT * FROM product_category ORDER BY category_sort;""",
+      ).then((data) {
+        List<ProductCategory> list;
+        data.forEach((element) {
+          list.add(ProductCategory.fromJson(element));
+        });
+        return list;
+      });
+    return Future.error("");
+  }
+
+
+  Future<int> findMaxUpdateTime() {
+    return Future(()=>1);
   }
 }
