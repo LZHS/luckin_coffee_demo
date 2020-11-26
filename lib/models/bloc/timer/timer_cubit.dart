@@ -14,7 +14,7 @@ class TimerCubit extends Cubit<int> {
   StreamSubscription subscription;
 
   TimerCubit(this.context) : super(0) {
-    transitionsCubit=context.bloc<TransitionsCubit>();
+    transitionsCubit=context.read<TransitionsCubit>();
     subscription=transitionsCubit.listen((_) { });
     timerStarted();
   }

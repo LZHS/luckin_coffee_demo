@@ -27,7 +27,7 @@ class HomeBannerWidget extends StatelessWidget {
             top: 30.0,
             right: 10.0,
             child: GestureDetector(
-              onTap: () => context.bloc<HomeBloc>().clickSan(),
+              onTap: () => context.read<HomeBloc>().clickSan(),
               child: Container(
                 width: 40.0,
                 height: 40.0,

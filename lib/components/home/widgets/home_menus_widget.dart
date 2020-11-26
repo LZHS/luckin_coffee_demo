@@ -16,7 +16,7 @@ class HomeMenusWidget extends StatelessWidget {
           state is RefreshMenuBottom ||
           state is LocatingRefresh,
       builder: (content, state) {
-        homeBloc = context.bloc();
+        homeBloc = context.read();
         if (state is HomeInitial) _buildMenuItems(state.menuItemData);
         if (state is RefreshMenuBottom) _buildMenuBottom(state);
         if (state is LocatingRefresh) _buildLocating(state);

@@ -40,31 +40,34 @@ class DatabaseManager {
   }
 
   /// 打开一个 数据库
-  Future<Database> _open(String path) async {
+  Future<Database> _open(String path) {
     _reset();
-    return await databaseFactory.openDatabase(path,
-        options: OpenDatabaseOptions(
-            version: DATA_BASE_CURRENT_VERSION,
-            onCreate: (Database db, int version) {
-              _onCreateMethod(db, version);
-              onCreateCalled = true;
-            },
-            onConfigure: (Database db) {
-              _onConfigureMethod(db);
-              onConfigureCalled = true;
-            },
-            onDowngrade: (Database db, int oldVersion, int newVersion) {
-              _onDowngradeMethod(db, oldVersion, newVersion);
-              onDowngradeCalled = true;
-            },
-            onUpgrade: (Database db, int oldVersion, int newVersion) {
-              _onUpgradeMethod(db, oldVersion, newVersion);
-              onUpgradeCalled = true;
-            },
-            onOpen: (Database db) {
-              _onOpenMethod(db);
-              onOpenCalled = true;
-            }));
+    return  databaseFactory.openDatabase(
+            path,
+            options: OpenDatabaseOptions(
+              version: DATA_BASE_CURRENT_VERSION,
+              onCreate: (Database db, int version) {
+                _onCreateMethod(db, version);
+                onCreateCalled = true;
+              },
+              onConfigure: (Database db) {
+                _onConfigureMethod(db);
+                onConfigureCalled = true;
+              },
+              onDowngrade: (Database db, int oldVersion, int newVersion) {
+                _onDowngradeMethod(db, oldVersion, newVersion);
+                onDowngradeCalled = true;
+              },
+              onUpgrade: (Database db, int oldVersion, int newVersion) {
+                _onUpgradeMethod(db, oldVersion, newVersion);
+                onUpgradeCalled = true;
+              },
+              onOpen: (Database db) {
+                _onOpenMethod(db);
+                onOpenCalled = true;
+              },
+            ),
+          );
   }
 
   Future<bool> _isDatabase(String path) async {
@@ -73,6 +76,7 @@ class DatabaseManager {
     try {
       db = await openReadOnlyDatabase(path);
       var version = await db.getVersion();
+      log.d("当前数据库版本 ：$version");
       if (version != null) {
         isDatabase = true;
       }
@@ -83,17 +87,16 @@ class DatabaseManager {
   }
 
   ///判断表是否存在
-  Future<bool> isTableExits(String tableName) async {
-    var res=await _database.rawQuery("select * from Sqlite_master where type = 'table' and name = '$tableName'");
-    return res!=null && res.length >0;
+  Future<bool> isTableExits(String tableName) {
+    return _database
+        .rawQuery(
+        "select * from Sqlite_master where type = 'table' and name = '$tableName'")
+        .then((data) => Future.value(data != null && data.length > 0));
   }
 
-  _onCreateMethod(Database db, int version) async {
+  _onCreateMethod(Database db, int version) async {}
 
-  }
-
-  _onConfigureMethod(Database db) {
-  }
+  _onConfigureMethod(Database db) {}
 
   _onDowngradeMethod(Database db, int oldVersion, int newVersion) {
     log.d("");
@@ -110,11 +113,13 @@ class DatabaseManager {
   }
 /// 創建并保存一个 产品类目 表 信息
   void createProductCategoryPro(Database db) {
-     isTableExits(ProductCategoryProvider.className).then((isExits) {
+    _database = db;
+    isTableExits(ProductCategoryProvider.tabName).then((isExits) {
       BaseDBProvider dbProvider = ProductCategoryProvider(db);
       _providerMap[ProductCategoryProvider.className] = dbProvider;
       if (!isExits) {
-        db.execute(dbProvider.createTableString()).then((value) => dbProvider.isTableExits=true);
+        db.execute(dbProvider.createTableString()).then((value) =>
+        dbProvider.isTableExits = true);
       }
     });
   }

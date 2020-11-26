@@ -22,6 +22,8 @@
 
 * [闲鱼 flutter 技术](https://www.yuque.com/xytech/flutter/)
 
+* TODO 原生 组件化 框架 https://gitee.com/xiaojinziCoder/Component/tree/develop
+
 ## 免责声明
 
 **免责声明**: 此代码仅学习使用，请勿用于商业用途，如拿去非法使用与本人无关！

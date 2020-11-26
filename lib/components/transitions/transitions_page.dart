@@ -39,7 +39,7 @@ class TransitionsPage extends StatelessWidget {
                 alignment: FractionalOffset.topRight,
                 margin: EdgeInsets.fromLTRB(0.0, 30.0, 10.0, 0.0),
                 child: FlatButton(
-                  onPressed: () => context.bloc<TimerCubit>().timerComplete(),
+                  onPressed: () => context.read<TimerCubit>().timerComplete(),
                   color: Colors.grey[400],
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
                   child: Text(

@@ -5,11 +5,10 @@ class ProductCategory{
   int _categorySort;
   int _updateTime;
 
-  ProductCategory(
-      {int categoryId,
-        String categoryName,
-        int categorySort,
-        int updateTime}) {
+  ProductCategory({int categoryId,
+    String categoryName,
+    int categorySort,
+    int updateTime}) {
     this._categoryId = categoryId;
     this._categoryName = categoryName;
     this._categorySort = categorySort;
@@ -17,13 +16,20 @@ class ProductCategory{
   }
 
   int get categoryId => _categoryId;
-  set categoryId(int categoryId) => _categoryId = categoryId;
+
+  set categoryId(categoryId) => _categoryId = categoryId;
+
   String get categoryName => _categoryName;
-  set categoryName(String categoryName) => _categoryName = categoryName;
+
+  set categoryName(categoryName) => _categoryName = categoryName;
+
   int get categorySort => _categorySort;
-  set categorySort(int categorySort) => _categorySort = categorySort;
+
+  set categorySort(categorySort) => _categorySort = categorySort;
+
   int get updateTime => _updateTime;
-  set updateTime(int updateTime) => _updateTime = updateTime;
+
+  set updateTime(updateTime) => _updateTime = updateTime;
 
   ProductCategory.fromJson(Map<String, dynamic> json) {
     _categoryId = json['category_id'];

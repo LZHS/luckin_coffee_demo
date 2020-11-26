@@ -6,8 +6,4 @@ abstract class BaseDBProvider{
 
   String tableName();
 
-  ///创建表sql语句
-  _tableBaseString(String sql) {
-    return sql;
-  }
 }

@@ -2,7 +2,7 @@
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 
 class HomeServiceImp extends HomeService {
-  static const GET_APP_BANNER = "app/home/getBanner";
+  static const GET_APP_BANNER = "home/getBanner";
 
   static final HomeServiceImp _instance = HomeServiceImp._internal();
   DioManager _dioManager;
