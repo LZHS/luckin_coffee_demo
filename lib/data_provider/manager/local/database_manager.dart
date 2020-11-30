@@ -118,8 +118,9 @@ class DatabaseManager {
       BaseDBProvider dbProvider = ProductCategoryProvider(db);
       _providerMap[ProductCategoryProvider.className] = dbProvider;
       if (!isExits) {
-        db.execute(dbProvider.createTableString()).then((value) =>
-        dbProvider.isTableExits = true);
+        db.execute(dbProvider.createTableString()).then(
+              (value) => dbProvider.isTableExits = true,
+            );
       }
     });
   }
