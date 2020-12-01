@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
 
-import 'package:crypto/crypto.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/common/widgets/cache_net_work_img/network_image.dart' as net;
 import 'package:luckin_coffee_demo/models/models.dart';
 
 class HomeBannerWidget extends StatelessWidget {
@@ -18,15 +18,17 @@ class HomeBannerWidget extends StatelessWidget {
                   state is HomeInitial || state is RefreshBanner,
               builder: (_, state) {
                 if (state is HomeInitial)
-                  return Image.asset(
-                    state.default_banner_bg,
-                    fit: BoxFit.fill,
-                  );
+                  return Image(image: net.NetworkImage(state.default_banner_bg),fit: BoxFit.fill,);
+                  // return Image.asset(
+                  //   state.default_banner_bg,
+                  //   fit: BoxFit.fill,
+                  // );
                 else if (state is RefreshBanner) return Container();
                 return Container();
               },
             ),
           ),
+          //region 扫描按钮
           Positioned(
             top: 30.0,
             right: 10.0,
@@ -47,6 +49,7 @@ class HomeBannerWidget extends StatelessWidget {
               ),
             ),
           )
+          //endregion
         ],
       );
 }
