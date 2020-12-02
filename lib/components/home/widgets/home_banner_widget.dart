@@ -18,11 +18,11 @@ class HomeBannerWidget extends StatelessWidget {
                   state is HomeInitial || state is RefreshBanner,
               builder: (_, state) {
                 if (state is HomeInitial)
-                  return Image(image: net.NetworkImage(state.default_banner_bg),fit: BoxFit.fill,);
-                  // return Image.asset(
-                  //   state.default_banner_bg,
-                  //   fit: BoxFit.fill,
-                  // );
+                  // return Image(image: net.NetworkImage(state.default_banner_bg),fit: BoxFit.fill,);
+                  return Image.asset(
+                    state.default_banner_bg,
+                    fit: BoxFit.fill,
+                  );
                 else if (state is RefreshBanner) return Container();
                 return Container();
               },

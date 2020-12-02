@@ -1,4 +1,6 @@
-import 'app_version.dart';
+
+
+import '../data_provider.dart';
 
 class EntityFactory {
   static T generateOBJ<T>(json)  {

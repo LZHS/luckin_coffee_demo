@@ -5,7 +5,7 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {
   // ignore: non_constant_identifier_names
-  final default_banner_bg = "http://47.110.55.76:8080/luckin/images/banners/icon_banner02.jpg";
+  final default_banner_bg = "lib/assets/images/banners/icon_banner02.webp";
 
   final menuItemData = [
     {

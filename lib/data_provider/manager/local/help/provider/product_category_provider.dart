@@ -1,7 +1,7 @@
-import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-import 'package:luckin_coffee_demo/data_provider/manager/beans/product_category.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/base_db_provider.dart';
 import 'package:sqflite/sqflite.dart';
+
+import '../../../../data_provider.dart';
 
 class ProductCategoryProvider extends BaseDBProvider {
   static final className = "ProductCategoryProvider";

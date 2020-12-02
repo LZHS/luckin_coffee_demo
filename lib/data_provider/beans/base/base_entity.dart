@@ -1,5 +1,7 @@
-import 'package:luckin_coffee_demo/data_provider/manager/beans/entity_factory.dart';
 import 'package:luckin_coffee_demo/exceptions/exception.dart';
+
+import '../../data_provider.dart';
+
 
 class BaseEntity<T> {
   int code;

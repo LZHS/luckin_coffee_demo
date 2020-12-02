@@ -17,6 +17,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : assert(context != null),
         super(HomeInitial()) {
     add(RequestData());
+    Future.delayed(
+      Duration(seconds: 10),
+      () => add(RefreshLocating()),
+    );
   }
 
   @override
@@ -30,15 +34,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           storeName: "青年汇店", distance: "1.3公里", isTakeTheir: false));
   }
 
-  _requestHomeData() async {}
+  _requestHomeData() async {
+    HomeService service=HomeServiceImp();
+    service.getHomeData();
+  }
 
   clickSan() {
-    log.d("clickSan = HomeBloc");
-    LoadingDialog.show(context);
-
-    Future.delayed(Duration(seconds: 15), () => LoadingDialog.cancel(context));
-
-    // Future.delayed(Duration(seconds: 5), () => add(RefreshLocating()));
+    showToast("你点击了扫描页面");
   }
 
   menuItemClick(int type) {

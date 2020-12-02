@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
-import 'package:luckin_coffee_demo/data_provider/manager/beans/app_version.dart';
-
 class AppServiceImp extends AppService {
   static const GET_APP_VERSION = "app/getAppVersion";
 

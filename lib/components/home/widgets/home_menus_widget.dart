@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
-import 'package:luckin_coffee_demo/data_provider/manager/beans/locating_information.dart';
+import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 // ignore: must_be_immutable
