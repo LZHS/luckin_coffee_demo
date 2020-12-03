@@ -25,7 +25,7 @@ class DioManager {
   /// success
   /// error
   /// Future<T> 返回参数
-  Future<BaseEntity> request<T>(Method method, String path,
+  Future<BaseEntity<T>> request<T>(Method method, String path,
       {Map<String, dynamic> params}) async {
     try {
       if(Global.connectivityResult==ConnectivityResult.none)
@@ -63,7 +63,7 @@ class DioManager {
   /// success
   /// error
   /// Future<T> 返回参数
-  Future<BaseEntity> get<T>(String path, {Map<String, dynamic> params}) async {
+  Future<BaseEntity<T>> get<T>(String path, {Map<String, dynamic> params}) async {
     return request<T>(Method.GET, path, params: params);
   }
 
@@ -72,7 +72,7 @@ class DioManager {
   /// success
   /// error
   /// Future<T> 返回参数
-  Future<BaseEntity> post<T>(String path, {Map<String, dynamic> params}) async {
+  Future<BaseEntity<T>> post<T>(String path, {Map<String, dynamic> params}) async {
     return request(Method.POST, path, params: params);
   }
 

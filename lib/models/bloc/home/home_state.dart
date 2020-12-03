@@ -46,4 +46,8 @@ class RefreshMenuBottom extends HomeState {
   final String bottomBarPath = "lib/assets/images/home/bottom_bar.png";
 }
 
-class RefreshBanner extends HomeState {}
+class RefreshBanner extends HomeState {
+  final List<BannerItem> banners;
+
+  RefreshBanner(this.banners);
+}

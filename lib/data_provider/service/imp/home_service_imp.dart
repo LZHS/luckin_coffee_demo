@@ -16,7 +16,7 @@ class HomeServiceImp extends HomeService {
 
   @override
   Future<BaseEntity> getHomeData() async {
-    // _dioManager.get(GET_APP_BANNER)
+   return _dioManager.get<List<BannerItem>>(GET_APP_BANNER) ;
     // return _dioManager.get(GET_APP_BANNER).catchError((value) {
     //   // if(value is BaseEntity)
     //   //   if(value.code==-404)

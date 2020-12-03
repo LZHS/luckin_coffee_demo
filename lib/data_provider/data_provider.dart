@@ -19,7 +19,7 @@ export 'beans/app/app_info.dart';
 export 'beans/app/app_notice_info.dart';
 export 'beans/app/app_version.dart';
 
-export 'beans/banner/banner_item.dart';
+export 'beans/banner/banner_bean.dart';
 
 export 'beans/locating_information.dart';
 export 'beans/product_category.dart';

@@ -27,16 +27,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    if (event is RequestData) yield null;
+    if (event is RequestData) yield* _requestHomeData();
     if (event is RefreshMenu) yield RefreshMenuBottom();
     if (event is RefreshLocating)
       yield LocatingRefresh(LocatingInformation(
           storeName: "青年汇店", distance: "1.3公里", isTakeTheir: false));
   }
 
-  _requestHomeData() async {
-    HomeService service=HomeServiceImp();
-    service.getHomeData();
+  Stream<HomeState> _requestHomeData() async* {
+    LoadingDialog.show(context);
+    HomeService service = HomeServiceImp();
+    BaseEntity data;
+    await service.getHomeData().then((value) => data = value).catchError((err) {
+      showToast("数据请求失败${err.message}");
+      data = err;
+    }).whenComplete(() {
+      log.d("数据请求失败");
+      LoadingDialog.cancel(context);
+    });
+    if (data.result is List<BannerItem>)
+      yield RefreshBanner(data.result);
+    else
+      showToast("数据请求失败");
   }
 
   clickSan() {
