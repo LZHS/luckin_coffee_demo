@@ -58,6 +58,14 @@ public interface BannerService {
      */
     List<BannerItem> queryBannerItemList(List<Integer> bannerIds);
 
+
+    /**
+     * 根据 Banner id 查询所有的 bannerItem
+     *
+     * @return
+     */
+    List<BannerItem> findByIsDisable();
+
     /**
      * 创建保存一个 BannerItem
      *

@@ -37,6 +37,10 @@ values ('1603953176025225666', 'static/images/banners/icon_banner01.jpg', 0, 1),
        ('1603953176026484151', 'static/images/banners/icon_banner05.jpg', 0, 1),
        ('1603953176026907742', 'static/images/bottom_bar.png', 2, 2);
 
+
+
+ALTER TABLE `banner_item`
+add  `is_disable` tinyint(2)   not null default 0 comment '该BannerItem 是否有效(0，有效，1 失效)';
 select *
 from `banner_item`;
 

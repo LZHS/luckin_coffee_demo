@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,39 +29,20 @@ public class HomeController {
     @Autowired
     BannerService bannerService;
 
+    /**
+     * 根据 APP 本地最新数据更新Banner 数据
+     *
+     * @return
+     */
     @GetMapping("/getBanner")
-    public ResultVO getAppVersion() {
-        List<Banner> banners = bannerService.queryBannerList();
-        List<Integer> bannerIds = banners
-                .stream()
-                .map((element) -> element.getId())
-                .collect(Collectors.toList());
-
-        log.info(bannerIds.toString());
-        Map<Integer, List<BannerItem>> bannerItems = bannerService
-                .queryBannerItemList(bannerIds)
-                .stream()
-                .collect(Collectors.groupingBy(BannerItem::getBannerId));
-
-        List<BannerVO> result = banners
+    public ResultVO getBanner() {
+        List<BannerVO> banners = bannerService.findByIsDisable()
                 .stream()
                 .map((element) -> {
                     BannerVO bannerVO = new BannerVO();
                     BeanUtils.copyProperties(element, bannerVO);
-                    List<BannerItem> bannerList = bannerItems.get(element.getId());
-                    if (bannerList != null && bannerList.size() > 0) {// 有可能出现  bannerItem 没有 对应的 banner 的情况
-                        List<BannerVO.BannerItemVO> items = bannerList.stream()
-                                .map((item) -> {
-                                    BannerVO.BannerItemVO itemVO = new BannerVO.BannerItemVO();
-                                    BeanUtils.copyProperties(item, itemVO);
-                                    return itemVO;
-                                })
-                                .collect(Collectors.toList());
-                        bannerVO.setBanners(items);
-                    }
                     return bannerVO;
-                })
-                .collect(Collectors.toList());
-        return ResultVOUtil.success(result);
+                }).collect(Collectors.toList());
+        return ResultVOUtil.success(banners);
     }
 }

@@ -4,15 +4,16 @@ create table `product_category`
     `category_name` varchar(64) not null comment '类目名字',
     `category_sort` int(4) UNSIGNED ZEROFILL DEFAULT '0000' not null comment '类目编号',
     `category_type` int         not null comment '类目编号',
+
     `create_time`   timestamp   not null     default current_timestamp comment '创建时间',
     `update_time`   timestamp   not null     default current_timestamp on update current_timestamp comment '修改时间',
     primary key (`category_id`),
     UNIQUE KEY `uqe_category_type` (`category_type`)
-) comment  '类目';
+) comment '类目';
 
 desc `product_category`;
 
-drop table  `product_category`;
+drop table `product_category`;
 
 delete
 from `product_category`;

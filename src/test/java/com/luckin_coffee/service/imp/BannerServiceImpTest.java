@@ -83,4 +83,9 @@ class BannerServiceImpTest {
     @Test
     void saveBannerItem() {
     }
+    @Test
+    void findByIsDisable(){
+        List<BannerItem> banners=  service.findByIsDisable();
+        Assert.assertTrue(banners.size()==6);
+    }
 }

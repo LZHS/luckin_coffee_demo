@@ -56,6 +56,11 @@ public class BannerServiceImp implements BannerService {
     }
 
     @Override
+    public List<BannerItem> findByIsDisable() {
+   return bannerItemRepository.findByIsDisable(0);
+    }
+
+    @Override
     public BannerItem saveBannerItem(BannerItem bean) {
         return null;
     }

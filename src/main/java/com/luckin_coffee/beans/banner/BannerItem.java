@@ -33,6 +33,11 @@ public class BannerItem implements Serializable {
      * 外键 关联 banner 表
      */
     private int bannerId;
+
+    /**
+     * 该BannerItem 是否有效(0，有效，1 失效)
+     */
+    private int isDisable;
     /**
      * 创建时间.
      */
