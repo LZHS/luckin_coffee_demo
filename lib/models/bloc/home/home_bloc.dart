@@ -16,7 +16,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this.context)
       : assert(context != null),
         super(HomeInitial()) {
-    add(RequestData());
     Future.delayed(
       Duration(seconds: 10),
       () => add(RefreshLocating()),
@@ -27,7 +26,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(
     HomeEvent event,
   ) async* {
-    if (event is RequestData) yield* _requestHomeData();
+    if (event is RequestData){
+      LoadingDialog.show(context);
+      yield* _requestHomeData();
+    }else
     if (event is RefreshMenu) yield RefreshMenuBottom();
     if (event is RefreshLocating)
       yield LocatingRefresh(LocatingInformation(
@@ -35,20 +37,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _requestHomeData() async* {
-    LoadingDialog.show(context);
     HomeService service = HomeServiceImp();
-    BaseEntity data;
-    await service.getHomeData().then((value) => data = value).catchError((err) {
-      showToast("数据请求失败${err.message}");
-      data = err;
+
+   final BaseEntity data=await service.getHomeData().catchError((data) {
+      showToast("数据请求失败${data.message}");
+      return data;
     }).whenComplete(() {
-      log.d("数据请求失败");
-      LoadingDialog.cancel(context);
+      log.d("whenComplete");
     });
     if (data.result is List<BannerItem>)
       yield RefreshBanner(data.result);
     else
       showToast("数据请求失败");
+    LoadingDialog.cancel();
   }
 
   clickSan() {

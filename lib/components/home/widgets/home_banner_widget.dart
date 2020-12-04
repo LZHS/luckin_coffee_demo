@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
-import 'package:luckin_coffee_demo/common/widgets/cache_net_work_img/network_image.dart' as net;
 import 'package:luckin_coffee_demo/models/models.dart';
 
 class HomeBannerWidget extends StatelessWidget {
@@ -17,13 +16,13 @@ class HomeBannerWidget extends StatelessWidget {
               buildWhen: (_, state) =>
                   state is HomeInitial || state is RefreshBanner,
               builder: (_, state) {
-                if (state is HomeInitial)
-                  // return Image(image: net.NetworkImage(state.default_banner_bg),fit: BoxFit.fill,);
+                if (state is HomeInitial) {
+                  BlocProvider.of<HomeBloc>(context).add(RequestData());
                   return Image.asset(
                     state.default_banner_bg,
                     fit: BoxFit.fill,
                   );
-                else if (state is RefreshBanner) return Container();
+                } else if (state is RefreshBanner) return Container();
                 return Container();
               },
             ),

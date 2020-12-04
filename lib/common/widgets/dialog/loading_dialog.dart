@@ -9,6 +9,9 @@ class LoadingDialog extends Dialog {
   static bool isDisable = false;
   static StreamController<int> _streamController;
   final String progressText = "加载中...";
+  static BuildContext context;
+
+  LoadingDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -42,25 +45,42 @@ class LoadingDialog extends Dialog {
   /// 显示 跟新 对话框
   static void show(context) {
     Future.delayed(
-      Duration.zero,
-      () => showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) {
-          return LoadingDialog();
-        },
-      ),
+        Duration.zero,
+            () {
+          log.d("对话框显示时间：${DateTime
+              .now()
+              .millisecondsSinceEpoch}");
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              log.d("对话框构建时间：${DateTime
+                  .now()
+                  .millisecondsSinceEpoch}");
+              LoadingDialog.context = context;
+              isDisable = true;
+              return LoadingDialog();
+            },
+          );
+        }
     );
-    isDisable = true;
   }
 
-  static void cancel(context) {
+  static void cancel() {
     Future.delayed(
       Duration.zero,
           () {
-        if (_streamController.isClosed) _streamController.close();
-        _streamController = null;
-        Navigator.of(context).pop();
+        log.d("对话框关闭时间：${DateTime
+            .now()
+            .millisecondsSinceEpoch}");
+        if (!isDisable) return;
+        // ignore: null_aware_in_condition
+        if (_streamController?.isClosed) {
+          _streamController.close();
+          _streamController = null;
+        }
+        if (LoadingDialog.context != null)
+          Navigator.of(LoadingDialog.context).pop();
       },
     );
     isDisable = false;
