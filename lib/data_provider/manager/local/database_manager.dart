@@ -1,6 +1,8 @@
 import 'dart:collection';
 
 import 'package:luckin_coffee_demo/common/global.dart';
+import 'package:luckin_coffee_demo/common/utils/log.dart';
+import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/banner_provider.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/product_category_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -91,7 +93,11 @@ class DatabaseManager {
     return _database
         .rawQuery(
         "select * from Sqlite_master where type = 'table' and name = '$tableName'")
-        .then((data) => Future.value(data != null && data.length > 0));
+        .then((data) {
+          var isExits=data != null && data.length > 0;
+          log.d("$tableName ${isExits?'存在':'不存在'}");
+          return Future.value(isExits);
+    });
   }
 
   _onCreateMethod(Database db, int version) async {}
@@ -110,6 +116,7 @@ class DatabaseManager {
     log.d("每次打开数据时");
     _providerMap.clear();
     createProductCategoryPro(db);
+    createBannerPro(db);
   }
 /// 創建并保存一个 产品类目 表 信息
   void createProductCategoryPro(Database db) {
@@ -121,6 +128,20 @@ class DatabaseManager {
         db.execute(dbProvider.createTableString()).then(
               (value) => dbProvider.isTableExits = true,
             );
+      }
+    });
+  }
+
+  /// 創建并保存一个 banner 表 信息
+  void createBannerPro(Database db) {
+    _database = db;
+    isTableExits(BannerProvider.tabName).then((isExits) {
+      BaseDBProvider dbProvider = BannerProvider(db);
+      _providerMap[BannerProvider.className] = dbProvider;
+      if (!isExits) {
+        db.execute(dbProvider.createTableString()).then(
+              (value) => dbProvider.isTableExits = true,
+        );
       }
     });
   }

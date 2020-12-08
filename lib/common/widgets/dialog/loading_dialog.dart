@@ -11,7 +11,49 @@ class LoadingDialog extends Dialog {
   final String progressText = "加载中...";
   static BuildContext context;
 
-  LoadingDialog();
+  /// 显示 和 构建 对话框的时间
+  static int showDialogTime = 0, buildDialogTime = 0;
+
+  /// 显示 跟新 对话框
+  static void show(context) {
+    showDialogTime = DateTime.now().millisecondsSinceEpoch;
+    Future.delayed(Duration.zero, () {
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          LoadingDialog.context = context;
+          isDisable = true;
+          buildDialogTime = DateTime.now().millisecondsSinceEpoch;
+          return LoadingDialog();
+        },
+      );
+    });
+  }
+
+  static void cancel() {
+    if (showDialogTime != 0) {
+      var duration = Duration.zero;
+      if (buildDialogTime == 0 ||
+          buildDialogTime - DateTime.now().millisecondsSinceEpoch <= 0)
+        duration = Duration(milliseconds: 500);
+      Future.delayed(
+        duration,
+        () {
+          if (_streamController != null && _streamController.isClosed) {
+            _streamController.close();
+            _streamController = null;
+          }
+          if (LoadingDialog.context != null)
+            Navigator.of(LoadingDialog.context).pop();
+          LoadingDialog.context = null;
+          showDialogTime = 0;
+          buildDialogTime = 0;
+          isDisable = false;
+        },
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,50 +83,6 @@ class LoadingDialog extends Dialog {
           children: [_buildProgressWidget(width), _buildProgressText(height)],
         ),
       );
-
-  /// 显示 跟新 对话框
-  static void show(context) {
-    Future.delayed(
-        Duration.zero,
-            () {
-          log.d("对话框显示时间：${DateTime
-              .now()
-              .millisecondsSinceEpoch}");
-          showDialog<void>(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) {
-              log.d("对话框构建时间：${DateTime
-                  .now()
-                  .millisecondsSinceEpoch}");
-              LoadingDialog.context = context;
-              isDisable = true;
-              return LoadingDialog();
-            },
-          );
-        }
-    );
-  }
-
-  static void cancel() {
-    Future.delayed(
-      Duration.zero,
-          () {
-        log.d("对话框关闭时间：${DateTime
-            .now()
-            .millisecondsSinceEpoch}");
-        if (!isDisable) return;
-        // ignore: null_aware_in_condition
-        if (_streamController?.isClosed) {
-          _streamController.close();
-          _streamController = null;
-        }
-        if (LoadingDialog.context != null)
-          Navigator.of(LoadingDialog.context).pop();
-      },
-    );
-    isDisable = false;
-  }
 
   _buildProgressText(width) =>
       Container(

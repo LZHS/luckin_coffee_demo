@@ -58,5 +58,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   menuItemClick(int type) {
     log.d("menuItemClick(type:$type) = HomeBloc");
+    add(RequestData());
   }
 }
