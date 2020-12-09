@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 import 'widgets/home_banner_widget.dart';
+import 'widgets/home_menu_bottom_widget.dart';
 import 'widgets/home_menus_widget.dart';
+import 'widgets/home_location_widget.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,7 +16,9 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             HomeBannerWidget(),
+            HomeLocationWidget(),
             HomeMenusWidget(),
+            HomeMenuBottomWidget(),
           ],
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:luckin_coffee_demo/common/common.dart';
 
 class BannerItem {
   String id;
@@ -12,7 +11,7 @@ class BannerItem {
 
   BannerItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    imgPath = BASE_URL + json['imgPath'];
+    imgPath =  json['imgPath'];
     action = json['action'];
     bannerId = json['bannerId'];
     updateTime = json['updateTime'];

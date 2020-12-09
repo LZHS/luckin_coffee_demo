@@ -5,7 +5,11 @@ abstract class HomeState {}
 
 class HomeInitial extends HomeState {
   // ignore: non_constant_identifier_names
-  final default_banner_bg = "lib/assets/images/banners/icon_banner02.webp";
+  static final DEFAULT_BANNER_BG =
+      "lib/assets/images/banners/icon_banner02.webp";
+  // ignore: non_constant_identifier_names
+  static final DEFAULT_BOTTOM_BANNER_BG =
+      "lib/assets/images/home/bottom_bar.webp";
 
   final menuItemData = [
     {
@@ -43,11 +47,22 @@ class LocatingRefresh extends HomeState {
 }
 
 class RefreshMenuBottom extends HomeState {
-  final String bottomBarPath = "lib/assets/images/home/bottom_bar.png";
+  // ignore: non_constant_identifier_names
+  static final DEFAULT_BOTTOM_BANNER_BG =
+      "lib/assets/images/home/bottom_bar.webp";
 }
 
+// ignore: must_be_immutable
 class RefreshBanner extends HomeState {
-  final List<BannerItem> banners;
+  // ignore: non_constant_identifier_names
+  static final DEFAULT_BANNER_BG =
+      "lib/assets/images/banners/icon_banner01.webp";
+  BannerStateEnum status = BannerStateEnum.NO_BANNER_DATA;
+  List<BannerItem> banners;
 
-  RefreshBanner(this.banners);
+
+}
+enum BannerStateEnum {
+  NO_BANNER_DATA,
+  SHOW_BANNER_DATA
 }

@@ -4,6 +4,7 @@ import 'package:luckin_coffee_demo/common/global.dart';
 import 'package:luckin_coffee_demo/common/utils/log.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/banner_provider.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/product_category_provider.dart';
+import 'package:luckin_coffee_demo/exceptions/app_exception.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -146,9 +147,9 @@ class DatabaseManager {
     });
   }
 
-  Future<BaseDBProvider> getProvider(String providerName) {
+   BaseDBProvider  getProvider(String providerName) {
     if (_providerMap.containsKey(providerName))
-      return Future<BaseDBProvider>.value(_providerMap[providerName]);
-    return Future.error("没有找到 与 $providerName 对应的数据提供器");
+      return _providerMap[providerName];
+    throw AppException(-100,"没有找到 与 $providerName 对应的数据提供器");
   }
 }
