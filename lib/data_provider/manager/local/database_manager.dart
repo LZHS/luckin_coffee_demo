@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:luckin_coffee_demo/common/global.dart';
-import 'package:luckin_coffee_demo/common/utils/log.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/banner_provider.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/product_category_provider.dart';
 import 'package:luckin_coffee_demo/exceptions/app_exception.dart';

@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:meta/meta.dart';
@@ -12,6 +13,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final BuildContext context;
+  SwiperController _topBannerController;
 
   HomeBloc(this.context)
       : assert(context != null),
@@ -39,7 +41,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try{
       LoadingDialog.show(context);
       HomeService service = HomeServiceImp();
-      final BaseEntity data = await service.getHomeData().catchError((onError)=>onError);
+      final BaseEntity data = await service.getHomeTopBannerData().catchError((
+          onError) => onError);
       if (data.code == 0) {
         List<BannerItem> banners = data.result;
         RefreshBanner refreshBanner = RefreshBanner();
@@ -65,7 +68,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     log.d("menuItemClick(type:$type) = HomeBloc");
     add(RequestData());
   }
+
   menuButtomItemClick() {
     log.d("底部 Banner 点击事件");
+  }
+
+  bannerItemClick(BannerItem item) {
+    log.d("BannerItem 被点击 ：${item.toString()}");
+    _topBannerController.stopAutoplay();
+    Future.delayed(Duration(minutes: 1), () {
+      _topBannerController.startAutoplay();
+    });
+  }
+
+  set topBannerController(SwiperController value) {
+    _topBannerController = value;
   }
 }

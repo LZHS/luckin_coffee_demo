@@ -18,6 +18,7 @@ class AppColors  {
   static const appTheme88afd5 = Color(0xff88afd5);
 
   static const appTheme4280BD = Color(0xff4280BD);
+  static const appTheme90c0ef = Color(0xff90c0ef);
 
   static const appTheme1e88afd5 = Color(0x1e88afd5);
 

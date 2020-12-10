@@ -6,11 +6,13 @@ import 'package:luckin_coffee_demo/models/bloc/home/home_bloc.dart';
 
 class HomeLocationWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => BlocBuilder<HomeBloc, HomeState>(
-      buildWhen: (_, state) => state is LocatingRefresh,
-      builder: (content, state) {
-        LocatingRefresh currState = state as LocatingRefresh;
-        return _buildLocatingWidget(currState.locatingInformation);
+  Widget build(BuildContext context) =>
+      BlocBuilder<HomeBloc, HomeState>(buildWhen: (previous, state) {
+        return state is LocatingRefresh;
+      }, builder: (content, state) {
+        if (state is LocatingRefresh)
+          return _buildLocatingWidget(state.locatingInformation);
+        return Container();
       });
 
   _buildLocatingWidget(LocatingInformation locating) => Container(

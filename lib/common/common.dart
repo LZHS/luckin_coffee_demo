@@ -18,6 +18,7 @@ export 'widgets/divider_widget.dart';
 export 'widgets/dialog/notice_dialog.dart';
 export 'widgets/button/app_button.dart';
 export 'widgets/down_progress.dart';
+export 'widgets/cache_net_work_img/network_cache_image.dart';
 //endregion
 
 

@@ -23,10 +23,10 @@ import 'package:flutter/src/painting/image_stream.dart';
 import 'package:luckin_coffee_demo/common/widgets/cache_net_work_img/cache_file_image.dart';
 
 @immutable
-class NetworkImage
+class NetworkCacheImage
     extends image_provider.ImageProvider<image_provider.NetworkImage>
     implements image_provider.NetworkImage {
-  const NetworkImage(this.url, {this.scale = 1.0, this.headers})
+  const NetworkCacheImage(this.url, {this.scale = 1.0, this.headers})
       : assert(url != null),
         assert(scale != null);
 
@@ -42,9 +42,9 @@ class NetworkImage
   static final _cacheFileImage = CacheFileImage();
 
   @override
-  Future<NetworkImage> obtainKey(
+  Future<NetworkCacheImage> obtainKey(
       image_provider.ImageConfiguration configuration) {
-    return SynchronousFuture<NetworkImage>(this);
+    return SynchronousFuture<NetworkCacheImage>(this);
   }
 
   @override
@@ -54,7 +54,7 @@ class NetworkImage
         StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(key as NetworkImage, chunkEvents, decode),
+      codec: _loadAsync(key as NetworkCacheImage, chunkEvents, decode),
       chunkEvents: chunkEvents.stream,
       scale: key.scale,
       debugLabel: key.url,
@@ -82,7 +82,7 @@ class NetworkImage
   }
 
   Future<ui.Codec> _loadAsync(
-    NetworkImage key,
+      NetworkCacheImage key,
     StreamController<ImageChunkEvent> chunkEvents,
     image_provider.DecoderCallback decode,
   ) async {
@@ -134,7 +134,7 @@ class NetworkImage
   @override
   bool operator ==(Object other) {
     if (other.runtimeType != runtimeType) return false;
-    return other is NetworkImage && other.url == url && other.scale == scale;
+    return other is NetworkCacheImage && other.url == url && other.scale == scale;
   }
 
   @override

@@ -1,4 +1,3 @@
-import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/beans/banner/banner_bean.dart';
 import 'package:luckin_coffee_demo/data_provider/manager/local/help/provider/base_db_provider.dart';
 import 'package:sqflite/sqlite_api.dart';
@@ -20,7 +19,7 @@ class BannerProvider extends BaseDBProvider {
 
   @override
   createTableString() => """CREATE TABLE $tabName (
-    $id   INTEGER PRIMARY KEY NOT NULL,
+    $id   TEXT PRIMARY KEY NOT NULL,
     $imgPath TEXT    NOT NULL,
     `$action` INT     NOT NULL,
     $bannerId INT     NOT NULL,
@@ -31,33 +30,40 @@ class BannerProvider extends BaseDBProvider {
 
   /// 插入數據
   Future<int> insert(List<BannerItem> banners) {
-    // TODO  进行到这里卡主了
     var sqlStr =
         "insert into `$tabName` (`$id`, `$imgPath`, `$action`,`$bannerId`,`$updateTime`) values (?,?,?,?,?);";
-    List<Future<int>> inserts = banners.map((e) =>
-        _database.rawInsert(
-            sqlStr, [e.id, e.imgPath, e.action, e.bannerId, e.updateTime])
-    ).toList();
-    Stream.fromFutures(inserts).map<Future<int>>((event) async {
-      log.d("event$event");
-      return await event;
-    });
-
-
-    // var arguments = banners
-    //     .map((e) => [e.id, e.imgPath, e.action, e.bannerId, e.updateTime])
-    //     .toList();
-    // _database.i
-    return null;
+    List<Future<int>> inserts = banners
+        .map((e) => _database.rawInsert(
+              sqlStr,
+              [e.id, e.imgPath, e.action, e.bannerId, e.updateTime],
+            ))
+        .toList();
+    return Stream.fromFutures(inserts)
+        .map<int>((event) => event)
+        .toList()
+        .then((value) => value.length);
   }
 
   /// 查询所有的记录
-  Future<List<BannerItem>> queryAll() {
-    var sqlStr = "SELECT * FROM `$tabName`;";
+  Future<List<BannerItem>> queryAll(BannerType type) {
+    var sqlStr =
+        "SELECT * FROM `$tabName` WHERE `$bannerId` = ${_checkBannerType(type)} ;";
     return _database.rawQuery(sqlStr).then((value) {
-      if (value.length <= 0) return Future.value(null);
-      return Future.value(value.map((e) => BannerItem.fromJson(e)).toList());
+      if (value.length <= 0) return null;
+      return
+          value.map((e) => BannerItem.fromDataJson(e)).toList();
     });
+  }
+
+  _checkBannerType(type) {
+    switch (type) {
+      case BannerType.TOP:
+        return "1";
+      case BannerType.BOTTOM:
+        return "2";
+      default:
+        return "1";
+    }
   }
 
   /// 更新 banneritem 记录 并返回 更新调数
@@ -67,11 +73,11 @@ class BannerProvider extends BaseDBProvider {
       if (value <= 0) return insert(banners);
       banners.forEach((element) {
         findById(element.id).then((value) async {
-          if (value.length >= 0)
-            updateCount += await insert(value);
+          if (value.length <= 0)
+            updateCount += await insert([element]);
           else
             updateCount +=
-            await _database.rawUpdate(_buildSqlUpdate(value.first));
+            await _database.rawUpdate(_buildSqlUpdate(element));
         });
       });
       return updateCount;
@@ -79,17 +85,17 @@ class BannerProvider extends BaseDBProvider {
   }
 
   /// 根据Id 查询 该条记录是否存在
-  Future<List<BannerItem>> findById(String itemId) {
+  Future<List<BannerItem>> findById(itemId) {
     var sqlSt = "SELECT * FROM $tabName where `$id`= '$itemId';";
     return _database.rawQuery(sqlSt).then((value) {
       if (value.length <= 0) return List();
-      return value.map((e) => BannerItem.fromJson(e)).toList();
+      return value.map((e) => BannerItem.fromDataJson(e)).toList();
     });
   }
 
   _buildSqlUpdate(BannerItem banner) => """
   UPDATE `$tabName`
-   SET `$imgPath` = ${banner.imgPath},
+   SET `$imgPath` = '${banner.imgPath}',
        `$action` = ${banner.action},
        `$bannerId` = ${banner.bannerId},
        `$updateTime` =${banner.updateTime} 
@@ -102,4 +108,9 @@ class BannerProvider extends BaseDBProvider {
     var sqlStr = "SELECT COUNT(*) as count FROM `$tabName`;";
     return _database.rawQuery(sqlStr).then((value) => value[0]["count"]);
   }
+
+}
+enum BannerType {
+  TOP,
+  BOTTOM
 }
