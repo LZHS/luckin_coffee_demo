@@ -19,7 +19,10 @@ class Routes {
   static String menu = "/menu/menu_page";
 
   /// 扫描页面
-  static String scan = "scan/scan_page";
+  static String scan = "/home/scan/scan_page";
+
+  /// 用户选择登陆页面
+  static String login = "/login/login_page";
 
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
@@ -30,7 +33,8 @@ class Routes {
       ..define(main, handler: mainHandler)
       ..define(home, handler: homeHandler)
       ..define(menu, handler: menuHandler)
-      ..define(scan, handler: scanHandler);
+      ..define(scan, handler: scanHandler)
+      ..define(login, handler: loginHandler);
   }
 
   static void goMainPage(BuildContext context) {
@@ -45,7 +49,12 @@ class Routes {
     Application.router.navigateTo(
       context,
       Routes.scan,
-      clearStack: true,
+      transition: TransitionType.fadeIn,
+    );
+  }static void goLoginPage(BuildContext context) {
+    Application.router.navigateTo(
+      context,
+      Routes.login,
       transition: TransitionType.fadeIn,
     );
   }

@@ -33,10 +33,11 @@ class MainPage extends StatelessWidget {
                   context.read<MainCubit>().changeCurrentPage(index),
               currentIndex: _getCurrentIndex(state),
             ),
-            body: IndexedStack(
+            body:   IndexedStack(
               index: _getCurrentIndex(state),
               children: _children,
-            ),
+            )
+
           ),
         ),
       ),
