@@ -24,8 +24,8 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: AppColors.appBackColor,
-      child: BlocProvider<MainCubit>.value(
-        value: MainCubit(context),
+      child: BlocProvider<MainCubit>(
+        create: (context) => MainCubit(context),
         child: BlocBuilder<MainCubit, MainState>(
           builder: (context, state) => Scaffold(
             bottomNavigationBar: BottomNavigationWidget.getBottomNavigationBar(
@@ -33,11 +33,15 @@ class MainPage extends StatelessWidget {
                   context.read<MainCubit>().changeCurrentPage(index),
               currentIndex: _getCurrentIndex(state),
             ),
-            body:   IndexedStack(
-              index: _getCurrentIndex(state),
-              children: _children,
-            )
-
+            body: MultiBlocProvider(
+              providers: [
+                BlocProvider<HomeBloc>(create: (context) => HomeBloc(context)),
+              ],
+              child: IndexedStack(
+                index: _getCurrentIndex(state),
+                children: _children,
+              ),
+            ),
           ),
         ),
       ),
