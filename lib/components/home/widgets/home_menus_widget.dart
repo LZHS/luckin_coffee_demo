@@ -87,7 +87,7 @@ class HomeMenusWidget extends StatelessWidget {
         ),
       );
 
-  menuItemClick(int type) => homeBloc.menuItemClick(type);
+  menuItemClick(int type) => homeBloc.onClickMenuItem(type);
 
 
 

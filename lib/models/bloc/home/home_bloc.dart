@@ -36,7 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield LocatingRefresh(LocatingInformation(
           storeName: "青年汇店", distance: "1.3公里", isTakeTheir: false));
   }
-
+/// 请求 Banner 事件
   Stream<HomeState> _requestHomeData() async* {
     try{
       LoadingDialog.show(context);
@@ -53,32 +53,41 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield refreshBanner;
       } else
         showToast(data.message);
-    }catch(e){
+    } catch (e) {
       log.e(e.toString());
-    }finally{
+    } finally {
       LoadingDialog.cancel();
     }
   }
 
-  clickSan() {
+  ///点击了扫描按钮
+  onClickScan() {
     showToast("你点击了扫描页面");
   }
 
-  menuItemClick(int type) {
+  ///
+  onClickMenuItem(int type) {
     log.d("menuItemClick(type:$type) = HomeBloc");
     add(RequestData());
   }
 
-  menuButtomItemClick() {
+  /// 底部 Banner 点击事件
+  onClickMenuBottomItem() {
     log.d("底部 Banner 点击事件");
   }
 
-  bannerItemClick(BannerItem item) {
+  ///BannerItem 被点击
+  onClickBannerItem(BannerItem item) {
     log.d("BannerItem 被点击 ：${item.toString()}");
     _topBannerController.stopAutoplay();
     Future.delayed(Duration(minutes: 1), () {
       _topBannerController.startAutoplay();
     });
+  }
+
+  /// 用户点击 是否自提 Item
+  onClickLocating() {
+    Routes.goLoginPage(context);
   }
 
   set topBannerController(SwiperController value) {

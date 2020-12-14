@@ -77,7 +77,7 @@ class HomeBannerWidget extends StatelessWidget {
         top: 30.0,
         right: 10.0,
         child: GestureDetector(
-          onTap: () => _bloc.clickSan(),
+          onTap: () => _bloc.onClickScan(),
           child: Container(
             width: 40.0,
             height: 40.0,
@@ -96,6 +96,6 @@ class HomeBannerWidget extends StatelessWidget {
 
   /// Banner Item 被点击是触发
   _bannerOnTap(BannerItem item) {
-    _bloc.bannerItemClick(item);
+    _bloc.onClickBannerItem(item);
   }
 }
