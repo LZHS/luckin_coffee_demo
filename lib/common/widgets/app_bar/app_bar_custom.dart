@@ -21,7 +21,6 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppBar
     return Container(
       width: double.infinity,
       height: height + Global.getStatusBarHeight(context),
