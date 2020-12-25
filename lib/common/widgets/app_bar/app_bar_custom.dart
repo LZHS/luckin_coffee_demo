@@ -76,6 +76,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 _buildLeftWidget(),
                 _buildCenterWidget(),
+                _buildRightWidget(),
               ],
             ),
           ),
@@ -131,6 +132,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       Application.router.pop(_context);
   }
 
+  /// 构建中间的文字
   _buildCenterWidget() {
     if (centerWidget == null && title == null || title == "")
       return Container();
@@ -142,10 +144,24 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       right: paddingRight,
       top: 0,
       bottom: 0,
-      child: centerWidget ?? Center(child: Text(
-        this.title,
-        overflow: TextOverflow.ellipsis,
-        style: this.titleTextStyle,
-      ),),);
+      child: centerWidget ??
+          Center(
+            child: Text(
+              this.title,
+              overflow: TextOverflow.ellipsis,
+              style: this.titleTextStyle,
+            ),
+          ),
+    );
   }
+
+  /// 添加右侧 控件
+  _buildRightWidget() => rightWidget == null
+      ? Container()
+      : Positioned(
+          top: 0.0,
+          bottom: 0.0,
+          width: rightWidget.width,
+          right: 0.0,
+          child: rightWidget);
 }

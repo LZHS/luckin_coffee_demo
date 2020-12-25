@@ -39,7 +39,8 @@ class AppButton extends StatelessWidget {
     this.backColor = AppColors.appTheme88afd5,
     this.highlightColor = AppColors.appTheme4280BD,
     this.leftImgPath = "",
-  }) : super(key: key);
+  })  : assert(text != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -24,6 +24,9 @@ class Routes {
   /// 用户选择登陆页面
   static String login = "/login/login_page";
 
+  /// 用户 微信 登陆页面
+  static String wechatLogin = "/login/wechat/wechat_login_page";
+
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
       handlerFunc: (_, parameters) => ErrorPage(),
@@ -34,7 +37,8 @@ class Routes {
       ..define(home, handler: homeHandler)
       ..define(menu, handler: menuHandler)
       ..define(scan, handler: scanHandler)
-      ..define(login, handler: loginHandler);
+      ..define(login, handler: loginHandler)
+      ..define(wechatLogin, handler: weChatLoginHandler);
   }
 
   static void goMainPage(BuildContext context) {
@@ -45,16 +49,27 @@ class Routes {
       transition: TransitionType.fadeIn,
     );
   }
+
   static void goScanPage(BuildContext context) {
     Application.router.navigateTo(
       context,
       Routes.scan,
       transition: TransitionType.fadeIn,
     );
-  }static void goLoginPage(BuildContext context) {
+  }
+
+  static void goLoginPage(BuildContext context) {
     Application.router.navigateTo(
       context,
       Routes.login,
+      transition: TransitionType.fadeIn,
+    );
+  }
+
+  static void goWechatLoginPage(BuildContext context) {
+    Application.router.navigateTo(
+      context,
+      Routes.wechatLogin,
       transition: TransitionType.fadeIn,
     );
   }

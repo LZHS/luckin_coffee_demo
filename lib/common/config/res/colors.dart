@@ -26,5 +26,14 @@ class AppColors  {
 
   static const appHomeMenusBorderColor = Color(0xff63473a);
 
+  static const appTheme49c265 = Color(0xff49c265);
+
+  static const appThemeHigh49c265 = Color(0xff007900);
+
+
+  static const appThemeHigh88afd5 = Color(0xaa88afd5);
+
+
+
   static const appDividerColor = Color(0xfff2f2f2);
 }

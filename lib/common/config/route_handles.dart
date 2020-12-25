@@ -28,13 +28,17 @@ var menuHandler = Handler(
 /// 菜单页面
 var scanHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return ScanPage();
-    });
+  return ScanPage();
+});
 
-/// 菜单页面
+/// 用戶选择 登录方式 页面
 var loginHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-      return LoginPage();
-    });
+  return LoginPage();
+});
 
-
+/// 微信 登录 页面
+var weChatLoginHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return WechatLoginPage();
+});
