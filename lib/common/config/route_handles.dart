@@ -40,5 +40,10 @@ var loginHandler = Handler(
 /// 微信 登录 页面
 var weChatLoginHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
-  return WechatLoginPage();
-});
+      return WechatLoginPage();
+    });
+/// 手机号  登录 页面
+var phoneLoginHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return PhoneNumLoginPage();
+    });

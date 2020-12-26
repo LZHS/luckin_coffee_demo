@@ -66,6 +66,7 @@ class LoginPage extends StatelessWidget {
         Routes.goWechatLoginPage(context);
         break;
       case 1: //手机验证码登录
+        Routes.goPhoneLoginPage(context);
         break;
     }
   }

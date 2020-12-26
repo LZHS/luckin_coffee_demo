@@ -9,7 +9,7 @@ class AppColors  {
 
   static const appTitleColor = Color(0xff383838);
 
-  static const appSubTitleColor = Color(0x64808080);
+  static const appSubTitleColor = Color(0xff808080);
 
   static const appMunTextColor = Color(0xff2b4c7e);
 

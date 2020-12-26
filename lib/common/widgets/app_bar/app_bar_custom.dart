@@ -22,7 +22,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   /// 朱勇设置为true是，leftWidget 其他设置将无效
   final bool leftIsNull;
   final VoidCallback onClickLeft;
-  final Widget leftWidget;
+  final SizedBox leftWidget;
   final Widget leftImageWidget;
   final String title;
 
@@ -37,7 +37,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   /// 是否显示 分割线，默认显示
   final bool isShowDivider;
   BuildContext _context;
-  final double leftWidth = 36.0;
+  static double leftWidth = 36.0;
 
   AppBarCustom(
       {Key key,
@@ -58,31 +58,26 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     _context = context;
-    return Container(
-      width: double.infinity,
-      height: height + Global.getStatusBarHeight(context) + 1,
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            height: Global.getStatusBarHeight(context),
-            color: shadowColor,
+    return Column(
+      children: [
+        Container(
+          width: double.infinity,
+          height: Global.getStatusBarHeight(context),
+          color: shadowColor,),
+        Container(
+          width: double.infinity,
+          height: height,
+          color: backgroundColor,
+          child: Stack(
+            children: [
+              _buildLeftWidget(),
+              _buildCenterWidget(),
+              _buildRightWidget(),
+            ],
           ),
-          Container(
-            width: double.infinity,
-            height: height - (isShowDivider ? 1 : 0),
-            color: backgroundColor,
-            child: Stack(
-              children: [
-                _buildLeftWidget(),
-                _buildCenterWidget(),
-                _buildRightWidget(),
-              ],
-            ),
-          ),
-          Visibility(visible: isShowDivider, child: DividerWidget())
-        ],
-      ),
+        ),
+        Visibility(visible: isShowDivider, child: DividerWidget())
+      ],
     );
   }
 
@@ -95,12 +90,13 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
           left: 0.0,
           top: 0.0,
           bottom: 0.0,
-          width: leftWidth,
+          width: leftWidget == null ? leftWidth : leftWidget.width,
           child: _buildLeftChildWidget()
       );
 
   _buildLeftChildWidget() =>
       leftWidget ?? Material(
+        color: Colors.transparent,
         child: Ink(
           decoration: BoxDecoration(
               color: Colors.transparent
@@ -136,8 +132,9 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   _buildCenterWidget() {
     if (centerWidget == null && title == null || title == "")
       return Container();
-    var paddingLeft = leftWidth + leftWidth / 2;
-    var paddingRight = rightWidget == null ? paddingLeft : rightWidget.width +
+    var paddingLeft = (leftWidget == null ? leftWidth : leftWidget.width) +
+        leftWidth / 2;
+    var paddingRight = (rightWidget == null ? 0 : rightWidget.width) +
         leftWidth / 2;
     return Positioned(
       left: paddingLeft,

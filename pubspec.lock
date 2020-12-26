@@ -14,7 +14,7 @@ packages:
       name: bloc
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.1.0"
+    version: "6.1.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -176,7 +176,7 @@ packages:
       name: fluttertoast
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "7.1.5"
+    version: "7.1.6"
   http_parser:
     dependency: transitive
     description:
