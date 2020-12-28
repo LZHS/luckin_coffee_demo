@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 
-/// 选择登陆方式页面
+/// 手机号登录页面
 class PhoneNumLoginPage extends StatelessWidget {
+  Future<String> navigateRes;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +46,47 @@ class PhoneNumLoginPage extends StatelessWidget {
       minHeight: 58.0,
       maxHeight: 58.0);
 
-  _buildSelectArea(BuildContext context) => FutureBuilder(
-          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+  _buildSelectArea(BuildContext context) => GestureDetector(
+      onTap: () => onClickSelectArea(context),
+      child: Container(
+        constraints: constraints,
+        child: Column(
+          children: [
+            Expanded(
+                child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  Text(
+                    "选择国家/地区",
+                    style: TextStyle(
+                        color: AppColors.appSubTitleColor, fontSize: 14),
+                  ),
+                  FutureBuilder<String>(
+                    initialData: "中国（+86）",
+                    future: navigateRes,
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      log.d("FutureBuilder => ${snapshot.toString()}");
+                      return Text(
+                        snapshot.data,
+                        style: TextStyle(
+                            fontSize: 14, color: AppColors.appTitleColor),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            )),
+            DividerWidget()
+          ],
+        ),
+      ));
 
-            // TODO 201226 将要构建 用户输入框
-        return Container(constraints: constraints,child: Row(),);
-      });
-
+  onClickSelectArea(BuildContext context) {
+    navigateRes =
+        Future.delayed(Duration.zero, () => Routes.goPhoneAreaPage(context));
+  }
 }

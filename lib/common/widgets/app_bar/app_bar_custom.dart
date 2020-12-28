@@ -82,7 +82,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height);
+  Size get preferredSize => Size.fromHeight(height + (isShowDivider ? 1 : 0));
 
   /// 构建左侧 Widget
   _buildLeftWidget() =>

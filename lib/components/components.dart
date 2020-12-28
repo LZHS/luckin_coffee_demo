@@ -15,3 +15,4 @@ export 'shopping/shopping_page.dart';
 export 'login/login_page.dart';
 export 'login/wechat/wechat_login_page.dart';
 export 'login/phone/phone_num_login_page.dart';
+export 'login/phone/area/phone_area_page.dart';

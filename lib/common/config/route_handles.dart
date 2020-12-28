@@ -46,4 +46,8 @@ var weChatLoginHandler = Handler(
 var phoneLoginHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
       return PhoneNumLoginPage();
+    });/// 手机号  登录 页面
+var phoneAreaHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+      return PhoneAreaPage();
     });

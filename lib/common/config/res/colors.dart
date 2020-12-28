@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 class AppColors  {
   static const appBackColor = Color(0xffd0cfd1);
 
-  static const appBarColor = Color(0xfff8f8f8);
+  static const appBarColor = Colors.white;
+
+  static const appBackgroundColor = Color(0xfff8f8f8);
 
   static const appTitleColor = Color(0xff383838);
 
   static const appSubTitleColor = Color(0xff808080);
 
   static const appMunTextColor = Color(0xff2b4c7e);
+
+  static const appHintTextColor = Color(0xffa6a6a6);
 
   static const appTextColor = Color(0xff505050);
 

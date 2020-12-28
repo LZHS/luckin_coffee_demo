@@ -36,6 +36,7 @@ class _AppComponentState extends State<AppComponent> with WidgetsBindingObserver
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (_, state) {
           return MaterialApp(
+            color: AppColors.appBackgroundColor,
             title: 'Luckin',
             theme: state.theme,
             onGenerateRoute: Application.router.generator,
