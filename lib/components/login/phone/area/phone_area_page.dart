@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/common/config/application.dart';
 
 /// 选择手机区号页面
 class PhoneAreaPage extends StatelessWidget {
@@ -16,7 +17,9 @@ class PhoneAreaPage extends StatelessWidget {
         backgroundColor: AppColors.appBackgroundColor,
         appBar: AppBarCustom(
           title: "选择手机区号",
-          onClickLeft: () {},
+          onClickLeft: () {
+            Application.router.pop(context, "${datas[0]["name"]}（${datas[0]["code"]}）");
+          },
         ),
         body: Container(
           margin: const EdgeInsets.only(top: 10, bottom: 10),
@@ -28,32 +31,39 @@ class PhoneAreaPage extends StatelessWidget {
         ));
   }
 
-  Widget _buildItemWidget(BuildContext context, int index) => Container(
-        width: double.infinity,
-        height: 50,
-        padding: const EdgeInsets.only(left: 15, right: 15),
-        child: Column(
-          children: [
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  datas[index]["name"],
-                  style:
-                      TextStyle(fontSize: 15, color: AppColors.appTitleColor),
-                ),
-                Text(
-                  datas[index]["code"],
-                  style: TextStyle(
-                      fontSize: 15, color: AppColors.appHintTextColor),
-                ),
-              ],
-            )),
-            Visibility(
-                visible: index != (datas.length - 1), child: DividerWidget())
-          ],
+  Widget _buildItemWidget(BuildContext context, int index) => FlatButton(
+    padding: const EdgeInsets.all(0),
+        onPressed: () {
+          var res = "${datas[index]["name"]}（${datas[index]["code"]}）";
+          Application.router.pop(context, res);
+        },
+        child: Container(
+          width: double.infinity,
+          height: 50,
+          padding: const EdgeInsets.only(left: 15, right: 15),
+          child: Column(
+            children: [
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    datas[index]["name"],
+                    style:
+                        TextStyle(fontSize: 15, color: AppColors.appTitleColor),
+                  ),
+                  Text(
+                    datas[index]["code"],
+                    style: TextStyle(
+                        fontSize: 15, color: AppColors.appHintTextColor),
+                  ),
+                ],
+              )),
+              Visibility(
+                  visible: index != (datas.length - 1), child: DividerWidget())
+            ],
+          ),
         ),
       );
 }

@@ -86,10 +86,11 @@ class Routes {
       transition: TransitionType.fadeIn,
     );
   }
-  static Future<String> goPhoneAreaPage(BuildContext context) =>
-    Application.router.navigateTo(
-      context,
-      Routes.phoneArea,
-      transition: TransitionType.fadeIn,
-    );
+
+  static Future goPhoneAreaPage(BuildContext context) => Application.router
+      .navigateTo(
+        context,
+        Routes.phoneArea,
+        transition: TransitionType.fadeIn,
+      ) ;
 }

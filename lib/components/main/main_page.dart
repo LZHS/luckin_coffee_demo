@@ -33,15 +33,10 @@ class MainPage extends StatelessWidget {
                   context.read<MainCubit>().changeCurrentPage(index),
               currentIndex: _getCurrentIndex(state),
             ),
-            body: MultiBlocProvider(
-              providers: [
-                BlocProvider<HomeBloc>(create: (context) => HomeBloc(context)),
-              ],
-              child: IndexedStack(
+            body: IndexedStack(
                 index: _getCurrentIndex(state),
                 children: _children,
               ),
-            ),
           ),
         ),
       ),
