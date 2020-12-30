@@ -32,4 +32,7 @@ class Global {
   /// 动态 获取状态栏的高度
   static double getStatusBarHeight(context) =>
       MediaQuery.of(context).padding.top;
+
+  /// 获取屏幕的宽高
+  static Size getMediaSize(context)=>MediaQuery.of(context).size;
 }

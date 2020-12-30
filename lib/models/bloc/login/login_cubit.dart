@@ -6,16 +6,50 @@ import 'package:meta/meta.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  final _defaultArea = "中国（+86）";
+  String currAreaVal = "中国（+86）";
+  int currAreaCode = 86;
+  var editingPhone = TextEditingController();
+  var editingCode = TextEditingController();
 
-  LoginCubit() : super(LoginInitial()) {
-    emit(LoginChangPhoneArea(_defaultArea));
+  var focusPhone = FocusNode();
+  var focusCode = FocusNode();
+  final BuildContext context;
+
+  LoginCubit(this.context) : super(LoginInitial()) {
+    emit(LoginChangPhoneArea(currAreaVal));
   }
 
-  onClickSelectArea(BuildContext context) {
+  /// 点击选择 跳转 选择手机 - 国家/区域
+  onClickSelectArea() {
     // ignore: missing_return
     Routes.goPhoneAreaPage(context).then<String>((result) {
-      emit(LoginChangPhoneArea(result));
+      currAreaVal = result["val"];
+      currAreaCode = result["key"];
+      emit(LoginChangPhoneArea(currAreaVal));
     });
+  }
+
+  ///
+  onClickConfirm() {
+
+    if(editingPhone.text==null||editingPhone.text==""){
+      FocusScope.of(context).requestFocus(focusPhone);
+      showToast("手机号不能为空");
+      return;
+    }
+
+  }
+
+  @override
+  Future<Function> close() {
+    editingPhone.dispose();
+    editingPhone = null;
+    editingCode.dispose();
+    editingCode = null;
+    focusPhone.dispose();
+    focusPhone = null;
+    focusCode.dispose();
+    focusCode = null;
+    return null;
   }
 }

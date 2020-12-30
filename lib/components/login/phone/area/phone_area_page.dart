@@ -5,10 +5,10 @@ import 'package:luckin_coffee_demo/common/config/application.dart';
 
 /// 选择手机区号页面
 class PhoneAreaPage extends StatelessWidget {
-  final datas = [
-    {"name": "中国", "code": "+86"},
-    {"name": "香港（中国）", "code": "+852"},
-    {"name": "美国", "code": "+1"}
+  final data = [
+    {"name": "中国", "code": 86},
+    {"name": "香港(中国)", "code": 852},
+    {"name": "美国", "code": 1}
   ];
 
   @override
@@ -18,7 +18,11 @@ class PhoneAreaPage extends StatelessWidget {
         appBar: AppBarCustom(
           title: "选择手机区号",
           onClickLeft: () {
-            Application.router.pop(context, "${datas[0]["name"]}（${datas[0]["code"]}）");
+            var res = {
+              "key": data[0]["code"],
+              "val": "${data[0]["name"]}(+${data[0]["code"]})"
+            };
+            Application.router.pop(context, res);
           },
         ),
         body: Container(
@@ -27,14 +31,17 @@ class PhoneAreaPage extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           child: ListView.builder(
-              itemCount: datas.length, itemBuilder: _buildItemWidget),
+              itemCount: data.length, itemBuilder: _buildItemWidget),
         ));
   }
 
   Widget _buildItemWidget(BuildContext context, int index) => FlatButton(
     padding: const EdgeInsets.all(0),
         onPressed: () {
-          var res = "${datas[index]["name"]}（${datas[index]["code"]}）";
+          var res = {
+            "key": data[index]["code"],
+            "val": "${data[index]["name"]}(+${data[index]["code"]})"
+          };
           Application.router.pop(context, res);
         },
         child: Container(
@@ -49,19 +56,19 @@ class PhoneAreaPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    datas[index]["name"],
+                    data[index]["name"],
                     style:
                         TextStyle(fontSize: 15, color: AppColors.appTitleColor),
                   ),
                   Text(
-                    datas[index]["code"],
+                    "+${data[index]["code"]}",
                     style: TextStyle(
                         fontSize: 15, color: AppColors.appHintTextColor),
                   ),
                 ],
               )),
               Visibility(
-                  visible: index != (datas.length - 1), child: DividerWidget())
+                  visible: index != (data.length - 1), child: DividerWidget())
             ],
           ),
         ),
