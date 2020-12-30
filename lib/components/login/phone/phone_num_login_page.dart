@@ -4,11 +4,6 @@ import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 /// 手机号登录页面
 class PhoneNumLoginPage extends StatelessWidget {
-  final constraints = BoxConstraints(
-      minWidth: double.infinity,
-      maxWidth: double.infinity,
-      minHeight: 58.0,
-      maxHeight: 58.0);
   LoginCubit _login;
 
   @override
@@ -39,7 +34,7 @@ class PhoneNumLoginPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildSelectArea(context),
+                  SelectArea()
                 ],
               ),
             )
@@ -49,8 +44,18 @@ class PhoneNumLoginPage extends StatelessWidget {
     );
   }
 
+}
 
-  _buildSelectArea(BuildContext context) => FlatButton(
+const constraints = BoxConstraints(
+    minWidth: double.infinity,
+    maxWidth: double.infinity,
+    minHeight: 58.0,
+    maxHeight: 58.0);
+
+/// 选择 国家/地区
+class SelectArea extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) =>FlatButton(
       padding: const EdgeInsets.all(0),
       onPressed: () =>
           BlocProvider.of<LoginCubit>(context).onClickSelectArea(context),
@@ -61,42 +66,36 @@ class PhoneNumLoginPage extends StatelessWidget {
           children: [
             Expanded(
                 child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              alignment: Alignment.centerLeft,
-              child: Row(
-                children: [
-                  Text(
-                    "选择国家/地区",
-                    style: TextStyle(
-                        color: AppColors.appSubTitleColor, fontSize: 14),
+                  width: double.infinity,
+                  height: double.infinity,
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      Text(
+                        "选择国家/地区",
+                        style: TextStyle(
+                            color: AppColors.appSubTitleColor, fontSize: 14),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: BlocBuilder<LoginCubit, LoginState>(
+                          buildWhen: (_, current) => current is LoginChangPhoneArea,
+                          builder: (context, state) {
+                            if (state is LoginChangPhoneArea)
+                              return Text(
+                                state.phoneArea,
+                                style: TextStyle(
+                                    fontSize: 14, color: AppColors.appTitleColor),
+                              );
+                            return Container();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: BlocBuilder<LoginCubit, LoginState>(
-                      buildWhen: (_, current) => current is LoginChangPhoneArea,
-                      builder: (context, state) {
-                        if (state is LoginChangPhoneArea)
-                          return Text(
-                            state.phoneArea,
-                            style: TextStyle(
-                                fontSize: 14, color: AppColors.appTitleColor),
-                          );
-                        return Container();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            )),
+                )),
             DividerWidget()
           ],
         ),
       ));
-}
-class SelectArea extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }
