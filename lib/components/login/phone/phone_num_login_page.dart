@@ -164,7 +164,7 @@ class InputContentWidget extends StatelessWidget {
   _buildConfirmWidget() => Container(
     margin: const EdgeInsets.only(top: 19,left: marginLeft,right: marginRight),
     width: double.infinity,
-    child: AppButton(text: "确定",onTap:()=> _cubit.onClickConfirm(),backColor: AppColors.appTheme88afd5,highlightColor: AppColors.appTheme1e88afd5,)
+    child: AppButton(text: "确定",onTap:()=> _cubit.onClickConfirm(),backColor: AppColors.appTheme88afd5,)
   );
 }
 
