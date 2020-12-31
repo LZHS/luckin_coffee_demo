@@ -17,6 +17,9 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit(this.context) : super(LoginInitial()) {
     emit(LoginChangPhoneArea(currAreaVal));
+    Future.delayed(Duration(seconds: 5), () {
+      emit(LoginShowHint());
+    });
   }
 
   /// 点击选择 跳转 选择手机 - 国家/区域
@@ -29,15 +32,18 @@ class LoginCubit extends Cubit<LoginState> {
     });
   }
 
+  /// 跳转至 用户服务条款 页面
+  goTermsOfServicePage() {
+    Routes.goTermsOfServicePage(context);
+  }
+
   ///
   onClickConfirm() {
-
-    if(editingPhone.text==null||editingPhone.text==""){
+    if (editingPhone.text == null || editingPhone.text == "") {
       FocusScope.of(context).requestFocus(focusPhone);
       showToast("手机号不能为空");
       return;
     }
-
   }
 
   @override

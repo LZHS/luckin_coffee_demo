@@ -17,6 +17,8 @@ class AppColors  {
 
   static const appHintTextColor = Color(0xffa6a6a6);
 
+  static const appTipsTextColor = Color(0xff55799d);
+
   static const appTextColor = Color(0xff505050);
 
   static const appTheme88afd5 = Color(0xff88afd5);

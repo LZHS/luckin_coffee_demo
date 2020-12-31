@@ -9,7 +9,6 @@ class PhoneNumLoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = Global.getMediaSize(context);
     return Scaffold(
-      backgroundColor: AppColors.appBarColor,
       appBar: AppBarCustom(isShowDivider: false),
       body: BlocProvider<LoginCubit>(
         lazy: false,
@@ -32,6 +31,24 @@ class PhoneNumLoginPage extends StatelessWidget {
                         fit: BoxFit.fill,
                       ),
                     )),
+                BlocBuilder<LoginCubit, LoginState>(
+                  buildWhen: (_, current) => current is LoginShowHint,
+                  builder: (_, state) {
+                    if (state is LoginShowHint)
+                      return Positioned(
+                          top: 134,
+                          left: 0.0,
+                          right: 0.0,
+                          child: Center(
+                              child: Text(
+                            "为了您的账号安全，请绑定手机",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.appTipsTextColor),
+                          )));
+                    return Container();
+                  },
+                ),
                 Positioned(
                     top: 177.0,
                     left: 0.0,
@@ -68,7 +85,8 @@ class InputContentWidget extends StatelessWidget {
         _buildSelectAreaWidget(context),
         _buildInputPhone(),
         _buildInputCode(),
-        _buildConfirmWidget()
+        _buildConfirmWidget(),
+        _buildTermsOfServiceWidget()
       ],
     );
   }
@@ -110,7 +128,7 @@ class InputContentWidget extends StatelessWidget {
         inputFormatters: [
           LengthLimitingTextInputFormatter(11),
           FilteringTextInputFormatter.digitsOnly,
-          FilteringTextInputFormatter.singleLineFormatter
+          FilteringTextInputFormatter.singleLineFormatter,
         ],
         maxLines: 1,
         keyboardType: TextInputType.phone,
@@ -151,21 +169,55 @@ class InputContentWidget extends StatelessWidget {
           children: [
             Expanded(
                 child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              alignment: Alignment.centerLeft,
-              child: child,
-            )),
+                  width: double.infinity,
+                  height: double.infinity,
+                  alignment: Alignment.centerLeft,
+                  // TODO 增加一键删除清空数据按钮
+                  child: child,
+                )),
             DividerWidget()
           ],
         ),
-      );
-
-  _buildConfirmWidget() => Container(
-    margin: const EdgeInsets.only(top: 19,left: marginLeft,right: marginRight),
-    width: double.infinity,
-    child: AppButton(text: "确定",onTap:()=> _cubit.onClickConfirm(),backColor: AppColors.appTheme88afd5,)
   );
+
+  /// 确认按钮
+  _buildConfirmWidget() =>
+      Container(
+          margin:
+          const EdgeInsets.only(top: 19, left: marginLeft, right: marginRight),
+          width: double.infinity,
+          child: AppButton(
+            text: "确定",
+            onTap: () => _cubit.onClickConfirm(),
+            backColor: AppColors.appTheme88afd5,
+          ));
+
+  /// 创建用户协议 控件
+  _buildTermsOfServiceWidget() =>
+      FlatButton(
+          color: Colors.transparent,
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onPressed: () => _cubit.goTermsOfServicePage(),
+          child: Container(
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("点击确定，即表示以阅读并同意",
+                    style: TextStyle(
+                        fontSize: 12.0, color: AppColors.appSubTitleColor)),
+                Padding(
+                  padding: const EdgeInsets.only(left: 2),
+                  child: Text("《注册会员服务条款》",
+                      style: TextStyle(
+                          fontSize: 12.0, color: AppColors.appTipsTextColor)),
+                )
+              ],
+            ),
+          ));
 }
 
 

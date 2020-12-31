@@ -30,6 +30,9 @@ class Routes {
   static String phoneLogin = "/login/phone/phone_num_login_page";
   /// 选择登陆方式页面
   static String phoneArea = "/login/phone/area/phone_area_page";
+  ///  用户协议 页面
+  static String termsOfService = "/login/terms/terms_of_service_page";
+
 
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
@@ -44,7 +47,8 @@ class Routes {
       ..define(login, handler: loginHandler)
       ..define(wechatLogin, handler: weChatLoginHandler)
       ..define(phoneLogin, handler: phoneLoginHandler)
-      ..define(phoneArea, handler: phoneAreaHandler);
+      ..define(phoneArea, handler: phoneAreaHandler)
+      ..define(termsOfService, handler: termsOfServiceHandler);
   }
 
   static void goMainPage(BuildContext context) {
@@ -93,4 +97,12 @@ class Routes {
         Routes.phoneArea,
         transition: TransitionType.fadeIn,
       ) ;
+
+  static void goTermsOfServicePage(BuildContext context) {
+    Application.router.navigateTo(
+      context,
+      Routes.termsOfService,
+      transition: TransitionType.fadeIn,
+    );
+  }
 }

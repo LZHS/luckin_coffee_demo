@@ -4,6 +4,7 @@ part of 'login_cubit.dart';
 abstract class LoginState {}
 
 class LoginInitial extends LoginState {}
+class LoginShowHint extends LoginState {}
 
 class LoginChangPhoneArea extends LoginState {
   final String phoneArea;
