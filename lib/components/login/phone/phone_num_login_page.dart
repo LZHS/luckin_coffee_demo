@@ -32,21 +32,38 @@ class PhoneNumLoginPage extends StatelessWidget {
                       ),
                     )),
                 BlocBuilder<LoginCubit, LoginState>(
-                  buildWhen: (_, current) => current is LoginShowHint,
+                  buildWhen: (_, current) {
+                    var temp = current is LoginShowHint;
+                    return temp;
+                  },
                   builder: (_, state) {
-                    if (state is LoginShowHint)
-                      return Positioned(
-                          top: 134,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Center(
-                              child: Text(
-                            "为了您的账号安全，请绑定手机",
-                            style: TextStyle(
-                                fontSize: 12,
-                                color: AppColors.appTipsTextColor),
-                          )));
-                    return Container();
+                    var visible = false;
+                    if (state is LoginShowHint) visible = state.isShow;
+                    return Visibility(
+                        visible: visible,
+                        child: Positioned(
+                            top: 150,
+                            left: 0.0,
+                            right: 0.0,
+                            child: Center(
+                                child: Text.rich(TextSpan(children: [
+                              TextSpan(
+                                text: ((state is LoginShowHint)
+                                    ? state.hintMsg
+                                    : "")+"  ",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.appTipsTextColor),
+                              ),
+                                  TextSpan(
+                                    text: (state is LoginShowHint)
+                                        ? state.errMsg
+                                        : "",
+                                    style: TextStyle(
+                                        fontSize: 11,
+                                        color: AppColors.appThemeSpecialff6464),
+                                  )
+                            ])))));
                   },
                 ),
                 Positioned(
@@ -67,18 +84,21 @@ class PhoneNumLoginPage extends StatelessWidget {
 // ignore: must_be_immutable
 class InputContentWidget extends StatelessWidget {
   LoginCubit _cubit;
-  static const double marginLeft=38.0,marginRight=38.0;
+  static const double marginLeft = 38.0,
+      marginRight = 38.0,
+      height = 58.0;
+
   /// 输入框限制
   final constraints = BoxConstraints(
       minWidth: double.infinity,
       maxWidth: double.infinity,
-      minHeight: 58.0,
-      maxHeight: 58.0);
+      minHeight: height,
+      maxHeight: height);
   final hintStyle = TextStyle(fontSize: 14, color: AppColors.appHintTextColor);
 
   @override
   Widget build(BuildContext context) {
-    _cubit=BlocProvider.of<LoginCubit>(context);
+    _cubit = BlocProvider.of<LoginCubit>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -105,64 +125,95 @@ class InputContentWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: BlocBuilder<LoginCubit, LoginState>(
-                buildWhen: (_, current) => current is LoginChangPhoneArea,
+                buildWhen: (_, curr) => curr is LoginChangPhoneArea,
                 builder: (context, state) {
-                  if (state is LoginChangPhoneArea)
-                    return Text(
-                      state.phoneArea,
-                      style: TextStyle(
-                          fontSize: 14, color: AppColors.appTitleColor),
-                    );
-                  return Container();
+                  var areaStr = this._cubit.currAreaVal;
+                  if (state is LoginChangPhoneArea) areaStr = state.phoneArea;
+                  return Text(
+                    areaStr,
+                    style: TextStyle(
+                        fontSize: 14, color: AppColors.appTitleColor),
+                  );
                 },
               ),
             ),
           ],
         )),
-      );
+  );
 
-  _buildInputPhone() => _customContainer(TextField(
-        maxLength: null,
-        controller: _cubit.editingPhone,
-        focusNode: _cubit.focusPhone,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(11),
-          FilteringTextInputFormatter.digitsOnly,
-          FilteringTextInputFormatter.singleLineFormatter,
+  /// 构建输入 手机号
+  _buildInputPhone() =>
+      _customContainer(Row(
+        children: [
+          Expanded(
+              child: TextField(
+                maxLength: null,
+                controller: _cubit.editingPhone,
+                focusNode: _cubit.focusPhone,
+                onChanged: _cubit.onChangedPhone,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                  FilteringTextInputFormatter.digitsOnly,
+                  FilteringTextInputFormatter.singleLineFormatter,
+                ],
+                maxLines: 1,
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                autofocus: true,
+                decoration: InputDecoration(
+                  hintText: "请输入手机号",
+                  hintStyle: hintStyle,
+                  border: InputBorder.none,
+                ),
+              )), BlocBuilder<LoginCubit, LoginState>(
+              buildWhen: (_, currState) => currState is ClearPhoneNum,
+              builder: (_, state) {
+                var visible = false;
+                if (state is ClearPhoneNum)
+                  visible = state.isClear;
+                return Visibility(
+                    visible: visible,
+                    child: SizedBox(width: height,
+                        height: height,
+                        child: FlatButton(
+                          onPressed: () => _cubit.onClickClearPhoneNum(),
+                          child: Icon(Icons.cancel, size: 18,
+                            color: AppColors.appHintTextColor,),)));
+              })
         ],
-        maxLines: 1,
-        keyboardType: TextInputType.phone,
-        textInputAction: TextInputAction.next,
-        autofocus: true,
-        decoration: InputDecoration(
-          hintText: "请输入手机号",
-          hintStyle: hintStyle,
-          border: InputBorder.none,
-        ),
       ));
 
-  _buildInputCode() => _customContainer(TextField(
-    controller: _cubit.editingCode,
-        focusNode:_cubit.focusCode ,
-        maxLength: null,
-        inputFormatters: [
-          LengthLimitingTextInputFormatter(4),
-          FilteringTextInputFormatter.digitsOnly,
-          FilteringTextInputFormatter.singleLineFormatter
-        ],
-        maxLines: 1,
-        keyboardType: TextInputType.phone,
-        textInputAction: TextInputAction.done,
-        autofocus: true,
-        decoration: InputDecoration(
-          hintText: "请输入手机验证码",
-          hintStyle: hintStyle,
-          border: InputBorder.none,
-        ),
-      ));
+  /// 构建 输入 验证码
+  _buildInputCode() =>
+      _customContainer(
+          Row(
+              children: [
+                Expanded(child: TextField(
+                  controller: _cubit.editingCode,
+                  focusNode: _cubit.focusCode,
+                  maxLength: null,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(4),
+                    FilteringTextInputFormatter.digitsOnly,
+                    FilteringTextInputFormatter.singleLineFormatter
+                  ],
+                  maxLines: 1,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.done,
+                  autofocus: true,
+                  onEditingComplete: () => _cubit.onClickConfirm(),
+                  decoration: InputDecoration(
+                    hintText: "请输入手机验证码",
+                    hintStyle: hintStyle,
+                    border: InputBorder.none,
+                  ),
+                )),
+
+              ]));
 
   /// item 基本 属性包装
-  _customContainer(Widget child) => Container(
+  _customContainer(Widget child) =>
+      Container(
         constraints: constraints,
         padding: const EdgeInsets.only(left: marginLeft, right: marginRight),
         child: Column(
@@ -200,23 +251,20 @@ class InputContentWidget extends StatelessWidget {
           splashColor: Colors.transparent,
           onPressed: () => _cubit.goTermsOfServicePage(),
           child: Container(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("点击确定，即表示以阅读并同意",
-                    style: TextStyle(
-                        fontSize: 12.0, color: AppColors.appSubTitleColor)),
-                Padding(
-                  padding: const EdgeInsets.only(left: 2),
-                  child: Text("《注册会员服务条款》",
-                      style: TextStyle(
-                          fontSize: 12.0, color: AppColors.appTipsTextColor)),
-                )
-              ],
-            ),
+              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text.rich(
+                  TextSpan(children: [
+                    TextSpan(text: "点击确定，即表示以阅读并同意  ",
+                        style: TextStyle(
+                            fontSize: 12.0, color: AppColors.appSubTitleColor)),
+                    TextSpan(text: "《注册会员服务条款》",
+                        style: TextStyle(
+                            fontSize: 12.0, color: AppColors.appTipsTextColor))
+                  ]))
+
+
           ));
 }
 

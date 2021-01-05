@@ -28,3 +28,6 @@ export 'widgets/dialog/notice_dialog.dart';
 export 'widgets/dialog/update_dialog.dart';
 export 'widgets/dialog/loading_dialog.dart';
 //endregion
+
+
+export 'utils/validator_util.dart';

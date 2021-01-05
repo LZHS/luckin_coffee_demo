@@ -39,6 +39,8 @@ class AppColors  {
 
   static const appThemeHigh88afd5 = Color(0xaa88afd5);
 
+  static const appThemeSpecialff6464 = Color(0xffff6464);
+
 
 
   static const appDividerColor = Color(0xfff2f2f2);
