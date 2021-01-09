@@ -38,7 +38,13 @@ class PhoneNumLoginPage extends StatelessWidget {
                   },
                   builder: (_, state) {
                     var visible = false;
-                    if (state is LoginShowHint) visible = state.isShow;
+                    var hintMsg = "", errMsg = "";
+                    if (state is LoginShowHint) {
+                      visible = state.isShow;
+                      hintMsg =
+                          state.hintMsg == null ? "" : "${state.hintMsg}  ";
+                      errMsg = state.errMsg == null ? "" : "${state.errMsg}";
+                    }
                     return Visibility(
                         visible: visible,
                         child: Positioned(
@@ -48,21 +54,17 @@ class PhoneNumLoginPage extends StatelessWidget {
                             child: Center(
                                 child: Text.rich(TextSpan(children: [
                               TextSpan(
-                                text: ((state is LoginShowHint)
-                                    ? state.hintMsg
-                                    : "")+"  ",
+                                text: hintMsg,
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: AppColors.appTipsTextColor),
                               ),
-                                  TextSpan(
-                                    text: (state is LoginShowHint)
-                                        ? state.errMsg
-                                        : "",
-                                    style: TextStyle(
-                                        fontSize: 11,
-                                        color: AppColors.appThemeSpecialff6464),
-                                  )
+                              TextSpan(
+                                text: errMsg,
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    color: AppColors.appThemeSpecialff6464),
+                              )
                             ])))));
                   },
                 ),
@@ -165,6 +167,7 @@ class InputContentWidget extends StatelessWidget {
                   hintStyle: hintStyle,
                   border: InputBorder.none,
                 ),
+                onEditingComplete: () => _cubit.changeFocusCode(),
               )), BlocBuilder<LoginCubit, LoginState>(
               buildWhen: (_, currState) => currState is ClearPhoneNum,
               builder: (_, state) {
@@ -208,8 +211,17 @@ class InputContentWidget extends StatelessWidget {
                     border: InputBorder.none,
                   ),
                 )),
-
+                _buildAuthenCodeWidget()
               ]));
+
+  /// 短信验证码
+  // TODO 20210109 未完成
+  Widget _buildAuthenCodeWidget() =>
+      Container(
+        width: height * 2,
+        height: height,
+        alignment: Alignment.center,
+        color: Colors.yellow,);
 
   /// item 基本 属性包装
   _customContainer(Widget child) =>
@@ -223,7 +235,6 @@ class InputContentWidget extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                   alignment: Alignment.centerLeft,
-                  // TODO 增加一键删除清空数据按钮
                   child: child,
                 )),
             DividerWidget()
@@ -263,9 +274,9 @@ class InputContentWidget extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 12.0, color: AppColors.appTipsTextColor))
                   ]))
-
-
           ));
+
 }
+
 
 

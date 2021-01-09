@@ -17,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   final BuildContext context;
 
   LoginCubit(this.context) : super(LoginInitial()) {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 5)).then((_) {
       emit(LoginShowHint(true, hintMsg: "为了您的账号安全，请绑定手机"));
     });
   }
@@ -44,7 +44,7 @@ class LoginCubit extends Cubit<LoginState> {
     String errMsg = _checkFormData();
     if (errMsg != "" || errMsg.length > 0) {
       showToast(errMsg);
-      emit(LoginShowHint(true, errMsg: errMsg));
+      _showHintWidget(true, errMsg: errMsg);
       return;
     }
   }
@@ -52,6 +52,7 @@ class LoginCubit extends Cubit<LoginState> {
   /// 清空 手机号输入框 内容
   onClickClearPhoneNum() {
     editingPhone.text = "";
+    _showHintWidget(false);
     emit(ClearPhoneNum(false));
   }
 
@@ -61,25 +62,50 @@ class LoginCubit extends Cubit<LoginState> {
     emit(ClearPhoneNum(entity.length != 0));
   }
 
-  String _checkFormData() {
-    if (editingPhone.text == null || editingPhone.text == "") {
-      FocusScope.of(context).requestFocus(focusPhone);
-      return "手机号不能为空!";
+  /// 手机号输入框 软键盘 Action 点击事件
+  changeFocusCode() {
+    var phoneErr = _checkPhoneData();
+    if (phoneErr == "")
+      FocusScope.of(context).requestFocus(focusCode);
+    else {
+      showToast(phoneErr);
+      _showHintWidget(true, errMsg: phoneErr);
     }
-    if (!ValidatorUtil.isMobile(editingPhone.text)) {
-      FocusScope.of(context).requestFocus(focusPhone);
-      return "手机号格式不正确!";
-    }
+  }
 
+  String _checkFormData() {
+    var phoneErr = _checkPhoneData();
+    if (phoneErr != "") return phoneErr;
     if (editingCode.text == null || editingCode.text == "") {
       FocusScope.of(context).requestFocus(focusCode);
-      return "验证码不能为空!";
+      return "验证码不能为空";
     }
     if (editingCode.text.length < 4) {
       FocusScope.of(context).requestFocus(focusCode);
-      return "验证码格式不正确!";
+      return "验证码格式不正确";
     }
     return "";
+  }
+
+  String _checkPhoneData() {
+    if (editingPhone.text == null || editingPhone.text == "") {
+      FocusScope.of(context).requestFocus(focusPhone);
+      return "手机号不能为空";
+    }
+    if (!ValidatorUtil.isMobile(editingPhone.text)) {
+      FocusScope.of(context).requestFocus(focusPhone);
+      return "手机号格式不正确";
+    }
+    return "";
+  }
+
+  _showHintWidget(bool isShow, {String hintMsg, String errMsg}) {
+    if (!isShow)
+      emit(LoginShowHint(isShow));
+    else {
+      emit(LoginShowHint(isShow, hintMsg: hintMsg, errMsg: errMsg));
+      Future.delayed(Duration(seconds: 5), () => emit(LoginShowHint(false)));
+    }
   }
 
   @override
@@ -92,6 +118,6 @@ class LoginCubit extends Cubit<LoginState> {
     focusPhone = null;
     focusCode.dispose();
     focusCode = null;
-    return null;
+    return super.close();
   }
 }

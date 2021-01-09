@@ -84,16 +84,6 @@ class WechatLoginPage extends StatelessWidget {
         ]));
   }
 
-  _onClickItem(type) {
-    switch (type) {
-      case 0: // 微信一键登录
-
-        break;
-      case 1: //手机验证码登录
-        break;
-    }
-  }
-
   _buildLeftWidget(BuildContext context) => SizedBox(
         width: 62,
         height: double.infinity,
