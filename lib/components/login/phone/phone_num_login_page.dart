@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/common/global.dart';
 import 'package:luckin_coffee_demo/models/bloc/bloc.dart';
 
 /// 手机号登录页面
@@ -176,67 +177,99 @@ class InputContentWidget extends StatelessWidget {
                   visible = state.isClear;
                 return Visibility(
                     visible: visible,
-                    child: SizedBox(width: height,
+                    child: SizedBox(
+                        width: height,
                         height: height,
                         child: FlatButton(
                           onPressed: () => _cubit.onClickClearPhoneNum(),
-                          child: Icon(Icons.cancel, size: 18,
-                            color: AppColors.appHintTextColor,),)));
+                          child: Icon(
+                            Icons.cancel,
+                            size: 18,
+                            color: AppColors.appHintTextColor,
+                          ),
+                        )));
               })
         ],
       ));
 
   /// 构建 输入 验证码
-  _buildInputCode() =>
-      _customContainer(
-          Row(
-              children: [
-                Expanded(child: TextField(
-                  controller: _cubit.editingCode,
-                  focusNode: _cubit.focusCode,
-                  maxLength: null,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(4),
-                    FilteringTextInputFormatter.digitsOnly,
-                    FilteringTextInputFormatter.singleLineFormatter
-                  ],
-                  maxLines: 1,
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.done,
-                  autofocus: true,
-                  onEditingComplete: () => _cubit.onClickConfirm(),
-                  decoration: InputDecoration(
-                    hintText: "请输入手机验证码",
-                    hintStyle: hintStyle,
-                    border: InputBorder.none,
-                  ),
-                )),
-                _buildAuthenCodeWidget()
-              ]));
+  _buildInputCode() => _customContainer(Row(children: [
+        Expanded(
+            child: TextField(
+          controller: _cubit.editingCode,
+          focusNode: _cubit.focusCode,
+          maxLength: null,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(4),
+            FilteringTextInputFormatter.digitsOnly,
+            FilteringTextInputFormatter.singleLineFormatter
+          ],
+          maxLines: 1,
+          keyboardType: TextInputType.phone,
+          textInputAction: TextInputAction.done,
+          autofocus: true,
+          onEditingComplete: () => _cubit.onClickConfirm(),
+          decoration: InputDecoration(
+            hintText: "请输入手机验证码",
+            hintStyle: hintStyle,
+            border: InputBorder.none,
+          ),
+        )),
+        _buildAuthenCodeWidget()
+      ]));
 
   /// 短信验证码
-  // TODO 20210109 未完成
-  Widget _buildAuthenCodeWidget() =>
-      Container(
-        width: height * 2,
-        height: height,
-        alignment: Alignment.center,
-        color: Colors.yellow,);
+  Widget _buildAuthenCodeWidget() => BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (_, currState) => currState is CodeState,
+        builder: (context, state) {
+          if (state is CodeState) {
+            var showText = "获取验证码";
+            var textColor = Colors.white;
+            var onPressed = _cubit.onClickRequestCode;
+            var flatColor = AppColors.appTheme88afd5;
+            if (state.currTimer != -1) {
+              final String secondsStr =
+                  (state.currTimer % Global.CODE_TIMER_TICKS)
+                      .floor()
+                      .toString()
+                      .padLeft(2, '0');
+              showText = "重新获取$secondsStr";
+              textColor = AppColors.appTipsTextColor;
+              flatColor = AppColors.appHintTextColor;
+              onPressed = null;
+            }
+            return Center(
+              child: FlatButton(
+                onPressed: onPressed,
+                height: 40,
+                color: flatColor,
+                child: Text(
+                  showText,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: textColor,
+                  ),
+                ),
+              ),
+            );
+          }
+          return Container();
+        },
+      );
 
   /// item 基本 属性包装
-  _customContainer(Widget child) =>
-      Container(
+  _customContainer(Widget child) => Container(
         constraints: constraints,
         padding: const EdgeInsets.only(left: marginLeft, right: marginRight),
         child: Column(
           children: [
             Expanded(
                 child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  alignment: Alignment.centerLeft,
-                  child: child,
-                )),
+              width: double.infinity,
+              height: double.infinity,
+              alignment: Alignment.centerLeft,
+              child: child,
+            )),
             DividerWidget()
           ],
         ),

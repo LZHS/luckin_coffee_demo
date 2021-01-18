@@ -9,22 +9,22 @@ class LoadingDialog extends Dialog {
   static bool isDisable = false;
   static StreamController<int> _streamController;
   final String progressText = "加载中...";
-  static BuildContext context;
+  static BuildContext _context;
 
   /// 显示 和 构建 对话框的时间
-  static int showDialogTime = 0, buildDialogTime = 0;
+  static int _showDialogTime = 0, _buildDialogTime = 0;
 
   /// 显示 跟新 对话框
   static void show(context) {
-    showDialogTime = DateTime.now().millisecondsSinceEpoch;
+    _showDialogTime = DateTime.now().millisecondsSinceEpoch;
     Future.delayed(Duration.zero, () {
       showDialog<void>(
         context: context,
         barrierDismissible: false,
         builder: (context) {
-          LoadingDialog.context = context;
+          LoadingDialog._context = context;
           isDisable = true;
-          buildDialogTime = DateTime.now().millisecondsSinceEpoch;
+          _buildDialogTime = DateTime.now().millisecondsSinceEpoch;
           return LoadingDialog();
         },
       );
@@ -32,10 +32,10 @@ class LoadingDialog extends Dialog {
   }
 
   static void cancel() {
-    if (showDialogTime != 0) {
+    if (_showDialogTime != 0) {
       var duration = Duration.zero;
-      if (buildDialogTime == 0 ||
-          buildDialogTime - DateTime.now().millisecondsSinceEpoch <= 0)
+      if (_buildDialogTime == 0 ||
+          _buildDialogTime - DateTime.now().millisecondsSinceEpoch <= 0)
         duration = Duration(milliseconds: 500);
       Future.delayed(
         duration,
@@ -44,11 +44,11 @@ class LoadingDialog extends Dialog {
             _streamController.close();
             _streamController = null;
           }
-          if (LoadingDialog.context != null)
-            Navigator.of(LoadingDialog.context).pop();
-          LoadingDialog.context = null;
-          showDialogTime = 0;
-          buildDialogTime = 0;
+          if (LoadingDialog._context != null)
+            Navigator.of(LoadingDialog._context).pop();
+          LoadingDialog._context = null;
+          _showDialogTime = 0;
+          _buildDialogTime = 0;
           isDisable = false;
         },
       );

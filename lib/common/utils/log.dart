@@ -7,7 +7,7 @@ class Log {
   factory Log( ) => _instance;
 
   Log._internal() {
-    _logger ??= Logger(printer: SimplePrinter(printTime: true, colors: false));
+    _logger ?? Logger(printer: SimplePrinter(printTime: true, colors: false));
   }
 
   void v(dynamic message) {

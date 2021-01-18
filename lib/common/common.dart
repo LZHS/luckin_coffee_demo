@@ -31,3 +31,6 @@ export 'widgets/dialog/loading_dialog.dart';
 
 
 export 'utils/validator_util.dart';
+
+
+export 'config/jpush_help.dart';

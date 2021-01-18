@@ -22,9 +22,15 @@ showToast(String msg) {
 class Global {
   // ignore: non_constant_identifier_names
   static final APP_ID = "1597818873300545668";
+  /// Jpush 推送KEY
+  // ignore: non_constant_identifier_names
+  static final JPUSH_APPKEY = "6a152dffabcce9b880298cb6";
 
   // ignore: non_constant_identifier_names
   static final TIMER_TICKS = 5;
+  // 重新获取 验证码 倒计时
+  // ignore: non_constant_identifier_names
+  static final CODE_TIMER_TICKS = 60;
 
   /// 动态获取当前设备的网络状态（只能得到连接种类，不能確定连接中是否有网络），默认为无网络连接
   static ConnectivityResult connectivityResult = ConnectivityResult.none;

@@ -1,20 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:luckin_coffee_demo/common/global.dart';
 
 void main() {
   test("description ", () async {
-    Stream<int> stream = Stream<int>.periodic(Duration(seconds: 1), (e)=>e);
-    stream = stream.take(5);
+    List<String> arrs = ["18349295925", "13699432965", "13845296840"];
 
-    log.d("${TestB().toString()}");
-   //  StreamController sc = StreamController<int>();
-   //  // 将 Stream 传入
-   //  sc.addStream(stream);
-   //  // 监听
-   // await sc.stream.forEach((element) =>print);
-   // sc.close();
+    var indexStr = "7";
+    Stream.fromIterable(arrs.reversed)
+        .where((event) => event.indexOf(indexStr) >= 0)
+        .toList()
+        .then(print);
   });
 }
 

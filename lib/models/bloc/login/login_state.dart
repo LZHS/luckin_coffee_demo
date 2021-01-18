@@ -16,6 +16,16 @@ class ClearPhoneNum extends LoginState {
 
   ClearPhoneNum(this.isClear);
 }
+/// 控制 短信验证码的 请求， 以及倒计时
+class CodeState extends LoginState{
+  /// 当前显示 倒计时时间，
+  /// 默认为 -1
+  /// 范围 0s ~ Global.CODE_TIMER_TICKS（60s）
+  final int currTimer;
+
+  CodeState(this.currTimer);
+}
+
 
 class LoginChangPhoneArea extends LoginState {
   final String phoneArea;

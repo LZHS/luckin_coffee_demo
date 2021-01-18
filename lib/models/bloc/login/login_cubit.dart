@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -14,12 +16,15 @@ class LoginCubit extends Cubit<LoginState> {
 
   var focusPhone = FocusNode();
   var focusCode = FocusNode();
+  StreamSubscription _timerStream;
   final BuildContext context;
 
   LoginCubit(this.context) : super(LoginInitial()) {
     Future.delayed(Duration(seconds: 5)).then((_) {
       emit(LoginShowHint(true, hintMsg: "为了您的账号安全，请绑定手机"));
     });
+    // Future.delayed(Duration.zero,(){});
+    emit(CodeState(-1));
   }
 
   //  emit(LoginShowHint("短信验证码已下发至 $currAreaVal ${editingPhone.text}",true));
@@ -73,6 +78,37 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
+  /// 该方法 请求 验证码 方法点击
+
+  void onClickRequestCode() {
+    var errMsg = _checkPhoneData();
+    if (errMsg != "") {
+      showToast(errMsg);
+      _showHintWidget(true, errMsg: errMsg);
+      return;
+    }
+    LoadingDialog.show(context);
+
+    /// TODO 这里模拟请求网络发送 短信验证码的过程
+    Future.delayed(
+      Duration(seconds: 5),
+    ).then((_) {
+      LoadingDialog.cancel();
+      _startDown();
+    });
+  }
+
+  void _startDown() {
+    emit(LoginShowHint(true,hintMsg:"短信验证码已下发至 ",errMsg:"$currAreaVal ${editingPhone.text}"));
+    _timerStream = Stream.periodic(Duration(seconds: 1), (data) => data)
+        .take(Global.CODE_TIMER_TICKS)
+        .listen((event) {
+      emit(CodeState(Global.CODE_TIMER_TICKS - event));
+    }, onDone: () {
+      emit(CodeState(-1));emit(LoginShowHint(true));
+    });
+  }
+
   String _checkFormData() {
     var phoneErr = _checkPhoneData();
     if (phoneErr != "") return phoneErr;
@@ -118,6 +154,8 @@ class LoginCubit extends Cubit<LoginState> {
     focusPhone = null;
     focusCode.dispose();
     focusCode = null;
+    _timerStream?.cancel();
+    _timerStream = null;
     return super.close();
   }
 }

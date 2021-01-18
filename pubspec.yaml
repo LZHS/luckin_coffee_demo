@@ -20,10 +20,11 @@ dependencies:
   connectivity: ^2.0.2
   package_info: ^0.4.3
   flutter_bloc: ^6.0.1
+  jpush_flutter: ^0.6.2
   fluttertoast: ^7.0.4
   flutter_swiper: ^1.1.6
   path_provider: ^1.6.14
-  shared_preferences: ^0.5.8
+  shared_preferences: ^0.5.12+4
   loading_indicator_view: ^1.1.0
   
 dev_dependencies:
