@@ -87,7 +87,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   /// 用户点击 是否自提 Item
   onClickLocating() {
-    Routes.goLoginPage(context);
+    if (UserInfo().isLogin) Routes.goLoginPage(context);
   }
 
   set topBannerController(SwiperController value) {

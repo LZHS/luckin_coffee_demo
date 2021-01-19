@@ -1,6 +1,5 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/widgets.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/models/models.dart';
 
@@ -18,7 +17,7 @@ class Application {
   static void init() {
     Bloc.observer = SimpleBlocObserver();
     DatabaseManager();
-    jPushHelp=JPushHelp();
+    // jPushHelp=JPushHelp();
     
   }
 

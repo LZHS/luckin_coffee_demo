@@ -16,7 +16,20 @@ class UserInfo {
   /// 当前用户 手机号
   String _currPhone = "";
 
-  String token ="";
+  String token = "";
+
+  String userId = "";
+
+  DateTime loginTime = DateTime(2021);
+
+  /// 获取用户 登录状态
+  /// 1、上次登录时间是否 大于7天
+  bool get isLogin {
+    if (currPhone == "") return false;
+    if (userId == "") return false;
+    if (loginTime.difference(DateTime.now()).inHours >= 7 * 24) return false;
+    return true;
+  }
 
   String get currPhone {
     List<String> caches = cachePhones;

@@ -79,7 +79,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   /// 该方法 请求 验证码 方法点击
-
   void onClickRequestCode() {
     var errMsg = _checkPhoneData();
     if (errMsg != "") {
@@ -88,8 +87,8 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
     LoadingDialog.show(context);
-
     /// TODO 这里模拟请求网络发送 短信验证码的过程
+
     Future.delayed(
       Duration(seconds: 5),
     ).then((_) {
