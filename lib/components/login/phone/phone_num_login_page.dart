@@ -162,7 +162,6 @@ class InputContentWidget extends StatelessWidget {
                 maxLines: 1,
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
-                autofocus: true,
                 decoration: InputDecoration(
                   hintText: "请输入手机号",
                   hintStyle: hintStyle,
@@ -206,8 +205,7 @@ class InputContentWidget extends StatelessWidget {
           ],
           maxLines: 1,
           keyboardType: TextInputType.phone,
-          textInputAction: TextInputAction.done,
-          autofocus: true,
+          textInputAction: TextInputAction.send,
           onEditingComplete: () => _cubit.onClickConfirm(),
           decoration: InputDecoration(
             hintText: "请输入手机验证码",
@@ -259,6 +257,7 @@ class InputContentWidget extends StatelessWidget {
 
   /// item 基本 属性包装
   _customContainer(Widget child) => Container(
+
         constraints: constraints,
         padding: const EdgeInsets.only(left: marginLeft, right: marginRight),
         child: Column(
@@ -308,7 +307,26 @@ class InputContentWidget extends StatelessWidget {
                             fontSize: 12.0, color: AppColors.appTipsTextColor))
                   ]))
           ));
+}
 
+
+class AAA extends StatefulWidget {
+  @override
+  _AAAState createState() => _AAAState();
+}
+
+class _AAAState extends State<AAA> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
 }
 
 

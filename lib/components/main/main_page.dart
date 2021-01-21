@@ -27,27 +27,37 @@ class MainPage extends StatelessWidget {
       child: BlocProvider<MainCubit>(
         create: (context) => MainCubit(context),
         child: BlocBuilder<MainCubit, MainState>(
-          builder: (context, state) => Scaffold(
-            bottomNavigationBar: BottomNavigationWidget.getBottomNavigationBar(
-              onTap: (index) =>
-                  context.read<MainCubit>().changeCurrentPage(index),
-              currentIndex: _getCurrentIndex(state),
-            ),
-            body: IndexedStack(
-                index: _getCurrentIndex(state),
+          buildWhen: (_, state) => state is MainCurrentState,
+          builder: (context, state) {
+            var currentIndex = 0;
+            if (state is MainCurrentState) currentIndex = state.currentIndex;
+            return Scaffold(
+              appBar: _buildCurrentAppBar(currentIndex),
+              bottomNavigationBar:
+                  BottomNavigationWidget.getBottomNavigationBar(
+                onTap: (index) =>
+                    context.read<MainCubit>().changeCurrentPage(index),
+                currentIndex: currentIndex,
+              ),
+              body: IndexedStack(
+                index: currentIndex,
                 children: _children,
               ),
-          ),
+            );
+          },
         ),
       ),
     );
   }
 
-
-  int _getCurrentIndex(state) {
-    if (state is MainCurrentState)
-      return state.currentIndex;
-    else
-      return 0;
+  _buildCurrentAppBar(int currentIndex) {
+    PreferredSizeWidget appBar;
+    if (currentIndex == 1)
+      appBar = AppBarCustom(title: "选择咖啡和小食", leftIsNull: true);
+    else if (currentIndex == 2)
+      appBar = AppBarCustom(title: "订单列表", leftIsNull: true);
+    else if (currentIndex == 3)
+      appBar = AppBarCustom(title: "购物车", leftIsNull: true);
+    return appBar;
   }
 }
