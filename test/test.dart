@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -5,17 +6,35 @@ import 'package:uuid/uuid.dart';
 import 'package:uuid/uuid_util.dart';
 
 void main() {
-  test("TestUUID ", () async {
+  test("Test ", () async {
+
     // TestUUID().test();
-    A a;
-    var count = a?.testA();
-    print("count = $count");
+    // List<Future<int>> futures = [];
+    // for (int i = 0; i < 10; i++) {
+    //   futures.add(_delay(3));
+    // }
+    // Stream<int> _futuresStream = Stream.fromFutures(futures);
+    // subscription= _futuresStream.listen(print);
   });
 }
 
-class A {
-  int testA() => 0;
+Future<int> _delay(int seconds) async {
+  await Future.delayed(Duration(seconds: seconds));
+  return seconds;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 String _randomCode() {
   String res = "";

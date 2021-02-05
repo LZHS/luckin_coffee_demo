@@ -29,6 +29,7 @@ class MainPage extends StatelessWidget {
         child: BlocBuilder<MainCubit, MainState>(
           buildWhen: (_, state) => state is MainCurrentState,
           builder: (context, state) {
+            log.d("MainPage =>  state = $state");
             var currentIndex = 0;
             if (state is MainCurrentState) currentIndex = state.currentIndex;
             return Scaffold(
