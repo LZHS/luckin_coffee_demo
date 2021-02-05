@@ -59,4 +59,12 @@ public class AppController {
         }
         return ResultVOUtil.success(result);
     }
+
+    @GetMapping("/getCode")
+    public ResultVO getCode(@RequestParam("phone")String phone){
+        ResultVO resultVO=null;
+
+        return  resultVO;
+    }
+
 }

@@ -1,0 +1,10 @@
+create table `check_code`
+(
+    `mobile`      CHAR(11)    NOT NULL COMMENT '手机号',
+    `checkCode`   CHAR(4) NOT NULL COMMENT '验证码',
+    `isUse`       tinyint(1)  NOT NULL DEFAULT 0 COMMENT '是否使用 0 未使用过，1已使用',
+    `using_time`  TIMESTAMP COMMENT '使用时间',
+    `create_time` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    PRIMARY KEY (`mobile`)
+) COMMENT ' 手机验证短信';
+
