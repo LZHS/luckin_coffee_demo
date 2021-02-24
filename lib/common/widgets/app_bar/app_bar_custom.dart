@@ -19,7 +19,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   final Color shadowColor;
 
   /// 左侧Widget 是否为空 默认不为空
-  /// 朱勇设置为true是，leftWidget 其他设置将无效
+  /// 设置为true 時候，leftWidget 其他设置将无效
   final bool leftIsNull;
   final VoidCallback onClickLeft;
   final SizedBox leftWidget;
@@ -44,7 +44,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       this.height = appBarHeight,
       this.shadowColor = AppColors.appBarColor,
       this.backgroundColor = AppColors.appBarColor,
-      this.leftIsNull = true,
+      this.leftIsNull = false,
       this.onClickLeft,
       this.leftWidget,
       this.leftImageWidget,
@@ -86,7 +86,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
 
   /// 构建左侧 Widget
   _buildLeftWidget() =>
-      !this.leftIsNull ? Container() : Positioned(
+      this.leftIsNull ? Container() : Positioned(
           left: 0.0,
           top: 0.0,
           bottom: 0.0,

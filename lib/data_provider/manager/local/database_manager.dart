@@ -105,11 +105,11 @@ class DatabaseManager {
   _onConfigureMethod(Database db) {}
 
   _onDowngradeMethod(Database db, int oldVersion, int newVersion) {
-    log.d("");
+    log.d("_onDowngradeMethod");
   }
 
   _onUpgradeMethod(Database db, int oldVersion, int newVersion) {
-    log.d("");
+    log.d("_onUpgradeMethod");
   }
 
   _onOpenMethod(Database db) {

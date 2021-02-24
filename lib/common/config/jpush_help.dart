@@ -49,14 +49,14 @@ class JPushHelp {
     try {
       jPush.addEventHandler(
           onReceiveNotification:
-              _onReceiveNotification ?? (Map<String, dynamic> message) async {},
+              _onReceiveNotification ?? (Map<String, dynamic> message) async {return message;},
           onOpenNotification:
-              _onOpenNotification ?? (Map<String, dynamic> message) async {},
+              _onOpenNotification ?? (Map<String, dynamic> message) async {return message;},
           onReceiveMessage:
-              _onReceiveMessage ?? (Map<String, dynamic> message) async {},
+              _onReceiveMessage ?? (Map<String, dynamic> message) async {return message;},
           onReceiveNotificationAuthorization:
               _onReceiveNotificationAuthorization ??
-                  (Map<String, dynamic> message) async {});
+                  (Map<String, dynamic> message) async {return message;});
     } on PlatformException {}
     jPush.setup(
       appKey: Global.JPUSH_APPKEY,

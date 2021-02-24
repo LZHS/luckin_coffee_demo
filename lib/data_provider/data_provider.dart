@@ -23,3 +23,5 @@ export 'beans/banner/banner_bean.dart';
 
 export 'beans/locating_information.dart';
 export 'beans/product_category.dart';
+
+export 'beans/user/user_info.dart';

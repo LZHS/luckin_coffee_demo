@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
 import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:luckin_coffee_demo/exceptions/exception.dart';
@@ -28,7 +29,7 @@ class DioManager {
   Future<BaseEntity<T>> request<T>(Method method, String path,
       {Map<String, dynamic> params}) async {
     try {
-      if(Global.connectivityResult==ConnectivityResult.none)
+      if(!kDebugMode||Global.connectivityResult==ConnectivityResult.none)
         return Future.error(BaseEntity(code: -1, message: "当前无网络，请检查网络连接"));
       Response response = await _dio.request(
         path,

@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:luckin_coffee_demo/common/common.dart';
+import 'package:luckin_coffee_demo/data_provider/data_provider.dart';
 import 'package:meta/meta.dart';
+import 'package:uuid/uuid.dart';
 
 part 'login_state.dart';
 
@@ -20,8 +24,15 @@ class LoginCubit extends Cubit<LoginState> {
   final BuildContext context;
 
   LoginCubit(this.context) : super(LoginInitial()) {
-    Future.delayed(Duration(seconds: 5)).then((_) {
-      emit(LoginShowHint(true, hintMsg: "为了您的账号安全，请绑定手机"));
+    Future.delayed(Duration.zero).then((_) {
+      // emit(LoginShowHint(true, hintMsg: "为了您的账号安全，请绑定手机"));
+      if (UserInfo().currPhone.length > 0) {
+        editingPhone.text = UserInfo().currPhone;
+        emit(ClearPhoneNum(true));
+        FocusScope.of(context).requestFocus(focusCode);
+      } else {
+        FocusScope.of(context).requestFocus(focusPhone);
+      }
     });
     // Future.delayed(Duration.zero,(){});
     emit(CodeState(-1));
@@ -52,12 +63,34 @@ class LoginCubit extends Cubit<LoginState> {
       _showHintWidget(true, errMsg: errMsg);
       return;
     }
+    LoadingDialog.show(context);
+    FocusScope.of(context).requestFocus(FocusNode());
+
+    /// TODO 这里模拟 用户登录状态
+    Future.delayed(Duration(seconds: Random().nextInt(9)), () {
+      // LoadingDialog.cancel();
+      UserInfo().savePhone(editingPhone.text);
+      UserInfo().loginTime = DateTime.now();
+      UserInfo().token = Uuid().v1();
+      UserInfo().userId = Uuid().v4();
+    }).whenComplete(() {
+      Navigator
+          .of(context)
+          .popUntil((route) {
+        var name = route.settings.name;
+        log.d("name = $name");
+        if (name == null || name.length == 0)
+          return false;
+        return name.startsWith(Routes.main);
+      });
+    });
   }
 
   /// 清空 手机号输入框 内容
   onClickClearPhoneNum() {
     editingPhone.text = "";
     _showHintWidget(false);
+    FocusScope.of(context).requestFocus(focusPhone);
     emit(ClearPhoneNum(false));
   }
 
@@ -79,7 +112,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   /// 该方法 请求 验证码 方法点击
-
   void onClickRequestCode() {
     var errMsg = _checkPhoneData();
     if (errMsg != "") {
@@ -88,25 +120,50 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
     LoadingDialog.show(context);
-
-    /// TODO 这里模拟请求网络发送 短信验证码的过程
-    Future.delayed(
-      Duration(seconds: 5),
-    ).then((_) {
-      LoadingDialog.cancel();
+    // 发送本地通知 模拟 短信验证码发送的过程
+    Future.delayed(Duration(seconds: 4), () {
       _startDown();
+      LoadingDialog.cancel();
+      var localNotification = LocalNotification(
+          id: int.parse(_randomCode()),
+          title: "【瑞幸咖啡】",
+          badge: 5,
+          buildId: 1,
+          content:
+          "【瑞幸咖啡】短信验证码： ${_randomCode()} 。尊敬的用户，您正在登陆，我们不会向您索要次验证码，切勿告知他人。",
+          fireTime: DateTime.now().add(Duration(seconds: 10)));
+      return Application.jPushHelp.jPush
+          .sendLocalNotification(localNotification);
+    }).then(
+          (value) {
+        log.d("发送 本地广播 :$value");
+      },
+      onError: (value) {
+        log.d("发送 本地广播 失敗 :$value");
+      },
+    ).whenComplete(() {
+      log.d("发送 本地广播 結束");
     });
   }
 
   void _startDown() {
-    emit(LoginShowHint(true,hintMsg:"短信验证码已下发至 ",errMsg:"$currAreaVal ${editingPhone.text}"));
+    emit(LoginShowHint(true,
+        hintMsg: "短信验证码已下发至 ", errMsg: "$currAreaVal ${editingPhone.text}"));
     _timerStream = Stream.periodic(Duration(seconds: 1), (data) => data)
         .take(Global.CODE_TIMER_TICKS)
         .listen((event) {
       emit(CodeState(Global.CODE_TIMER_TICKS - event));
     }, onDone: () {
-      emit(CodeState(-1));emit(LoginShowHint(true));
+      emit(CodeState(-1));
+      emit(LoginShowHint(true));
     });
+  }
+
+  String _randomCode() {
+    String res = "";
+    for (int index = 0; index < 4; index++)
+      res += "${Random().nextInt(9)}";
+    return res;
   }
 
   String _checkFormData() {
@@ -145,7 +202,7 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   @override
-  Future<Function> close() {
+  Future<void> close() {
     editingPhone.dispose();
     editingPhone = null;
     editingCode.dispose();

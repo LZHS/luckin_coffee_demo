@@ -11,8 +11,9 @@ dependencies:
     sdk: flutter 
   dio: ^3.0.9
   path: ^1.7.0
+  uuid: ^2.2.2
   fluro: ^1.7.7
-  logger: ^0.9.2
+  logger: ^0.9.4
   crypto: ^2.1.5
   rxdart: ^0.24.1
   equatable: ^1.2.3
