@@ -4,10 +4,11 @@ import 'package:logger/logger.dart';
 class Log {
   static final Log _instance = Log._internal();
   Logger _logger;
-  factory Log( ) => _instance;
+  factory Log() => _instance;
 
   Log._internal() {
-    _logger ?? Logger(printer: SimplePrinter(printTime: true, colors: false));
+    _logger = _logger ??
+        Logger(printer: SimplePrinter(printTime: true, colors: false));
   }
 
   void v(dynamic message) {
@@ -37,7 +38,9 @@ class Log {
   }
 
   void d(dynamic message) {
-    if (kDebugMode)
-      _logger.d(message);
+    if (!kDebugMode) return;
+    _logger = _logger ??
+        Logger(printer: SimplePrinter(printTime: true, colors: false));
+    _logger.d(message);
   }
 }
