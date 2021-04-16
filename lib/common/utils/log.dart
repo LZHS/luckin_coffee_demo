@@ -38,7 +38,9 @@ class Log {
   }
 
   void d(dynamic message) {
-    if (kDebugMode)
-      _logger.d(message);
+    if (!kDebugMode) return;
+    _logger = _logger ??
+        Logger(printer: SimplePrinter(printTime: true, colors: false));
+    _logger.d(message);
   }
 }

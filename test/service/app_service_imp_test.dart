@@ -1,9 +1,11 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:luckin_coffee_demo/common/global.dart';
 import 'package:luckin_coffee_demo/data_provider/service/imp/app_service_imp.dart';
 
 void main() {
   test("AppServiceImp", () async {
+    // Global.connectivityResult=ConnectivityResult.wifi;
     await AppServiceImp().getAppVersion("1597818873300545668").then((value) {
       log.d("成功："+value.toString());
     }, onError: (err) {
