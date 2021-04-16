@@ -1,20 +1,16 @@
- 
+# luckin_coffee_demo
 
-## luckin-coffee-demo 项目说明 
+A new Flutter project.
 
-## 服务端
-* [服务端代码](https://github.com/LZHS/luckin-coffee-demo/tree/service-code)  
-  > 该服务将用于 客户端 数据请求
+## Getting Started
 
-## 客户端
-* [客户端-Flutter代码](https://github.com/LZHS/luckin-coffee-demo/tree/cli-flutter)  
-  > 该代码将展示 页面效果以及与用户交互
- 
+This project is a starting point for a Flutter application.
 
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-## 免责声明
-**免责声明**: 此代码仅学习使用，请勿用于商业用途，如拿去非法使用与本人无关！
-
-
-
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
