@@ -13,7 +13,7 @@
 
 
 ## Web端
-* [客户端-Flutter代码](https://github.com/LZHS/luckin_coffee_demo/tree/web-code)  
+* [Web-Flutter代码](https://github.com/LZHS/luckin_coffee_demo/tree/web-code)  
   > 该代码将展示 页面效果以及 用户后台管理系统
  
 
