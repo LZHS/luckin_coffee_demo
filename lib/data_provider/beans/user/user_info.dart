@@ -2,11 +2,10 @@ import 'package:luckin_coffee_demo/common/common.dart';
 
 /// 存储用户 基本信息
 class UserInfo {
-  // ignore: non_constant_identifier_names
-  final CACHE_PHONE = "cache_phone";
-  final CACHE_TOKEN = "cache_token";
-  final CACHE_USER_ID = "cache_user_id";
-  final CACHE_LOGIN_TIME = "cache_login_time";
+  static const CACHE_PHONE = "cache_phone";
+  static const CACHE_TOKEN = "cache_token";
+  static const CACHE_USER_ID = "cache_user_id";
+  static const CACHE_LOGIN_TIME = "cache_login_time";
   static UserInfo _instance;
 
   factory UserInfo() {
@@ -17,9 +16,10 @@ class UserInfo {
   /// 当前用户 手机号
   String _currPhone = "";
 
+  // ignore: unused_field
   DateTime _loginTime = DateTime(2021);
 
-  String get token =>  Application.sharedP.getString(CACHE_TOKEN);
+  String get token => Application.sharedP.getString(CACHE_TOKEN);
 
   set token(String value) {
     Application.sharedP.setString(CACHE_TOKEN, value);
@@ -59,7 +59,7 @@ class UserInfo {
     return res ?? [];
   }
 
-  String get userId =>  Application.sharedP.getString(CACHE_USER_ID);
+  String get userId => Application.sharedP.getString(CACHE_USER_ID);
 
   set userId(String value) {
     Application.sharedP.setString(CACHE_USER_ID, value);

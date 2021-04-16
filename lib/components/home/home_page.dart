@@ -18,16 +18,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-     super.initState();
+    super.initState();
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
   }
+
   @override
   void didUpdateWidget(covariant HomePage oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -46,7 +49,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void deactivate() {
-    // TODO: implement deactivate
     super.deactivate();
   }
 }

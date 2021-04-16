@@ -43,8 +43,8 @@ android {
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-
-        ndk {
+		
+		ndk {
             //选择要添加的对应 cpu 类型的 .so 库。
             abiFilters 'armeabi', 'armeabi-v7a', 'x86', 'x86_64', 'mips', 'mips64', 'arm64-v8a'
         }
@@ -54,11 +54,10 @@ android {
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
-
-    signingConfigs {
+	signingConfigs {
         release {
             //证书存放目录
-            storeFile file('../jks/luckin_coffee.jks')
+            storeFile file('../../jks/luckin_coffee.jks')
             //密码
             storePassword 'luckin_coffee'
             //别名
@@ -67,8 +66,9 @@ android {
             keyPassword 'luckin_coffee'
         }
     }
+
     buildTypes {
-        debug {
+         debug {
             signingConfig signingConfigs.release
         }
         release {

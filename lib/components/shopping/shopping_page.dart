@@ -5,7 +5,7 @@ class ShoppingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      child: Text("购物车页面"),
+      child: Text("购物车页面1"),
     );
   }
 }
